@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1A2E1F">
+<title>Pınar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        serif: ['Fraunces', 'Georgia', 'serif'],
+        sans: ['Inter', 'system-ui'],
+      },
+      colors: {
+        ivory: '#F6F1E8',
+        cream: '#EBE2D1',
+        forest: '#1A2E1F',
+        'forest-light': '#2E4632',
+        clay: '#B8624A',
+        'clay-light': '#D89078',
+        sand: '#D4C4A8',
+        ink: '#0F1511',
+      }
+    }
+  }
+}
+</script>
+<style>
+  html, body { background: #F6F1E8; color: #0F1511; font-family: 'Inter', sans-serif; }
+  .font-serif { font-family: 'Fraunces', serif; }
+  .hidden-page { display: none; }
+  .active-page { display: block; }
+  .glow { box-shadow: 0 4px 24px rgba(26,46,31,0.06); }
+  .tap-card { transition: all 0.2s; cursor: pointer; user-select: none; }
+  .tap-card:active { transform: scale(0.98); }
+  .tap-card.done { opacity: 0.55; }
+  .tap-card.done .card-body { text-decoration: line-through; }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-thumb { background: #D4C4A8; border-radius: 3px; }
+</style>
+</head>
+<body class="min-h-screen pb-24 md:pb-0">
+
+<!-- HEADER -->
+<header class="border-b border-cream bg-ivory/95 backdrop-blur sticky top-0 z-40">
+  <div class="max-w-3xl mx-auto px-5 py-4 flex items-center justify-between">
+    <h1 class="font-serif text-2xl text-forest">Pınar</h1>
+    <div class="flex items-center gap-3">
+      <span id="streakBadge" class="text-xs text-clay font-sans"></span>
+      <button onclick="switchTab('settings')" class="text-forest/40 text-lg hover:text-forest transition">⚙</button>
+    </div>
+  </div>
+</header>
+
+<!-- TAB NAV -->
+<nav class="fixed md:sticky bottom-0 md:top-16 left-0 right-0 z-30 bg-ivory/95 backdrop-blur border-t md:border-t-0 md:border-b border-cream">
+  <div class="max-w-3xl mx-auto px-2 py-2 flex justify-around">
+    <button class="tab-btn active font-sans text-xs px-4 py-2 rounded-full flex flex-col items-center gap-1" data-tab="today">
+      <span class="text-xl">◉</span><span>Bugün</span>
+    </button>
+    <button class="tab-btn font-sans text-xs px-4 py-2 rounded-full flex flex-col items-center gap-1" data-tab="routine">
+      <span class="text-xl">◈</span><span>Rutin</span>
+    </button>
+    <button class="tab-btn font-sans text-xs px-4 py-2 rounded-full flex flex-col items-center gap-1" data-tab="shop">
+      <span class="text-xl">⚘</span><span>Alış</span>
+    </button>
+    <button class="tab-btn font-sans text-xs px-4 py-2 rounded-full flex flex-col items-center gap-1" data-tab="coach">
+      <span class="text-xl">✦</span><span>Koç</span>
+    </button>
+  </div>
+</nav>
+
+<style>
+  .tab-btn { color: #1A2E1F60; transition: all 0.2s; }
+  .tab-btn.active { color: #1A2E1F; }
+  .tab-btn.active span:first-child { transform: scale(1.15); }
+</style>
+
+<main class="max-w-3xl mx-auto px-5 py-6">
+
+<!-- =============== BUGÜN =============== -->
+<section id="page-today" class="active-page">
+
+  <div class="mb-8">
+    <p id="dayLabel" class="text-clay font-sans text-xs uppercase tracking-[0.2em] mb-2"></p>
+    <h2 id="greeting" class="font-serif text-4xl text-forest"></h2>
+  </div>
+
+  <!-- TONIGHT BADGE -->
+  <div class="bg-forest text-ivory rounded-3xl p-6 mb-6 glow">
+    <p class="text-clay-light font-sans text-[10px] uppercase tracking-[0.25em] mb-2">Bu akşam</p>
+    <p id="tonightType" class="font-serif text-3xl"></p>
+    <p id="tonightHero" class="text-ivory/70 font-serif text-sm mt-2 italic"></p>
+  </div>
+
+  <!-- SABAH -->
+  <div class="mb-6">
+    <div class="flex items-baseline justify-between mb-3">
+      <h3 class="font-serif text-2xl text-forest">Sabah</h3>
+      <span id="amProgress" class="text-xs font-sans text-clay"></span>
+    </div>
+    <div id="amSteps" class="space-y-2"></div>
+  </div>
+
+  <!-- GÜN İÇİ -->
+  <div class="mb-6">
+    <h3 class="font-serif text-2xl text-forest mb-3">Gün İçi</h3>
+    <div id="dailySteps" class="space-y-2"></div>
+  </div>
+
+  <!-- AKŞAM -->
+  <div class="mb-6">
+    <div class="flex items-baseline justify-between mb-3">
+      <h3 class="font-serif text-2xl text-forest">Akşam</h3>
+      <span id="pmProgress" class="text-xs font-sans text-clay"></span>
+    </div>
+    <div id="pmSteps" class="space-y-2"></div>
+  </div>
+
+  <!-- FEELING -->
+  <div class="bg-white rounded-3xl p-6 glow mb-6">
+    <p class="font-serif text-lg text-forest mb-4">Bugün nasılsın?</p>
+    <div class="grid grid-cols-3 gap-2">
+      <button onclick="setMood('great')" class="mood-btn py-4 rounded-2xl bg-cream/40 hover:bg-cream transition" data-mood="great">
+        <div class="text-3xl mb-1">◉</div>
+        <div class="text-xs font-sans text-forest">harika</div>
+      </button>
+      <button onclick="setMood('ok')" class="mood-btn py-4 rounded-2xl bg-cream/40 hover:bg-cream transition" data-mood="ok">
+        <div class="text-3xl mb-1">◐</div>
+        <div class="text-xs font-sans text-forest">normal</div>
+      </button>
+      <button onclick="setMood('tired')" class="mood-btn py-4 rounded-2xl bg-cream/40 hover:bg-cream transition" data-mood="tired">
+        <div class="text-3xl mb-1">◯</div>
+        <div class="text-xs font-sans text-forest">yorgun</div>
+      </button>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="grid grid-cols-3 gap-3 mb-6" id="statsRow"></div>
+</section>
+
+<!-- =============== RUTİN =============== -->
+<section id="page-routine" class="hidden-page">
+  <div class="mb-8">
+    <p class="text-clay font-sans text-xs uppercase tracking-[0.2em] mb-2">Haftalık Ritim</p>
+    <h2 class="font-serif text-4xl text-forest">Rutin</h2>
+  </div>
+
+  <!-- HAFTALIK AKŞAM ROTASYONU -->
+  <div class="bg-white rounded-3xl p-6 glow mb-6">
+    <h3 class="font-serif text-xl text-forest mb-4">Akşam Rotasyonu</h3>
+    <div class="space-y-3" id="weekRotation"></div>
+  </div>
+
+  <!-- MEVCUT ENVANTER -->
+  <div class="bg-white rounded-3xl p-6 glow mb-6">
+    <h3 class="font-serif text-xl text-forest mb-4">Aktif Ürünler</h3>
+    <div class="space-y-4 text-sm">
+      <div>
+        <p class="text-clay uppercase tracking-wider text-xs mb-2">Sabah · her gün</p>
+        <ul class="space-y-1 font-serif text-forest">
+          <li>1. Sensai Creamy Soap</li>
+          <li>2. iS Clinical Pro-Heal Serum</li>
+          <li>3. Sensai Cellular Performance Cream</li>
+          <li>4. Environ Youth+ Eye Gel</li>
+          <li>5. <strong>SkinCeuticals SPF 50</strong> ⭐</li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-clay uppercase tracking-wider text-xs mb-2">Akşam · gün değişir</p>
+        <ul class="space-y-1 font-serif text-forest">
+          <li>Pzt/Çar/Cum: <strong>Environ C-Quence 3</strong> + Sensai Ultra</li>
+          <li>Sal/Per: <strong>SkinCeuticals A.G.E.</strong> + La Mer Night</li>
+          <li>Cmt: <strong>Environ Oil Capsule</strong> + La Mer Concentrate</li>
+          <li>Pzr: <strong>Revival Masque</strong> veya Celltermi Sheet</li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-clay uppercase tracking-wider text-xs mb-2">Ek alanlar · her gece</p>
+        <ul class="space-y-1 font-serif text-forest">
+          <li>Boyun: Sensai Throat & Bust</li>
+          <li>Eller: MBR The Best Hand</li>
+          <li>Dudak: Sensai Lip Treatment</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROTASYONDA -->
+  <details class="bg-cream/40 rounded-3xl p-5 mb-6">
+    <summary class="font-serif text-lg text-forest cursor-pointer">⏸ Rotasyonda dinlenen ürünler</summary>
+    <p class="mt-3 text-sm text-forest/70 leading-relaxed">
+      Caudalie Resveratrol-Lift · Caudalie Premier Cru · Caudalie VinoHydra · Sensai Lift Focus Essence · Sensai Refreshing Eye Essence · Environ Avance Elixir
+      <br><br>
+      <span class="text-xs">2 ay sonra rotasyona geri al. Şu an aynı anda kullanmak bariyer zayıflatır.</span>
+    </p>
+  </details>
+
+  <!-- TAKVİYE -->
+  <div class="bg-white rounded-3xl p-6 glow">
+    <h3 class="font-serif text-xl text-forest mb-4">Günlük Takviye</h3>
+    <ul class="space-y-2 text-sm font-serif text-forest">
+      <li class="flex justify-between border-b border-cream pb-2"><span>Vit D3 + K2</span><span class="text-clay">2000-4000 IU · öğlen</span></li>
+      <li class="flex justify-between border-b border-cream pb-2"><span>Omega-3 (EPA+DHA)</span><span class="text-clay">2 g · yemekle</span></li>
+      <li class="flex justify-between border-b border-cream pb-2"><span>Magnezyum glisinat</span><span class="text-clay">400 mg · yatmadan</span></li>
+      <li class="flex justify-between border-b border-cream pb-2"><span>Kreatin monohidrat</span><span class="text-clay">5 g · sabit saat</span></li>
+      <li class="flex justify-between"><span>Kadın 40+ multivit</span><span class="text-clay">1 adet · sabah</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- =============== ALIŞ =============== -->
+<section id="page-shop" class="hidden-page">
+  <div class="mb-8">
+    <p class="text-clay font-sans text-xs uppercase tracking-[0.2em] mb-2">Stash Tamamlayıcı · 8 Ürün</p>
+    <h2 class="font-serif text-4xl text-forest">Alış Listesi</h2>
+  </div>
+
+  <div class="bg-forest text-ivory rounded-3xl p-6 mb-6 glow">
+    <div class="grid grid-cols-3 gap-3 text-center">
+      <div>
+        <p class="text-clay-light text-[10px] uppercase tracking-widest">Must</p>
+        <p class="font-serif text-2xl mt-1">~2500 TL</p>
+      </div>
+      <div>
+        <p class="text-clay-light text-[10px] uppercase tracking-widest">K-Beauty</p>
+        <p class="font-serif text-2xl mt-1">~1800 TL</p>
+      </div>
+      <div>
+        <p class="text-clay-light text-[10px] uppercase tracking-widest">Premium</p>
+        <p class="font-serif text-2xl mt-1">€470+</p>
+      </div>
+    </div>
+    <div class="mt-5 text-center">
+      <p id="shopProgress" class="font-serif text-xl">0 / 8</p>
+      <div class="h-1.5 bg-forest-light rounded-full mt-2 overflow-hidden">
+        <div id="shopProgressBar" class="h-full bg-clay-light transition-all" style="width:0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-6">
+    <div class="flex items-center gap-2 mb-3">
+      <span class="w-6 h-6 rounded-full bg-clay text-ivory text-xs flex items-center justify-center font-serif">1</span>
+      <h3 class="font-serif text-xl text-forest">Must · Önce bunlar</h3>
+    </div>
+    <div id="shopMust" class="space-y-3"></div>
+  </div>
+
+  <div class="mb-6">
+    <div class="flex items-center gap-2 mb-3">
+      <span class="w-6 h-6 rounded-full bg-forest text-ivory text-xs flex items-center justify-center font-serif">2</span>
+      <h3 class="font-serif text-xl text-forest">K-Beauty</h3>
+    </div>
+    <div id="shopKbeauty" class="space-y-3"></div>
+  </div>
+
+  <div class="mb-6">
+    <div class="flex items-center gap-2 mb-3">
+      <span class="w-6 h-6 rounded-full bg-sand text-forest text-xs flex items-center justify-center font-serif">3</span>
+      <h3 class="font-serif text-xl text-forest">Premium · opsiyonel</h3>
+    </div>
+    <div id="shopPremium" class="space-y-3"></div>
+  </div>
+
+  <details class="bg-cream/40 rounded-2xl p-5">
+    <summary class="font-serif text-forest cursor-pointer text-sm">❌ Alma — trend ama gereksiz</summary>
+    <ul class="mt-3 space-y-2 text-xs text-forest/80 font-sans">
+      <li>• Augustinus Bader The Cream — hype, Sensai Ultra yeter</li>
+      <li>• COSRX Snail Mucin — iS Clinical yanında zayıf</li>
+      <li>• La Prairie / Sisley — kanıt zayıf</li>
+      <li>• NAD+ / oral peptid hype — kanıt yok</li>
+    </ul>
+  </details>
+</section>
+
+<!-- =============== KOÇ =============== -->
+<section id="page-coach" class="hidden-page">
+  <div class="mb-6">
+    <p class="text-clay font-sans text-xs uppercase tracking-[0.2em] mb-2">4 Uzman Tek Kafada</p>
+    <h2 class="font-serif text-4xl text-forest">Koç</h2>
+  </div>
+
+  <div class="bg-forest text-ivory rounded-3xl p-6 mb-4 glow">
+    <h3 class="font-serif text-xl mb-3">Claude'a sor</h3>
+    <p class="text-ivory/80 text-sm mb-4">Sorunu yaz, verilerinle birlikte Claude'a kopyala.</p>
+    <textarea id="coachInput" rows="3" placeholder="Örn: Cildim kuru bu hafta, ne ekleyeyim?" class="w-full bg-forest-light/50 rounded-2xl p-3 outline-none text-sm resize-none text-ivory placeholder-ivory/40 mb-3"></textarea>
+    <button onclick="copyAndOpenClaude()" class="w-full bg-clay text-ivory font-sans uppercase tracking-widest text-xs py-3 rounded-full">📋 Kopyala + Claude Aç</button>
+  </div>
+
+  <div>
+    <p class="text-clay font-sans text-xs uppercase tracking-widest mb-3">Hızlı sorular</p>
+    <div class="space-y-2">
+      <button onclick="quickCoach('Bugünkü cilt rutinimi kontrol et — mevcut ürünlerimle. Sıra doğru mu?')" class="w-full text-left bg-white rounded-2xl p-4 glow font-serif text-forest hover:bg-cream/50 transition">🧴 Rutin kontrolü</button>
+      <button onclick="quickCoach('Son haftamı analiz et ve bu hafta odaklanmam gereken 1 şey söyle')" class="w-full text-left bg-white rounded-2xl p-4 glow font-serif text-forest hover:bg-cream/50 transition">📊 Haftamı analiz et</button>
+      <button onclick="quickCoach('Cildim kuru ve yorgun görünüyor. Mevcut ürünlerimden bu hafta ne değiştireyim?')" class="w-full text-left bg-white rounded-2xl p-4 glow font-serif text-forest hover:bg-cream/50 transition">🌿 Cildim kuru</button>
+      <button onclick="quickCoach('Perimenopause semptom taraması yap — Greene ölçeği soruları sor')" class="w-full text-left bg-white rounded-2xl p-4 glow font-serif text-forest hover:bg-cream/50 transition">🌙 Perimenopause kontrol</button>
+      <button onclick="quickCoach('Bu haftaya 30-dk hazır öğle yemeği 3 protein-hedefli öneri')" class="w-full text-left bg-white rounded-2xl p-4 glow font-serif text-forest hover:bg-cream/50 transition">🥗 Öğle menüsü</button>
+      <button onclick="quickCoach('Uykum kötü son hafta — somut 3 aksiyon söyle')" class="w-full text-left bg-white rounded-2xl p-4 glow font-serif text-forest hover:bg-cream/50 transition">😴 Uyku</button>
+    </div>
+  </div>
+</section>
+
+<!-- =============== AYAR =============== -->
+<section id="page-settings" class="hidden-page">
+  <div class="mb-6">
+    <h2 class="font-serif text-4xl text-forest">Ayarlar</h2>
+  </div>
+
+  <div class="bg-white rounded-3xl p-6 glow mb-4">
+    <h3 class="font-serif text-lg text-forest mb-3">Kişisel Bağlam</h3>
+    <p class="text-xs text-forest/60 mb-3">Koç bu bilgileri kullanır.</p>
+    <textarea id="personalContext" rows="4" class="w-full bg-cream/30 rounded-2xl p-3 outline-none text-sm resize-none"></textarea>
+    <button onclick="savePersonalContext()" class="mt-3 bg-forest text-ivory font-sans text-xs uppercase tracking-wider px-5 py-2 rounded-full">Kaydet</button>
+  </div>
+
+  <div class="bg-white rounded-3xl p-6 glow mb-4">
+    <h3 class="font-serif text-lg text-forest mb-3">Veri</h3>
+    <div class="grid grid-cols-2 gap-2">
+      <button onclick="exportData()" class="bg-cream/50 text-forest font-sans text-xs uppercase tracking-wider py-3 rounded-full">📥 Yedek al</button>
+      <label class="bg-cream/50 text-forest font-sans text-xs uppercase tracking-wider py-3 rounded-full text-center cursor-pointer">
+        📤 Yedek yükle
+        <input type="file" accept=".json" onchange="importData(event)" class="hidden">
+      </label>
+    </div>
+    <button onclick="clearData()" class="w-full mt-2 bg-clay/10 text-clay font-sans text-xs uppercase tracking-wider py-3 rounded-full">🗑 Tümünü sil</button>
+  </div>
+
+  <button onclick="switchTab('today')" class="w-full bg-forest text-ivory font-sans text-xs uppercase tracking-wider py-3 rounded-full">← Bugüne dön</button>
+</section>
+
+</main>
+
+<script>
+/* ================= STATE ================= */
+const STORAGE_KEY = 'pk_wellness_v2';
+let state = (() => {
+  try {
+    const s = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    return {
+      days: s.days || {},
+      shopBought: s.shopBought || {},
+      personalContext: s.personalContext || '44 yaş, kadın, Restar Group CEO (otomotiv/savunma). Yüksek iş yoğunluğu, kronik stres, perimenopause penceresi. Doğa ve deniz tutkusu. Hızlı + net + aksiyon odaklı.',
+    };
+  } catch { return { days: {}, shopBought: {}, personalContext: '' }; }
+})();
+function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+
+function today() { return new Date().toISOString().slice(0,10); }
+function getToday() {
+  if (!state.days[today()]) state.days[today()] = { am: {}, pm: {}, daily: {}, mood: null };
+  return state.days[today()];
+}
+
+/* ================= TABS ================= */
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  document.querySelectorAll('[id^="page-"]').forEach(p => { p.classList.remove('active-page'); p.classList.add('hidden-page'); });
+  const page = document.getElementById('page-' + tab);
+  page.classList.remove('hidden-page');
+  page.classList.add('active-page');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (tab === 'today') renderToday();
+  if (tab === 'routine') renderRoutine();
+  if (tab === 'shop') renderShop();
+  if (tab === 'settings') renderSettings();
+}
+document.querySelectorAll('.tab-btn').forEach(b => b.addEventListener('click', () => switchTab(b.dataset.tab)));
+
+/* ================= BUGÜN ================= */
+const DAY_NAMES = ['Pazar','Pazartesi','Salı','Çarşamba','Perşembe','Cuma','Cumartesi'];
+const MONTHS = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+
+function getTonight() {
+  const d = new Date().getDay();
+  if (d === 1 || d === 3 || d === 5) return {
+    type: 'Retinol Gecesi',
+    hero: 'Environ C-Quence 3',
+    steps: [
+      { id:'pm_clean', t:'Sensai Creamy Soap', s:'temizleyici + fırça' },
+      { id:'pm_active', t:'Environ C-Quence 3', s:'ana aktif · 3-4 damla' },
+      { id:'pm_cream', t:'Sensai Ultra Intensive Cream', s:'bariyer onarımı' },
+      { id:'pm_eye', t:'Sensai Melt Rich Eye', s:'göz çevresi' },
+    ]
+  };
+  if (d === 2 || d === 4) return {
+    type: 'Anti-Glycation',
+    hero: 'SkinCeuticals A.G.E. Interrupter',
+    steps: [
+      { id:'pm_clean', t:'Sensai Creamy Soap', s:'temizleyici' },
+      { id:'pm_active', t:'SkinCeuticals A.G.E. Interrupter', s:'anti-aging serum' },
+      { id:'pm_cream', t:'La Mer Rejuvenating Night', s:'lüks gece nem' },
+      { id:'pm_eye', t:'Sensai Melt Rich Eye', s:'göz çevresi' },
+    ]
+  };
+  if (d === 6) return {
+    type: 'Onarım Gecesi',
+    hero: 'Environ Oil Capsule + La Mer Concentrate',
+    steps: [
+      { id:'pm_clean', t:'Sensai Creamy Soap', s:'temizleyici' },
+      { id:'pm_active', t:'Environ Moisture+ Oil Capsule', s:'1 kapsül yüze' },
+      { id:'pm_cream', t:'La Mer The Concentrate', s:'SOS tamir' },
+      { id:'pm_eye', t:'Sensai Melt Rich Eye', s:'göz çevresi' },
+    ]
+  };
+  return {
+    type: 'Maske Günü · Pazar',
+    hero: 'Environ Revival Masque',
+    steps: [
+      { id:'pm_clean', t:'Sensai Creamy Soap', s:'temizleyici' },
+      { id:'pm_mask', t:'Environ Revival Masque', s:'veya Celltermi Sheet — 20 dk' },
+      { id:'pm_cream', t:'Sensai Ultra Intensive Cream', s:'maske sonrası nem' },
+      { id:'pm_eye', t:'Sensai Melt Rich Eye', s:'göz çevresi' },
+    ]
+  };
+}
+
+const AM_STEPS = [
+  { id:'am_clean', t:'Sensai Creamy Soap', s:'fırça ile · yumuşak' },
+  { id:'am_serum', t:'iS Clinical Pro-Heal', s:'antioksidan · 3-4 damla' },
+  { id:'am_cream', t:'Sensai Cellular Performance', s:'hafif nem' },
+  { id:'am_eye', t:'Environ Eye Gel', s:'göz çevresi' },
+  { id:'am_spf', t:'SkinCeuticals SPF 50', s:'⭐ non-negotiable', hero: true },
+];
+
+const DAILY_STEPS = [
+  { id:'d_water', t:'2 litre su', s:'hidrasyon' },
+  { id:'d_walk', t:'30 dk yürüyüş', s:'zone 2 · dışarıda' },
+  { id:'d_breath', t:'5 dk nefes egzersizi', s:'4-7-8 · toplantı öncesi' },
+  { id:'d_supp', t:'Takviyeler', s:'D3 · Omega-3 · Mg · Kreatin' },
+  { id:'d_cutcaf', t:'Son kafein 13:00', s:'uyku için kritik' },
+];
+
+function renderToday() {
+  const now = new Date();
+  document.getElementById('dayLabel').textContent = `${now.getDate()} ${MONTHS[now.getMonth()]} · ${DAY_NAMES[now.getDay()]}`;
+  const hour = now.getHours();
+  const g = hour < 5 ? 'İyi geceler' : hour < 12 ? 'Günaydın' : hour < 17 ? 'İyi günler' : hour < 22 ? 'İyi akşamlar' : 'İyi geceler';
+  document.getElementById('greeting').textContent = g + '.';
+
+  const tonight = getTonight();
+  document.getElementById('tonightType').textContent = tonight.type;
+  document.getElementById('tonightHero').textContent = '"' + tonight.hero + '"';
+
+  const t = getToday();
+
+  // AM
+  document.getElementById('amSteps').innerHTML = AM_STEPS.map(s => stepCard(s, !!t.am[s.id], 'am')).join('');
+  const amDone = AM_STEPS.filter(s => t.am[s.id]).length;
+  document.getElementById('amProgress').textContent = `${amDone}/${AM_STEPS.length}`;
+
+  // Daily
+  document.getElementById('dailySteps').innerHTML = DAILY_STEPS.map(s => stepCard(s, !!t.daily[s.id], 'daily')).join('');
+
+  // PM
+  document.getElementById('pmSteps').innerHTML = tonight.steps.map(s => stepCard(s, !!t.pm[s.id], 'pm')).join('');
+  const pmDone = tonight.steps.filter(s => t.pm[s.id]).length;
+  document.getElementById('pmProgress').textContent = `${pmDone}/${tonight.steps.length}`;
+
+  // Mood
+  document.querySelectorAll('.mood-btn').forEach(b => {
+    b.classList.toggle('bg-forest', t.mood === b.dataset.mood);
+    b.classList.toggle('text-ivory', t.mood === b.dataset.mood);
+    b.classList.toggle('bg-cream/40', t.mood !== b.dataset.mood);
+  });
+
+  // Streak + stats
+  const streak = calcStreak();
+  document.getElementById('streakBadge').textContent = streak > 0 ? `${streak} gün ✦` : '';
+  renderStats();
+}
+
+function stepCard(s, done, group) {
+  const hero = s.hero ? 'border-2 border-clay' : '';
+  return `<div class="tap-card bg-white rounded-2xl p-4 glow ${done ? 'done' : ''} ${hero}" onclick="toggleStep('${group}','${s.id}')">
+    <div class="flex items-center gap-3">
+      <div class="w-6 h-6 rounded-full border-2 ${done ? 'bg-forest border-forest' : 'border-forest/30'} flex items-center justify-center flex-shrink-0">
+        ${done ? '<span class="text-ivory text-xs">✓</span>' : ''}
+      </div>
+      <div class="card-body flex-1 min-w-0">
+        <p class="font-serif text-base text-forest leading-tight">${s.t}</p>
+        <p class="text-xs text-forest/60 mt-0.5">${s.s}</p>
+      </div>
+    </div>
+  </div>`;
+}
+
+function toggleStep(group, id) {
+  const t = getToday();
+  if (!t[group]) t[group] = {};
+  t[group][id] = !t[group][id];
+  save();
+  renderToday();
+}
+
+function setMood(m) {
+  const t = getToday();
+  t.mood = t.mood === m ? null : m;
+  save();
+  renderToday();
+}
+
+function calcStreak() {
+  let s = 0;
+  const now = new Date();
+  for (let i = 0; i < 60; i++) {
+    const d = new Date(now); d.setDate(d.getDate() - i);
+    const key = d.toISOString().slice(0,10);
+    const day = state.days[key];
+    if (day && (Object.keys(day.am || {}).length > 0 || Object.keys(day.pm || {}).length > 0)) s++;
+    else if (i > 0) break;
+  }
+  return s;
+}
+
+function renderStats() {
+  const days = Object.entries(state.days).sort().slice(-7);
+  const spfDays = days.filter(([_,d]) => d.am && d.am.am_spf).length;
+  const retinolDays = days.filter(([_,d]) => d.pm && (d.pm.pm_active)).length;
+  const suppDays = days.filter(([_,d]) => d.daily && d.daily.d_supp).length;
+  document.getElementById('statsRow').innerHTML = `
+    ${stat('SPF', spfDays + '/7', 'son hafta')}
+    ${stat('Retinoid', retinolDays + '/7', 'gece')}
+    ${stat('Takviye', suppDays + '/7', 'gün')}
+  `;
+}
+function stat(label, val, sub) {
+  return `<div class="bg-white rounded-2xl p-4 text-center glow">
+    <p class="text-[10px] uppercase tracking-wider text-clay mb-1">${label}</p>
+    <p class="font-serif text-xl text-forest">${val}</p>
+    <p class="text-[10px] text-forest/50 mt-0.5">${sub}</p>
+  </div>`;
+}
+
+/* ================= RUTİN ================= */
+function renderRoutine() {
+  const week = [
+    { d: 'Pazartesi', t: 'Retinol', h: 'Environ C-Quence 3' },
+    { d: 'Salı', t: 'Anti-Glycation', h: 'SkinCeuticals A.G.E.' },
+    { d: 'Çarşamba', t: 'Retinol', h: 'Environ C-Quence 3' },
+    { d: 'Perşembe', t: 'Anti-Glycation', h: 'SkinCeuticals A.G.E.' },
+    { d: 'Cuma', t: 'Retinol', h: 'Environ C-Quence 3' },
+    { d: 'Cumartesi', t: 'Onarım', h: 'Environ Oil + La Mer Concentrate' },
+    { d: 'Pazar', t: 'Maske', h: 'Environ Revival / Celltermi' },
+  ];
+  const todayName = DAY_NAMES[new Date().getDay()];
+  document.getElementById('weekRotation').innerHTML = week.map(w => {
+    const isToday = w.d === todayName;
+    return `<div class="flex items-center justify-between p-3 rounded-xl ${isToday ? 'bg-forest text-ivory' : 'bg-cream/40'}">
+      <div>
+        <p class="font-serif ${isToday ? 'text-ivory' : 'text-forest'}">${w.d}${isToday ? ' · bugün' : ''}</p>
+        <p class="text-xs ${isToday ? 'text-ivory/70' : 'text-forest/60'} mt-0.5">${w.h}</p>
+      </div>
+      <span class="text-xs font-sans uppercase tracking-wider ${isToday ? 'text-clay-light' : 'text-clay'}">${w.t}</span>
+    </div>`;
+  }).join('');
+}
+
+/* ================= ALIŞ ================= */
+const SHOP_ITEMS = [
+  { id:'tretinoin', cat:'must', brand:'Galderma', name:'Retacnyl Tretinoin', dose:'0.025-0.05%', role:'Rx retinoid', why:'Environ C-Quence 3\'ün 10-20x üstü. 44 yaş için en güçlü anti-aging.', price:'~200 TL', ev:'güçlü', where:'Eczane (reçeteli)', action:'Dermatolog randevusu', link:null, bg:'linear-gradient(135deg,#D2232A,#8B1821)', mono:'R', icon:'℞' },
+  { id:'azelaic', cat:'must', brand:'Bayer/PC', name:'Azelaic Acid', dose:'15-20%', role:'Melasma + ton', why:'Perimenopause\'da melanosit patlar — bunu durduran ürünün yok.', price:'500-800 TL', ev:'güçlü', where:'Finacea (eczane) veya Paula\'s Choice', action:'Reçete veya sipariş', link:'https://www.paulaschoice.com', bg:'linear-gradient(135deg,#F5E6D3,#E8D4B5)', mono:'PC', icon:'◉', darkText:true },
+  { id:'niacinamide', cat:'must', brand:'The Ordinary', name:'Niacinamide 10% + Zinc', dose:'30 ml', role:'Gözenek + sebum + ton', why:'Niasinamidin yok. Tek ürün 2 sorunu çözer.', price:'~150 TL', ev:'güçlü', where:'Trendyol · Gratis · Sephora', action:'Online 30 dk', link:'https://theordinary.com', bg:'linear-gradient(135deg,#1A1A1A,#3A3A3A)', mono:'TO', icon:'◆' },
+  { id:'anua', cat:'kbeauty', brand:'Anua', name:'Heartleaf 77% Toner', dose:'250 ml', role:'Barrier · kızarıklık', why:'Retinoid + A.G.E. kombinasyonu bariyerini zorlar — bu onarır.', price:'~400 TL', ev:'orta', where:'Trendyol · iHerb', action:'Her gün pamukla', link:'https://www.anua-official.com', bg:'linear-gradient(135deg,#C8D6B9,#A8C090)', mono:'A', icon:'❋', darkText:true },
+  { id:'numbuzin', cat:'kbeauty', brand:'Numbuzin', name:'No. 3 Softening Serum', dose:'50 ml', role:'Peptid + PDRN', why:'Genosys kürdeyken aradaki ayları doldurur.', price:'~900 TL', ev:'orta', where:'Trendyol · iHerb', action:'C-Quence olmayan geceler', link:'https://www.numbuzin.com', bg:'linear-gradient(135deg,#F0E4D8,#D9C7B3)', mono:'N³', icon:'◈', darkText:true },
+  { id:'bojoseon', cat:'kbeauty', brand:'Beauty of Joseon', name:'Relief Sun SPF 50+', dose:'50 ml', role:'Hafif ikinci SPF', why:'Cult K-beauty SPF. Çantada, tazeleme için, makyaj altı.', price:'~500 TL', ev:'güçlü', where:'Trendyol · iHerb', action:'Yedek SPF', link:'https://beautyofjoseon.com', bg:'linear-gradient(135deg,#E8B865,#C89545)', mono:'BoJ', icon:'☀' },
+  { id:'tns', cat:'premium', brand:'SkinMedica', name:'TNS Advanced+ Serum', dose:'28.4 g', role:'Growth factor', why:'Peptidlerin üst seviyesi. Collagen Pro\'nun 3x etkili.', price:'€290 (~14K TL)', ev:'güçlü', where:'ABD ithal · klinik', action:'Opsiyonel · hediye', link:'https://www.skinmedica.com', bg:'linear-gradient(135deg,#2E4632,#1A2E1F)', mono:'SM', icon:'✧' },
+  { id:'alpharet', cat:'premium', brand:'Skinbetter', name:'Alpha Ret Overnight', dose:'30 ml', role:'Tretinoin hibridi', why:'Tretinoin reçetesi alamazsan alternatif.', price:'€180 (~7K TL)', ev:'güçlü', where:'ABD ithal', action:'Rx alamazsan', link:'https://www.skinbetter.com', bg:'linear-gradient(135deg,#B89C7A,#8E7558)', mono:'SB', icon:'◐' },
+];
+
+function renderShop() {
+  ['must','kbeauty','premium'].forEach(cat => {
+    const el = document.getElementById('shop' + cat.charAt(0).toUpperCase() + cat.slice(1));
+    if (!el) return;
+    el.innerHTML = SHOP_ITEMS.filter(i => i.cat === cat).map(shopCard).join('');
+  });
+  const total = SHOP_ITEMS.length;
+  const done = Object.keys(state.shopBought || {}).length;
+  document.getElementById('shopProgress').textContent = `${done} / ${total}`;
+  document.getElementById('shopProgressBar').style.width = Math.round(done/total*100) + '%';
+}
+
+function shopCard(item) {
+  const bought = !!state.shopBought[item.id];
+  const textColor = item.darkText ? 'text-forest' : 'text-ivory';
+  const evBadge = { 'güçlü':'bg-clay text-ivory', 'orta':'bg-sand text-forest', 'anekdot':'bg-cream text-forest/60' }[item.ev];
+
+  return `<div class="bg-white rounded-2xl overflow-hidden glow ${bought ? 'opacity-50' : ''}">
+    <div class="flex">
+      <div class="w-28 md:w-36 flex-shrink-0 flex items-center justify-center ${textColor} relative" style="background:${item.bg};">
+        <div class="text-center p-3">
+          <div class="font-serif text-4xl leading-none mb-1">${item.icon}</div>
+          <div class="font-serif text-xl tracking-wide">${item.mono}</div>
+        </div>
+        <span class="absolute top-2 right-2 text-[9px] font-sans uppercase tracking-wider px-2 py-0.5 rounded-full ${evBadge}">${item.ev}</span>
+      </div>
+      <div class="flex-1 p-4 min-w-0">
+        <p class="text-[10px] text-clay uppercase tracking-wider">${item.brand}</p>
+        <p class="font-serif text-base text-forest leading-tight mt-0.5">${item.name}</p>
+        <p class="text-[10px] text-forest/60 mt-1">${item.dose}</p>
+        <p class="text-xs text-forest/80 mt-2 leading-snug">${item.why}</p>
+        <div class="mt-3 flex items-center justify-between">
+          <span class="font-serif text-forest">${item.price}</span>
+          <div class="flex items-center gap-2">
+            ${item.link ? `<a href="${item.link}" target="_blank" class="text-[10px] text-clay underline">site</a>` : ''}
+            <button onclick="toggleBought('${item.id}')" class="text-[10px] font-sans uppercase tracking-wider px-3 py-1.5 rounded-full ${bought ? 'bg-cream text-forest/60' : 'bg-forest text-ivory'}">${bought ? '✓ alındı' : '+ alındı'}</button>
+          </div>
+        </div>
+        <p class="text-[10px] text-forest/50 mt-2">📍 ${item.where}</p>
+      </div>
+    </div>
+  </div>`;
+}
+
+function toggleBought(id) {
+  state.shopBought = state.shopBought || {};
+  if (state.shopBought[id]) delete state.shopBought[id];
+  else state.shopBought[id] = new Date().toISOString();
+  save();
+  renderShop();
+}
+
+/* ================= KOÇ ================= */
+function quickCoach(q) {
+  document.getElementById('coachInput').value = q;
+  copyAndOpenClaude();
+}
+
+function buildPrompt() {
+  const q = (document.getElementById('coachInput')?.value || '').trim();
+  const recent = Object.entries(state.days).sort().slice(-7);
+  let data = '';
+  if (recent.length > 0) {
+    data = '\n\n## SON 7 GÜN\n';
+    recent.forEach(([d, day]) => {
+      const am = Object.keys(day.am || {}).filter(k => day.am[k]).length;
+      const pm = Object.keys(day.pm || {}).filter(k => day.pm[k]).length;
+      const dly = Object.keys(day.daily || {}).filter(k => day.daily[k]).length;
+      data += `- ${d}: sabah ${am}/5, akşam ${pm}/4, gün içi ${dly}/5${day.mood ? `, ruh hali: ${day.mood}` : ''}\n`;
+    });
+  }
+  return `Sen Pınar Kamçı'nın kişisel wellness + longevity + güzellik + perimenopause danışmanısın.
+
+## 4 UZMAN TEK KAFADA
+1. Longevity doktoru (Peter Attia — apoB, VO2max, DEXA)
+2. Fonksiyonel diyetisyen (kadın 40+ protein 1.6-2.2g/kg, Türk mutfağı)
+3. Dermatolog (Baumann, Fitzpatrick — retinoid/peptid/SPF)
+4. Perimenopause hekimi (Haver + Sims — "kadın küçük erkek değildir"; IF/aşırı kardiyo 40+ kadında yanlış; ağır direnç 3-4x/hafta zorunlu)
+
+## KURALLAR
+- SONUÇ → OPSİYON (maks 2-3) → AKSİYON
+- Ölçülebilir: gram/dakika/doz/frekans
+- Evidence tier: [güçlü] [orta] [anekdot]
+- Disclaimer spam YASAK
+- Kısa, yapılandırılmış
+
+## PINAR HAKKINDA
+${state.personalContext}
+
+## MEVCUT CİLT ENVANTERİ (~€6K)
+Environ (C-Quence 3, Avance Elixir, Revival Masque, Oil Capsules, Eye Gel), Sensai (Creamy Soap, Ultra Intensive, Melt Rich Eye, Throat & Bust...), Shiseido (Ultimune), La Mer (Concentrate, Night Cream, Treatment Lotion), SkinCeuticals (A.G.E. Interrupter, Collagen Pro, SPF 50), iS Clinical Pro-Heal, Caudalie (rotasyon), MBR Hand, Genosys Bio-Meso PDRN, Revive NX, Celltermi, Isov Azulene.
+
+### AKTİF ROTASYON
+- Sabah: Creamy Soap → iS Clinical → Sensai Cream → Environ Eye → SkinCeuticals SPF 50
+- Pzt/Çar/Cum: Environ C-Quence 3 + Sensai Ultra
+- Sal/Per: SkinCeuticals A.G.E. + La Mer Night
+- Cmt: Environ Oil + La Mer Concentrate
+- Pzr: Revival Masque / Celltermi
+
+### EKSİKLER (önerilmiş)
+Tretinoin, azelaic %15, niasinamid %10, Anua Heartleaf, Numbuzin No.3, Beauty of Joseon SPF
+${data}
+
+## SORUM
+${q || '[soruyu yaz]'}
+
+Kısa, aksiyon-odaklı yanıt ver.`;
+}
+
+async function copyAndOpenClaude() {
+  const p = buildPrompt();
+  try { await navigator.clipboard.writeText(p); } catch {
+    const ta = document.createElement('textarea'); ta.value = p;
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+  }
+  toast('Kopyalandı ✓');
+  setTimeout(() => window.open('https://claude.ai/new', '_blank'), 250);
+}
+
+/* ================= AYAR ================= */
+function renderSettings() {
+  document.getElementById('personalContext').value = state.personalContext || '';
+}
+function savePersonalContext() {
+  state.personalContext = document.getElementById('personalContext').value;
+  save(); toast('Kaydedildi ✓');
+}
+function exportData() {
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `pinar-${today()}.json`; a.click();
+  URL.revokeObjectURL(url);
+}
+function importData(e) {
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = ev => {
+    try { state = JSON.parse(ev.target.result); save(); alert('Yüklendi.'); location.reload(); }
+    catch { alert('Geçersiz.'); }
+  };
+  r.readAsText(f);
+}
+function clearData() {
+  if (!confirm('Tüm veri silinecek. Emin misin?')) return;
+  localStorage.removeItem(STORAGE_KEY); location.reload();
+}
+
+/* ================= TOAST ================= */
+function toast(m) {
+  const t = document.createElement('div');
+  t.className = 'fixed bottom-24 md:bottom-8 left-1/2 -translate-x-1/2 bg-forest text-ivory text-sm px-5 py-3 rounded-full glow z-50';
+  t.textContent = m; document.body.appendChild(t);
+  setTimeout(() => t.style.transition = 'opacity 0.4s', 10);
+  setTimeout(() => t.style.opacity = '0', 1800);
+  setTimeout(() => t.remove(), 2400);
+}
+
+/* ================= INIT ================= */
+renderToday();
+</script>
+
+</body>
+</html>
