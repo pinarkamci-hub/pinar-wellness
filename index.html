@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#1A2E1F">
+<meta name="theme-color" content="#3D1F4D">
 <title>Yaşam Pınarım</title>
 
 <!-- FAVICON & APPLE TOUCH -->
@@ -23,14 +23,14 @@ tailwind.config = {
         sans: ['Inter', 'system-ui'],
       },
       colors: {
-        ivory: '#F6F1E8',
-        cream: '#EBE2D1',
-        forest: '#1A2E1F',
-        'forest-light': '#2E4632',
-        clay: '#B8624A',
-        'clay-light': '#D89078',
-        sand: '#D4C4A8',
-        ink: '#0F1511',
+        ivory: '#F5F0F8',
+        cream: '#E4D8EC',
+        forest: '#3D1F4D',
+        'forest-light': '#5A3472',
+        clay: '#B8648A',
+        'clay-light': '#D4A4BE',
+        sand: '#C9B8D4',
+        ink: '#1F0A2E',
       }
     }
   }
@@ -65,18 +65,21 @@ tailwind.config = {
 
 <!-- TAB NAV -->
 <nav class="fixed md:sticky bottom-0 md:top-16 left-0 right-0 z-30 bg-ivory/95 backdrop-blur border-t md:border-t-0 md:border-b border-cream">
-  <div class="max-w-3xl mx-auto px-2 py-2 flex justify-around">
-    <button class="tab-btn active font-sans text-xs px-4 py-2 rounded-full flex flex-col items-center gap-1" data-tab="today">
-      <span class="text-xl">◉</span><span>Bugün</span>
+  <div class="max-w-3xl mx-auto px-1 py-2 flex justify-around">
+    <button class="tab-btn active font-sans text-[10px] md:text-xs px-2 md:px-4 py-2 rounded-full flex flex-col items-center gap-1" data-tab="today">
+      <span class="text-lg md:text-xl">◉</span><span>Bugün</span>
     </button>
-    <button class="tab-btn font-sans text-xs px-4 py-2 rounded-full flex flex-col items-center gap-1" data-tab="routine">
-      <span class="text-xl">◈</span><span>Rutin</span>
+    <button class="tab-btn font-sans text-[10px] md:text-xs px-2 md:px-4 py-2 rounded-full flex flex-col items-center gap-1" data-tab="routine">
+      <span class="text-lg md:text-xl">◈</span><span>Rutin</span>
     </button>
-    <button class="tab-btn font-sans text-xs px-4 py-2 rounded-full flex flex-col items-center gap-1" data-tab="shop">
-      <span class="text-xl">⚘</span><span>Alışveriş</span>
+    <button class="tab-btn font-sans text-[10px] md:text-xs px-2 md:px-4 py-2 rounded-full flex flex-col items-center gap-1" data-tab="aesthetic">
+      <span class="text-lg md:text-xl">✧</span><span>Estetik</span>
     </button>
-    <button class="tab-btn font-sans text-xs px-4 py-2 rounded-full flex flex-col items-center gap-1" data-tab="coach">
-      <span class="text-xl">✦</span><span>Koç</span>
+    <button class="tab-btn font-sans text-[10px] md:text-xs px-2 md:px-4 py-2 rounded-full flex flex-col items-center gap-1" data-tab="shop">
+      <span class="text-lg md:text-xl">⚘</span><span>Alış</span>
+    </button>
+    <button class="tab-btn font-sans text-[10px] md:text-xs px-2 md:px-4 py-2 rounded-full flex flex-col items-center gap-1" data-tab="coach">
+      <span class="text-lg md:text-xl">✦</span><span>Koç</span>
     </button>
   </div>
 </nav>
@@ -224,27 +227,32 @@ tailwind.config = {
 <!-- =============== ALIŞ =============== -->
 <section id="page-shop" class="hidden-page">
   <div class="mb-8">
-    <p class="text-clay font-sans text-xs uppercase tracking-[0.2em] mb-2">Stash Tamamlayıcı · 8 Ürün</p>
+    <p class="text-clay font-sans text-xs uppercase tracking-[0.2em] mb-2">Yüz · Vücut · Kanıtlı seçki</p>
     <h2 class="font-serif text-4xl text-forest">Alışveriş Listesi</h2>
+    <p class="mt-3 text-xs text-forest/60 italic">Link verilmedi — her kartta tam ürün adını kopyala, kendin ara. "Nereden bulunur" bilgisi altında.</p>
   </div>
 
   <div class="bg-forest text-ivory rounded-3xl p-6 mb-6 glow">
-    <div class="grid grid-cols-3 gap-3 text-center">
+    <div class="grid grid-cols-4 gap-2 text-center">
       <div>
-        <p class="text-clay-light text-[10px] uppercase tracking-widest">Must</p>
-        <p class="font-serif text-2xl mt-1">~2500 TL</p>
+        <p class="text-clay-light text-[9px] uppercase tracking-widest">Yüz Must</p>
+        <p class="font-serif text-lg mt-1">~24K TL</p>
       </div>
       <div>
-        <p class="text-clay-light text-[10px] uppercase tracking-widest">K-Beauty</p>
-        <p class="font-serif text-2xl mt-1">~1800 TL</p>
+        <p class="text-clay-light text-[9px] uppercase tracking-widest">K-Beauty</p>
+        <p class="font-serif text-lg mt-1">~24K TL</p>
       </div>
       <div>
-        <p class="text-clay-light text-[10px] uppercase tracking-widest">Premium</p>
-        <p class="font-serif text-2xl mt-1">€470+</p>
+        <p class="text-clay-light text-[9px] uppercase tracking-widest">Premium</p>
+        <p class="font-serif text-lg mt-1">~27K TL</p>
+      </div>
+      <div>
+        <p class="text-clay-light text-[9px] uppercase tracking-widest">Vücut</p>
+        <p class="font-serif text-lg mt-1">~25K TL</p>
       </div>
     </div>
     <div class="mt-5 text-center">
-      <p id="shopProgress" class="font-serif text-xl">0 / 8</p>
+      <p id="shopProgress" class="font-serif text-xl">0 / 17</p>
       <div class="h-1.5 bg-forest-light rounded-full mt-2 overflow-hidden">
         <div id="shopProgressBar" class="h-full bg-clay-light transition-all" style="width:0%"></div>
       </div>
@@ -254,7 +262,7 @@ tailwind.config = {
   <div class="mb-6">
     <div class="flex items-center gap-2 mb-3">
       <span class="w-6 h-6 rounded-full bg-clay text-ivory text-xs flex items-center justify-center font-serif">1</span>
-      <h3 class="font-serif text-xl text-forest">Must · Önce bunlar</h3>
+      <h3 class="font-serif text-xl text-forest">Yüz · Must</h3>
     </div>
     <div id="shopMust" class="space-y-3"></div>
   </div>
@@ -262,7 +270,7 @@ tailwind.config = {
   <div class="mb-6">
     <div class="flex items-center gap-2 mb-3">
       <span class="w-6 h-6 rounded-full bg-forest text-ivory text-xs flex items-center justify-center font-serif">2</span>
-      <h3 class="font-serif text-xl text-forest">K-Beauty</h3>
+      <h3 class="font-serif text-xl text-forest">Yüz · Cult / K-Beauty</h3>
     </div>
     <div id="shopKbeauty" class="space-y-3"></div>
   </div>
@@ -270,9 +278,18 @@ tailwind.config = {
   <div class="mb-6">
     <div class="flex items-center gap-2 mb-3">
       <span class="w-6 h-6 rounded-full bg-sand text-forest text-xs flex items-center justify-center font-serif">3</span>
-      <h3 class="font-serif text-xl text-forest">Premium · opsiyonel</h3>
+      <h3 class="font-serif text-xl text-forest">Yüz · Premium</h3>
     </div>
     <div id="shopPremium" class="space-y-3"></div>
+  </div>
+
+  <div class="mb-6">
+    <div class="flex items-center gap-2 mb-3">
+      <span class="w-6 h-6 rounded-full text-ivory text-xs flex items-center justify-center font-serif" style="background:#C93757">4</span>
+      <h3 class="font-serif text-xl text-forest">Vücut · Selülit + Sıkılaşma</h3>
+    </div>
+    <p class="text-xs text-forest/60 mb-3 leading-snug">Gerçek etki: ağır direnç + protein + kuru fırça. Krem yardımcıdır, mucize değil. Dürüst olalım.</p>
+    <div id="shopBody" class="space-y-3"></div>
   </div>
 
   <details class="bg-cream/40 rounded-2xl p-5">
@@ -570,63 +587,115 @@ function renderRoutine() {
 
 /* ================= ALIŞ ================= */
 const SHOP_ITEMS = [
-  { id:'tretinoin', cat:'must', brand:'Galderma', name:'Retacnyl Tretinoin', dose:'0.025-0.05%', role:'Rx retinoid', why:'Environ C-Quence 3\'ün 10-20x üstü. 44 yaş için en güçlü anti-aging.', price:'~200 TL', ev:'güçlü', where:'Eczane · reçete gerekli', action:'Dermatolog randevusu',
-    links:[
-      { name:'ilaç bilgi', url:'https://www.ilacrehberi.com/ilac/retacnyl' },
-    ],
-    bg:'linear-gradient(135deg,#D2232A,#8B1821)', mono:'R', icon:'℞' },
-  { id:'azelaic', cat:'must', brand:'Bayer / Paula\'s Choice', name:'Azelaic Acid 15-20%', dose:'1 tüp / 30 ml', role:'Melasma + ton', why:'Perimenopause\'da melanosit patlar — bunu durduran ürünün yok.', price:'500-1200 TL', ev:'güçlü', where:'Finacea eczane (reçeteli) veya Paula\'s Choice online', action:'Reçete veya sipariş',
-    links:[
-      { name:'Paula\'s Choice — Trendyol', url:'https://www.trendyol.com/sr?q=paula%27s+choice+azelaic+booster' },
-      { name:'Paula\'s Choice — iHerb', url:'https://www.iherb.com/search?kw=paulas+choice+azelaic' },
-      { name:'Skinoren %15 bilgi', url:'https://www.ilacrehberi.com/ilac/skinoren' },
-    ],
-    bg:'linear-gradient(135deg,#F5E6D3,#E8D4B5)', mono:'PC', icon:'◉', darkText:true },
-  { id:'niacinamide', cat:'must', brand:'The Ordinary', name:'Niacinamide 10% + Zinc 1%', dose:'30 ml', role:'Gözenek + sebum + ton', why:'Niasinamidin yok. Tek ürün 2 sorunu çözer.', price:'~150-250 TL', ev:'güçlü', where:'Online · her yerde', action:'Online 30 dk',
-    links:[
-      { name:'Trendyol — en ucuz', url:'https://www.trendyol.com/sr?q=the+ordinary+niacinamide+10' },
-      { name:'Sephora TR', url:'https://www.sephora.com.tr/search?q=the+ordinary+niacinamide' },
-      { name:'Gratis', url:'https://www.gratis.com/tr/search?query=the+ordinary+niacinamide' },
-    ],
-    bg:'linear-gradient(135deg,#1A1A1A,#3A3A3A)', mono:'TO', icon:'◆' },
-  { id:'anua', cat:'kbeauty', brand:'Anua', name:'Heartleaf 77% Soothing Toner', dose:'250 ml', role:'Barrier · kızarıklık', why:'Retinoid + A.G.E. kombinasyonu bariyerini zorlar — bu onarır.', price:'~400-550 TL', ev:'orta', where:'iHerb orijinal · Trendyol hızlı', action:'Her gün pamukla',
-    links:[
-      { name:'iHerb — orijinal', url:'https://www.iherb.com/search?kw=anua+heartleaf+77+toner' },
-      { name:'Trendyol', url:'https://www.trendyol.com/sr?q=anua+heartleaf+77' },
-      { name:'Yesstyle', url:'https://www.yesstyle.com/en/anua-heartleaf-77-soothing-toner-250ml/info.html' },
-    ],
-    bg:'linear-gradient(135deg,#C8D6B9,#A8C090)', mono:'A', icon:'❋', darkText:true },
-  { id:'numbuzin', cat:'kbeauty', brand:'Numbuzin', name:'No. 3 Skin Softening Serum', dose:'50 ml', role:'Peptid + PDRN', why:'Genosys kürdeyken aradaki ayları doldurur.', price:'~800-1100 TL', ev:'orta', where:'iHerb · Yesstyle', action:'C-Quence olmayan geceler',
-    links:[
-      { name:'iHerb — orijinal', url:'https://www.iherb.com/search?kw=numbuzin+no+3' },
-      { name:'Trendyol', url:'https://www.trendyol.com/sr?q=numbuzin+no+3' },
-      { name:'Yesstyle', url:'https://www.yesstyle.com/en/numbuzin/list.html' },
-    ],
-    bg:'linear-gradient(135deg,#F0E4D8,#D9C7B3)', mono:'N³', icon:'◈', darkText:true },
-  { id:'bojoseon', cat:'kbeauty', brand:'Beauty of Joseon', name:'Relief Sun Rice + Probiotics SPF 50+', dose:'50 ml', role:'Hafif ikinci SPF', why:'Cult K-beauty SPF. Çantada, tazeleme için, makyaj altı.', price:'~400-600 TL', ev:'güçlü', where:'iHerb en ucuz + orijinal', action:'Yedek SPF',
-    links:[
-      { name:'iHerb — en ucuz', url:'https://www.iherb.com/search?kw=beauty+of+joseon+relief+sun' },
-      { name:'Trendyol', url:'https://www.trendyol.com/sr?q=beauty+of+joseon+relief+sun' },
-      { name:'Sephora TR', url:'https://www.sephora.com.tr/search?q=beauty+of+joseon' },
-    ],
-    bg:'linear-gradient(135deg,#E8B865,#C89545)', mono:'BoJ', icon:'☀' },
-  { id:'tns', cat:'premium', brand:'SkinMedica', name:'TNS Advanced+ Serum', dose:'28.4 g', role:'Growth factor', why:'Peptidlerin üst seviyesi. Collagen Pro\'nun 3x etkili.', price:'€290 (~14K TL)', ev:'güçlü', where:'ABD ithal · klinik', action:'Opsiyonel · hediye',
-    links:[
-      { name:'Dermstore — int\'l shipping', url:'https://www.dermstore.com/search?query=skinmedica+tns+advanced' },
-      { name:'Amazon US', url:'https://www.amazon.com/s?k=skinmedica+tns+advanced' },
-      { name:'SkinMedica resmi', url:'https://www.skinmedica.com/tns-advanced-plus-serum' },
-    ],
-    bg:'linear-gradient(135deg,#2E4632,#1A2E1F)', mono:'SM', icon:'✧' },
-  { id:'alpharet', cat:'premium', brand:'Skinbetter', name:'AlphaRet Overnight Cream', dose:'30 ml', role:'Tretinoin hibridi', why:'Tretinoin reçetesi alamazsan alternatif.', price:'€180 (~7K TL)', ev:'güçlü', where:'Klinik / authorized provider', action:'Rx alamazsan',
-    links:[
-      { name:'Authorized provider bul', url:'https://find.skinbetter.com/' },
-      { name:'Skinbetter resmi', url:'https://www.skinbetter.com/products/alpharet-overnight-cream' },
-    ],
-    bg:'linear-gradient(135deg,#B89C7A,#8E7558)', mono:'SB', icon:'◐' },
+  // YÜZ — MUST
+  { id:'ab-rich', cat:'must', brand:'Augustinus Bader', name:'The Rich Cream', dose:'50 ml',
+    why:'TFC8® complex — Oprah\'nın O-List cult kremi. Anında ışıltı + 28 gün kollajen tetikleme. 44 yaş glow bombası.',
+    price:'€250 (~12.000 TL)', ev:'güçlü',
+    where:'Trendyol Luxe · Sephora TR (sınırlı) · dermoshop.com.tr · Net-a-Porter TR teslimat',
+    bg:'linear-gradient(135deg,#E8E4D9,#C9BFA8)', mono:'AB', icon:'✦', darkText:true },
+
+  { id:'sturm-glow', cat:'must', brand:'Dr. Barbara Sturm', name:'Glow Drops', dose:'30 ml',
+    why:'Klinik glow — 10 dakikada içten aydınlanma. Purslane + hyaluronic + alg. CEO öncesi-toplantı silahı.',
+    price:'€145 (~7.000 TL)', ev:'güçlü',
+    where:'dermoshop.com.tr · Trendyol Luxe · Douglas TR · Nişantaşı Dr.Sturm butik',
+    bg:'linear-gradient(135deg,#D4DFE3,#AFC0C6)', mono:'BS', icon:'◇', darkText:true },
+
+  { id:'medik8', cat:'must', brand:'Medik8', name:'Crystal Retinal 10', dose:'30 ml',
+    why:'Environ C-Quence 3\'ten bir seviye üstü. Retinaldehyde retinol\'den 11x etkili, tretinoin\'den az irrite.',
+    price:'€95 (~4.500 TL)', ev:'güçlü',
+    where:'Trendyol · dermokozmetik eczaneler · Lookfantastic TR teslimat · Cult Beauty (UK→TR)',
+    bg:'linear-gradient(135deg,#1A2E1F,#2E4632)', mono:'M8', icon:'◈' },
+
+  // YÜZ — K-BEAUTY / CULT
+  { id:'vintners', cat:'kbeauty', brand:'Vintner\'s Daughter', name:'Active Botanical Serum', dose:'30 ml',
+    why:'22 aktif botanik · 3 haftalık yavaş ekstraksiyon. Gwyneth → Kim K. cult ürünü. Aydınlık cilt.',
+    price:'$225 (~7.500 TL)', ev:'orta',
+    where:'Net-a-Porter TR · Space NK (UK) · dermoshop.com.tr (ara)',
+    bg:'linear-gradient(135deg,#B5904A,#8A6B2E)', mono:'VD', icon:'☼' },
+
+  { id:'p50', cat:'kbeauty', brand:'Biologique Recherche', name:'Lotion P50 1970', dose:'150 ml',
+    why:'Dünyanın efsane peeling\'i. 1970\'ten değişmeyen formül. 2 haftada cilt dönüşümü.',
+    price:'€95 (~4.500 TL)', ev:'güçlü',
+    where:'İstanbul BR merkezi: Nişantaşı · Bebek · Zorlu Center (sadece spa üzerinden satılır)',
+    bg:'linear-gradient(135deg,#8B2C2C,#5F1A1A)', mono:'BR', icon:'❀' },
+
+  { id:'sisley-oil', cat:'kbeauty', brand:'Sisley Paris', name:'Black Rose Precious Face Oil', dose:'25 ml',
+    why:'Siyah gül + argan + macadamia. Bir damla radiance + gece deep hydration. Perimenopause kuruluğu için altın.',
+    price:'€255 (~12.000 TL)', ev:'orta',
+    where:'Sephora TR · Sisley butik Nişantaşı · Douglas · Rossmann EU',
+    bg:'linear-gradient(135deg,#3E1F2E,#5F2D42)', mono:'SI', icon:'✾' },
+
+  // YÜZ — PREMIUM
+  { id:'tns', cat:'premium', brand:'SkinMedica', name:'TNS Advanced+ Serum', dose:'28.4 g',
+    why:'Klinik kanıt en güçlü anti-aging serum. Collagen Pro\'nun 3x etkili. Dermatolog "tek serum" seçimi.',
+    price:'€290 (~14.000 TL)', ev:'güçlü',
+    where:'TR eczanede YOK · Dermstore (US→TR) · Amazon DE · dermatolog klinik satışı',
+    bg:'linear-gradient(135deg,#0F3D3E,#1A5A5C)', mono:'SM', icon:'✧' },
+
+  { id:'valmont', cat:'premium', brand:'Valmont', name:'Prime Renewing Pack', dose:'75 ml',
+    why:'İsviçre hücre terapisi. 15 dk maske VEYA gece kremi — jet-lag reset. Yatarsın yorgun, kalkarsın ışıltılı.',
+    price:'€260 (~12.500 TL)', ev:'orta',
+    where:'Valmont butik Nişantaşı · Brown Thomas TR teslimat · Douglas EU',
+    bg:'linear-gradient(135deg,#0D1B2A,#1B3A5B)', mono:'V', icon:'❖' },
+
+  // VÜCUT — SELÜLİT / SIKILAŞMA
+  { id:'clarins-bodyfit', cat:'body', brand:'Clarins', name:'Body Fit Anti-Cellulite Contouring Expert', dose:'200 ml',
+    why:'TR/EU\'da en erişilebilir kanıtlı selülit kremi. Kafein + quince leaf + yağ asit. Gün içi sıkılaştırıcı.',
+    price:'~2.200 TL', ev:'orta',
+    where:'Sephora TR · Clarins butik · Douglas · Trendyol · Boyner',
+    bg:'linear-gradient(135deg,#C93757,#8E2240)', mono:'CL', icon:'❁' },
+
+  { id:'weleda-birch', cat:'body', brand:'Weleda', name:'Birch Cellulite Oil', dose:'200 ml',
+    why:'Doğal huş ağacı yağı. Klinik kanıt: 12 haftada ciltte %14 sıkılaşma. Duş sonrası nemli cilde masaj.',
+    price:'~800 TL', ev:'orta',
+    where:'Eczane (açık) · Trendyol · Gratis · DM · Rossmann EU',
+    bg:'linear-gradient(135deg,#7A9855,#4F6D37)', mono:'WL', icon:'❂' },
+
+  { id:'somatoline', cat:'body', brand:'Somatoline Cosmetic', name:'Slimming Treatment Intensive Night', dose:'450 ml',
+    why:'İtalyan eczane klasiği. İyot + phytocomplex, 7 gece uygulama. Karın/bacak için kanıtlı çevre daralması.',
+    price:'~1.400 TL', ev:'orta',
+    where:'Eczane · Trendyol · Migros · DM · Watsons',
+    bg:'linear-gradient(135deg,#1E3A5F,#0F2038)', mono:'SL', icon:'◐' },
+
+  { id:'caudalie-firm', cat:'body', brand:'Caudalie', name:'Vinosculpt Lift & Firm Body Cream', dose:'250 ml',
+    why:'Grapevine resveratrol + peptid. Vücut kollajen tetikleme. 44 yaş üst kol/bacak sıkılaşma için.',
+    price:'~1.200 TL', ev:'orta',
+    where:'Caudalie butik Nişantaşı · Sephora TR · Trendyol · Gratis',
+    bg:'linear-gradient(135deg,#6B3458,#421B35)', mono:'CD', icon:'❃' },
+
+  { id:'nuxe-cellu', cat:'body', brand:'Nuxe', name:'Body Reshaping Concentrate Day + Night', dose:'200 ml',
+    why:'Günlük 2 uygulama konsantresi. Sabah enerji + akşam detoks formülü. Fransız eczane altın standart.',
+    price:'~1.500 TL', ev:'orta',
+    where:'Eczane (dermokozmetik) · Trendyol · Sephora TR',
+    bg:'linear-gradient(135deg,#C9A87C,#8B6F44)', mono:'NX', icon:'✿' },
+
+  { id:'sisley-celluli', cat:'body', brand:'Sisley Paris', name:'Celluli-Pro', dose:'200 ml',
+    why:'Lüks selülit — ivy + marshmallow extract. Uzun dönem sıkılaşma. Sabah-akşam yukarı doğru masaj.',
+    price:'€210 (~10.000 TL)', ev:'anekdot',
+    where:'Sisley butik Nişantaşı · Sephora TR · Douglas EU',
+    bg:'linear-gradient(135deg,#A32D5A,#6B1A3A)', mono:'SI', icon:'✾' },
+
+  { id:'drybrush', cat:'body', brand:'Aromatherapy Associates', name:'Polishing Body Brush', dose:'1 adet',
+    why:'Kuru fırça — lenfatik drenaj + selülit için bilim-destekli evde ritüel. Duş öncesi 3 dk yukarı doğru.',
+    price:'~1.100 TL', ev:'orta',
+    where:'Douglas · Amazon DE · dermoshop.com.tr · alternatif: The Body Shop Cactus Brush ~350 TL',
+    bg:'linear-gradient(135deg,#A8916C,#6E5B3C)', mono:'AA', icon:'⁂' },
+
+  { id:'guasha-body', cat:'body', brand:'Nephrite', name:'Body Gua Sha Tool (Jade/Rose Quartz)', dose:'1 adet',
+    why:'Vücut gua sha — selülit fibröz bantlarını mekanik çözer. Akşam 5 dk uyluk/kalça.',
+    price:'~400-800 TL', ev:'anekdot',
+    where:'Trendyol (nephrite/jade body gua sha) · Amazon · Gratis · Boyner (ara)',
+    bg:'linear-gradient(135deg,#8EA68C,#5E7A5C)', mono:'GS', icon:'◯' },
+
+  { id:'theragun-mini', cat:'body', brand:'Therabody', name:'Theragun Mini 2.0', dose:'1 adet',
+    why:'Perküsyon masaj cihazı — selülit + kas rahatlama. 15 dk/gün uyluk-kalça. Ergonomi için mini yeterli.',
+    price:'~6.500 TL', ev:'orta',
+    where:'MediaMarkt · Vatan · Trendyol · Amazon · Hepsiburada',
+    bg:'linear-gradient(135deg,#222222,#000000)', mono:'TB', icon:'❖' },
 ];
 
 function renderShop() {
-  ['must','kbeauty','premium'].forEach(cat => {
+  ['must','kbeauty','premium','body'].forEach(cat => {
     const el = document.getElementById('shop' + cat.charAt(0).toUpperCase() + cat.slice(1));
     if (!el) return;
     el.innerHTML = SHOP_ITEMS.filter(i => i.cat === cat).map(shopCard).join('');
@@ -642,10 +711,7 @@ function shopCard(item) {
   const textColor = item.darkText ? 'text-forest' : 'text-ivory';
   const evBadge = { 'güçlü':'bg-clay text-ivory', 'orta':'bg-sand text-forest', 'anekdot':'bg-cream text-forest/60' }[item.ev];
 
-  const linksHtml = (item.links || []).map((l, i) => {
-    const primary = i === 0;
-    return `<a href="${l.url}" target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-[11px] font-sans ${primary ? 'bg-forest text-ivory' : 'bg-cream text-forest'} px-3 py-1.5 rounded-full hover:opacity-80 transition">🛒 ${l.name}</a>`;
-  }).join('');
+  const searchName = `${item.brand} ${item.name}`;
 
   return `<div class="bg-white rounded-2xl overflow-hidden glow ${bought ? 'opacity-50' : ''}">
     <div class="flex">
@@ -662,14 +728,23 @@ function shopCard(item) {
         <p class="text-[10px] text-forest/60 mt-1">${item.dose}</p>
         <p class="text-xs text-forest/80 mt-2 leading-snug">${item.why}</p>
         <p class="font-serif text-forest mt-3">${item.price}</p>
-        <p class="text-[10px] text-forest/50 mt-1">📍 ${item.where}</p>
-
-        ${linksHtml ? `<div class="mt-3 flex flex-wrap gap-1.5">${linksHtml}</div>` : ''}
-
-        <button onclick="toggleBought('${item.id}')" class="mt-3 w-full text-[11px] font-sans uppercase tracking-wider py-2 rounded-full ${bought ? 'bg-cream text-forest/60' : 'bg-clay text-ivory'}">${bought ? '✓ alındı — geri al' : '+ alındı işaretle'}</button>
+        <div class="mt-2 bg-cream/40 rounded-xl p-2.5">
+          <p class="text-[9px] uppercase tracking-widest text-clay font-sans mb-1">Nereden bulunur</p>
+          <p class="text-[11px] text-forest/80 leading-snug">${item.where}</p>
+        </div>
+        <button onclick="copySearch('${searchName.replace(/'/g,"\\'")}')" class="mt-2 w-full text-[10px] font-sans uppercase tracking-wider py-1.5 rounded-full bg-forest/5 text-forest/70 hover:bg-forest/10 transition">📋 Ürün adını kopyala</button>
+        <button onclick="toggleBought('${item.id}')" class="mt-2 w-full text-[11px] font-sans uppercase tracking-wider py-2 rounded-full ${bought ? 'bg-cream text-forest/60' : 'bg-clay text-ivory'}">${bought ? '✓ alındı — geri al' : '+ alındı işaretle'}</button>
       </div>
     </div>
   </div>`;
+}
+
+async function copySearch(name) {
+  try { await navigator.clipboard.writeText(name); } catch {
+    const ta = document.createElement('textarea'); ta.value = name;
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+  }
+  toast('Kopyalandı ✓ arama yapabilirsin');
 }
 
 function toggleBought(id) {
