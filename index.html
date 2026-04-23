@@ -570,14 +570,59 @@ function renderRoutine() {
 
 /* ================= ALIŞ ================= */
 const SHOP_ITEMS = [
-  { id:'tretinoin', cat:'must', brand:'Galderma', name:'Retacnyl Tretinoin', dose:'0.025-0.05%', role:'Rx retinoid', why:'Environ C-Quence 3\'ün 10-20x üstü. 44 yaş için en güçlü anti-aging.', price:'~200 TL', ev:'güçlü', where:'Eczane (reçeteli)', action:'Dermatolog randevusu', link:null, bg:'linear-gradient(135deg,#D2232A,#8B1821)', mono:'R', icon:'℞' },
-  { id:'azelaic', cat:'must', brand:'Bayer/PC', name:'Azelaic Acid', dose:'15-20%', role:'Melasma + ton', why:'Perimenopause\'da melanosit patlar — bunu durduran ürünün yok.', price:'500-800 TL', ev:'güçlü', where:'Finacea (eczane) veya Paula\'s Choice', action:'Reçete veya sipariş', link:'https://www.paulaschoice.com', bg:'linear-gradient(135deg,#F5E6D3,#E8D4B5)', mono:'PC', icon:'◉', darkText:true },
-  { id:'niacinamide', cat:'must', brand:'The Ordinary', name:'Niacinamide 10% + Zinc', dose:'30 ml', role:'Gözenek + sebum + ton', why:'Niasinamidin yok. Tek ürün 2 sorunu çözer.', price:'~150 TL', ev:'güçlü', where:'Trendyol · Gratis · Sephora', action:'Online 30 dk', link:'https://theordinary.com', bg:'linear-gradient(135deg,#1A1A1A,#3A3A3A)', mono:'TO', icon:'◆' },
-  { id:'anua', cat:'kbeauty', brand:'Anua', name:'Heartleaf 77% Toner', dose:'250 ml', role:'Barrier · kızarıklık', why:'Retinoid + A.G.E. kombinasyonu bariyerini zorlar — bu onarır.', price:'~400 TL', ev:'orta', where:'Trendyol · iHerb', action:'Her gün pamukla', link:'https://www.anua-official.com', bg:'linear-gradient(135deg,#C8D6B9,#A8C090)', mono:'A', icon:'❋', darkText:true },
-  { id:'numbuzin', cat:'kbeauty', brand:'Numbuzin', name:'No. 3 Softening Serum', dose:'50 ml', role:'Peptid + PDRN', why:'Genosys kürdeyken aradaki ayları doldurur.', price:'~900 TL', ev:'orta', where:'Trendyol · iHerb', action:'C-Quence olmayan geceler', link:'https://www.numbuzin.com', bg:'linear-gradient(135deg,#F0E4D8,#D9C7B3)', mono:'N³', icon:'◈', darkText:true },
-  { id:'bojoseon', cat:'kbeauty', brand:'Beauty of Joseon', name:'Relief Sun SPF 50+', dose:'50 ml', role:'Hafif ikinci SPF', why:'Cult K-beauty SPF. Çantada, tazeleme için, makyaj altı.', price:'~500 TL', ev:'güçlü', where:'Trendyol · iHerb', action:'Yedek SPF', link:'https://beautyofjoseon.com', bg:'linear-gradient(135deg,#E8B865,#C89545)', mono:'BoJ', icon:'☀' },
-  { id:'tns', cat:'premium', brand:'SkinMedica', name:'TNS Advanced+ Serum', dose:'28.4 g', role:'Growth factor', why:'Peptidlerin üst seviyesi. Collagen Pro\'nun 3x etkili.', price:'€290 (~14K TL)', ev:'güçlü', where:'ABD ithal · klinik', action:'Opsiyonel · hediye', link:'https://www.skinmedica.com', bg:'linear-gradient(135deg,#2E4632,#1A2E1F)', mono:'SM', icon:'✧' },
-  { id:'alpharet', cat:'premium', brand:'Skinbetter', name:'Alpha Ret Overnight', dose:'30 ml', role:'Tretinoin hibridi', why:'Tretinoin reçetesi alamazsan alternatif.', price:'€180 (~7K TL)', ev:'güçlü', where:'ABD ithal', action:'Rx alamazsan', link:'https://www.skinbetter.com', bg:'linear-gradient(135deg,#B89C7A,#8E7558)', mono:'SB', icon:'◐' },
+  { id:'tretinoin', cat:'must', brand:'Galderma', name:'Retacnyl Tretinoin', dose:'0.025-0.05%', role:'Rx retinoid', why:'Environ C-Quence 3\'ün 10-20x üstü. 44 yaş için en güçlü anti-aging.', price:'~200 TL', ev:'güçlü', where:'Eczane · reçete gerekli', action:'Dermatolog randevusu',
+    links:[
+      { name:'ilaç bilgi', url:'https://www.ilacrehberi.com/ilac/retacnyl' },
+    ],
+    bg:'linear-gradient(135deg,#D2232A,#8B1821)', mono:'R', icon:'℞' },
+  { id:'azelaic', cat:'must', brand:'Bayer / Paula\'s Choice', name:'Azelaic Acid 15-20%', dose:'1 tüp / 30 ml', role:'Melasma + ton', why:'Perimenopause\'da melanosit patlar — bunu durduran ürünün yok.', price:'500-1200 TL', ev:'güçlü', where:'Finacea eczane (reçeteli) veya Paula\'s Choice online', action:'Reçete veya sipariş',
+    links:[
+      { name:'Paula\'s Choice — Trendyol', url:'https://www.trendyol.com/sr?q=paula%27s+choice+azelaic+booster' },
+      { name:'Paula\'s Choice — iHerb', url:'https://www.iherb.com/search?kw=paulas+choice+azelaic' },
+      { name:'Skinoren %15 bilgi', url:'https://www.ilacrehberi.com/ilac/skinoren' },
+    ],
+    bg:'linear-gradient(135deg,#F5E6D3,#E8D4B5)', mono:'PC', icon:'◉', darkText:true },
+  { id:'niacinamide', cat:'must', brand:'The Ordinary', name:'Niacinamide 10% + Zinc 1%', dose:'30 ml', role:'Gözenek + sebum + ton', why:'Niasinamidin yok. Tek ürün 2 sorunu çözer.', price:'~150-250 TL', ev:'güçlü', where:'Online · her yerde', action:'Online 30 dk',
+    links:[
+      { name:'Trendyol — en ucuz', url:'https://www.trendyol.com/sr?q=the+ordinary+niacinamide+10' },
+      { name:'Sephora TR', url:'https://www.sephora.com.tr/search?q=the+ordinary+niacinamide' },
+      { name:'Gratis', url:'https://www.gratis.com/tr/search?query=the+ordinary+niacinamide' },
+    ],
+    bg:'linear-gradient(135deg,#1A1A1A,#3A3A3A)', mono:'TO', icon:'◆' },
+  { id:'anua', cat:'kbeauty', brand:'Anua', name:'Heartleaf 77% Soothing Toner', dose:'250 ml', role:'Barrier · kızarıklık', why:'Retinoid + A.G.E. kombinasyonu bariyerini zorlar — bu onarır.', price:'~400-550 TL', ev:'orta', where:'iHerb orijinal · Trendyol hızlı', action:'Her gün pamukla',
+    links:[
+      { name:'iHerb — orijinal', url:'https://www.iherb.com/search?kw=anua+heartleaf+77+toner' },
+      { name:'Trendyol', url:'https://www.trendyol.com/sr?q=anua+heartleaf+77' },
+      { name:'Yesstyle', url:'https://www.yesstyle.com/en/anua-heartleaf-77-soothing-toner-250ml/info.html' },
+    ],
+    bg:'linear-gradient(135deg,#C8D6B9,#A8C090)', mono:'A', icon:'❋', darkText:true },
+  { id:'numbuzin', cat:'kbeauty', brand:'Numbuzin', name:'No. 3 Skin Softening Serum', dose:'50 ml', role:'Peptid + PDRN', why:'Genosys kürdeyken aradaki ayları doldurur.', price:'~800-1100 TL', ev:'orta', where:'iHerb · Yesstyle', action:'C-Quence olmayan geceler',
+    links:[
+      { name:'iHerb — orijinal', url:'https://www.iherb.com/search?kw=numbuzin+no+3' },
+      { name:'Trendyol', url:'https://www.trendyol.com/sr?q=numbuzin+no+3' },
+      { name:'Yesstyle', url:'https://www.yesstyle.com/en/numbuzin/list.html' },
+    ],
+    bg:'linear-gradient(135deg,#F0E4D8,#D9C7B3)', mono:'N³', icon:'◈', darkText:true },
+  { id:'bojoseon', cat:'kbeauty', brand:'Beauty of Joseon', name:'Relief Sun Rice + Probiotics SPF 50+', dose:'50 ml', role:'Hafif ikinci SPF', why:'Cult K-beauty SPF. Çantada, tazeleme için, makyaj altı.', price:'~400-600 TL', ev:'güçlü', where:'iHerb en ucuz + orijinal', action:'Yedek SPF',
+    links:[
+      { name:'iHerb — en ucuz', url:'https://www.iherb.com/search?kw=beauty+of+joseon+relief+sun' },
+      { name:'Trendyol', url:'https://www.trendyol.com/sr?q=beauty+of+joseon+relief+sun' },
+      { name:'Sephora TR', url:'https://www.sephora.com.tr/search?q=beauty+of+joseon' },
+    ],
+    bg:'linear-gradient(135deg,#E8B865,#C89545)', mono:'BoJ', icon:'☀' },
+  { id:'tns', cat:'premium', brand:'SkinMedica', name:'TNS Advanced+ Serum', dose:'28.4 g', role:'Growth factor', why:'Peptidlerin üst seviyesi. Collagen Pro\'nun 3x etkili.', price:'€290 (~14K TL)', ev:'güçlü', where:'ABD ithal · klinik', action:'Opsiyonel · hediye',
+    links:[
+      { name:'Dermstore — int\'l shipping', url:'https://www.dermstore.com/search?query=skinmedica+tns+advanced' },
+      { name:'Amazon US', url:'https://www.amazon.com/s?k=skinmedica+tns+advanced' },
+      { name:'SkinMedica resmi', url:'https://www.skinmedica.com/tns-advanced-plus-serum' },
+    ],
+    bg:'linear-gradient(135deg,#2E4632,#1A2E1F)', mono:'SM', icon:'✧' },
+  { id:'alpharet', cat:'premium', brand:'Skinbetter', name:'AlphaRet Overnight Cream', dose:'30 ml', role:'Tretinoin hibridi', why:'Tretinoin reçetesi alamazsan alternatif.', price:'€180 (~7K TL)', ev:'güçlü', where:'Klinik / authorized provider', action:'Rx alamazsan',
+    links:[
+      { name:'Authorized provider bul', url:'https://find.skinbetter.com/' },
+      { name:'Skinbetter resmi', url:'https://www.skinbetter.com/products/alpharet-overnight-cream' },
+    ],
+    bg:'linear-gradient(135deg,#B89C7A,#8E7558)', mono:'SB', icon:'◐' },
 ];
 
 function renderShop() {
@@ -597,6 +642,11 @@ function shopCard(item) {
   const textColor = item.darkText ? 'text-forest' : 'text-ivory';
   const evBadge = { 'güçlü':'bg-clay text-ivory', 'orta':'bg-sand text-forest', 'anekdot':'bg-cream text-forest/60' }[item.ev];
 
+  const linksHtml = (item.links || []).map((l, i) => {
+    const primary = i === 0;
+    return `<a href="${l.url}" target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-[11px] font-sans ${primary ? 'bg-forest text-ivory' : 'bg-cream text-forest'} px-3 py-1.5 rounded-full hover:opacity-80 transition">🛒 ${l.name}</a>`;
+  }).join('');
+
   return `<div class="bg-white rounded-2xl overflow-hidden glow ${bought ? 'opacity-50' : ''}">
     <div class="flex">
       <div class="w-28 md:w-36 flex-shrink-0 flex items-center justify-center ${textColor} relative" style="background:${item.bg};">
@@ -611,14 +661,12 @@ function shopCard(item) {
         <p class="font-serif text-base text-forest leading-tight mt-0.5">${item.name}</p>
         <p class="text-[10px] text-forest/60 mt-1">${item.dose}</p>
         <p class="text-xs text-forest/80 mt-2 leading-snug">${item.why}</p>
-        <div class="mt-3 flex items-center justify-between">
-          <span class="font-serif text-forest">${item.price}</span>
-          <div class="flex items-center gap-2">
-            ${item.link ? `<a href="${item.link}" target="_blank" class="text-[10px] text-clay underline">site</a>` : ''}
-            <button onclick="toggleBought('${item.id}')" class="text-[10px] font-sans uppercase tracking-wider px-3 py-1.5 rounded-full ${bought ? 'bg-cream text-forest/60' : 'bg-forest text-ivory'}">${bought ? '✓ alındı' : '+ alındı'}</button>
-          </div>
-        </div>
-        <p class="text-[10px] text-forest/50 mt-2">📍 ${item.where}</p>
+        <p class="font-serif text-forest mt-3">${item.price}</p>
+        <p class="text-[10px] text-forest/50 mt-1">📍 ${item.where}</p>
+
+        ${linksHtml ? `<div class="mt-3 flex flex-wrap gap-1.5">${linksHtml}</div>` : ''}
+
+        <button onclick="toggleBought('${item.id}')" class="mt-3 w-full text-[11px] font-sans uppercase tracking-wider py-2 rounded-full ${bought ? 'bg-cream text-forest/60' : 'bg-clay text-ivory'}">${bought ? '✓ alındı — geri al' : '+ alındı işaretle'}</button>
       </div>
     </div>
   </div>`;
