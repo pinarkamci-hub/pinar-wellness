@@ -66,20 +66,23 @@ tailwind.config = {
 <!-- TAB NAV -->
 <nav class="fixed md:sticky bottom-0 md:top-16 left-0 right-0 z-30 bg-ivory/95 backdrop-blur border-t md:border-t-0 md:border-b border-cream">
   <div class="max-w-3xl mx-auto px-1 py-2 flex justify-around">
-    <button class="tab-btn active font-sans text-[10px] md:text-xs px-2 md:px-4 py-2 rounded-full flex flex-col items-center gap-1" data-tab="today">
-      <span class="text-lg md:text-xl">◉</span><span>Bugün</span>
+    <button class="tab-btn active font-sans text-[9px] md:text-xs px-1.5 md:px-3 py-2 rounded-full flex flex-col items-center gap-0.5" data-tab="today">
+      <span class="text-base md:text-xl">◉</span><span>Bugün</span>
     </button>
-    <button class="tab-btn font-sans text-[10px] md:text-xs px-2 md:px-4 py-2 rounded-full flex flex-col items-center gap-1" data-tab="routine">
-      <span class="text-lg md:text-xl">◈</span><span>Rutin</span>
+    <button class="tab-btn font-sans text-[9px] md:text-xs px-1.5 md:px-3 py-2 rounded-full flex flex-col items-center gap-0.5" data-tab="routine">
+      <span class="text-base md:text-xl">◈</span><span>Rutin</span>
     </button>
-    <button class="tab-btn font-sans text-[10px] md:text-xs px-2 md:px-4 py-2 rounded-full flex flex-col items-center gap-1" data-tab="aesthetic">
-      <span class="text-lg md:text-xl">✧</span><span>Estetik</span>
+    <button class="tab-btn font-sans text-[9px] md:text-xs px-1.5 md:px-3 py-2 rounded-full flex flex-col items-center gap-0.5" data-tab="aesthetic">
+      <span class="text-base md:text-xl">✧</span><span>Estetik</span>
     </button>
-    <button class="tab-btn font-sans text-[10px] md:text-xs px-2 md:px-4 py-2 rounded-full flex flex-col items-center gap-1" data-tab="shop">
-      <span class="text-lg md:text-xl">⚘</span><span>Alış</span>
+    <button class="tab-btn font-sans text-[9px] md:text-xs px-1.5 md:px-3 py-2 rounded-full flex flex-col items-center gap-0.5" data-tab="longevity">
+      <span class="text-base md:text-xl">∞</span><span>Longevity</span>
     </button>
-    <button class="tab-btn font-sans text-[10px] md:text-xs px-2 md:px-4 py-2 rounded-full flex flex-col items-center gap-1" data-tab="coach">
-      <span class="text-lg md:text-xl">✦</span><span>Koç</span>
+    <button class="tab-btn font-sans text-[9px] md:text-xs px-1.5 md:px-3 py-2 rounded-full flex flex-col items-center gap-0.5" data-tab="shop">
+      <span class="text-base md:text-xl">⚘</span><span>Alış</span>
+    </button>
+    <button class="tab-btn font-sans text-[9px] md:text-xs px-1.5 md:px-3 py-2 rounded-full flex flex-col items-center gap-0.5" data-tab="coach">
+      <span class="text-base md:text-xl">✦</span><span>Koç</span>
     </button>
   </div>
 </nav>
@@ -303,6 +306,337 @@ tailwind.config = {
   </details>
 </section>
 
+<!-- =============== ESTETİK =============== -->
+<section id="page-aesthetic" class="hidden-page">
+  <div class="mb-8">
+    <p class="text-clay font-sans text-xs uppercase tracking-[0.2em] mb-2">Mini Estetik · 2026 Trendleri</p>
+    <h2 class="font-serif text-4xl text-forest">Estetik</h2>
+    <p class="mt-3 text-xs text-forest/70 italic leading-relaxed">2026 trendi: hacim değil <strong>rejenerasyon</strong>. Dolgu-ağır yüzden, kendi kollajeni tetikleyen biostimulatörlere dönüş. "Tweakment" çağı.</p>
+  </div>
+
+  <!-- 44 YAŞ 12 AYLIK PLAN -->
+  <div class="bg-forest text-ivory rounded-3xl p-6 mb-6 glow">
+    <p class="text-clay-light text-[10px] uppercase tracking-widest mb-3">44 Yaş · 12 Aylık Tweakment Planı</p>
+    <div class="space-y-2 text-sm">
+      <div class="flex justify-between border-b border-forest-light/50 pb-2"><span>Her 3-4 ay</span><span class="text-clay-light">Baby Botox</span></div>
+      <div class="flex justify-between border-b border-forest-light/50 pb-2"><span>Her 6 ay</span><span class="text-clay-light">Profhilo × 2 seans</span></div>
+      <div class="flex justify-between border-b border-forest-light/50 pb-2"><span>Her 6 ay</span><span class="text-clay-light">Rejuran (polynucleotide) göz altı</span></div>
+      <div class="flex justify-between border-b border-forest-light/50 pb-2"><span>Yılda 1</span><span class="text-clay-light">HIFU (Ultherapy/Ultraformer)</span></div>
+      <div class="flex justify-between border-b border-forest-light/50 pb-2"><span>Yılda 1</span><span class="text-clay-light">Morpheus8 (yüz sıkılaşma)</span></div>
+      <div class="flex justify-between border-b border-forest-light/50 pb-2"><span>Ayda 1</span><span class="text-clay-light">Mezoterapi VEYA OxyGeneo</span></div>
+      <div class="flex justify-between"><span>İhtiyaç</span><span class="text-clay-light">Dolgu (sadece kontur/volüm)</span></div>
+    </div>
+    <p class="mt-4 text-[11px] text-ivory/60 italic">Kural: Aynı gün ≥2 müdahale yapma. Bariyer zayıflar.</p>
+  </div>
+
+  <!-- KATEGORİ TAB'LARI -->
+  <div class="flex gap-2 mb-5 overflow-x-auto pb-1">
+    <button onclick="filterAes('face')" id="aes-tab-face" class="aes-tab-btn px-4 py-2 rounded-full text-xs font-sans uppercase tracking-wider bg-forest text-ivory whitespace-nowrap">Yüz</button>
+    <button onclick="filterAes('body')" id="aes-tab-body" class="aes-tab-btn px-4 py-2 rounded-full text-xs font-sans uppercase tracking-wider bg-cream text-forest whitespace-nowrap">Vücut · Selülit</button>
+    <button onclick="filterAes('paris')" id="aes-tab-paris" class="aes-tab-btn px-4 py-2 rounded-full text-xs font-sans uppercase tracking-wider bg-cream text-forest whitespace-nowrap">Paris Işıltısı</button>
+  </div>
+
+  <div id="aesContainer"></div>
+
+  <details class="bg-cream/40 rounded-2xl p-5 mt-6">
+    <summary class="font-serif text-forest cursor-pointer text-sm">⚠ Dikkat — Müdahale öncesi/sonrası</summary>
+    <ul class="mt-3 space-y-2 text-xs text-forest/80 font-sans leading-relaxed">
+      <li>• <strong>2-3 hafta önce retinoid bırak</strong> — özellikle Morpheus8, HIFU, Pico öncesi</li>
+      <li>• <strong>48 saat öncesi alkol + NSAID yok</strong> — morarma artar</li>
+      <li>• <strong>7 gün sonrası SPF 50+ hayati</strong> — pigmentasyon riski zirvede</li>
+      <li>• <strong>Güneş 2 hafta yok</strong> — HIFU, laser sonrası</li>
+      <li>• <strong>Doktor seçimi:</strong> Sadece estetisyen değil — Dermatoloji veya Plastik Cerrahi uzmanı, minimum 5 yıl deneyim, referans listesi</li>
+      <li>• <strong>Exosome FDA onaylı değil</strong> — sadece topikal, mikroneedling sonrası. Enjeksiyon iddiası gören klinikten uzak dur</li>
+    </ul>
+  </details>
+</section>
+
+<!-- =============== LONGEVITY =============== -->
+<section id="page-longevity" class="hidden-page">
+  <div class="mb-8">
+    <p class="text-clay font-sans text-xs uppercase tracking-[0.2em] mb-2">Yağ Yakımı · Metabolizma · 44 Yaş</p>
+    <h2 class="font-serif text-4xl text-forest">Longevity</h2>
+    <p class="mt-3 text-xs text-forest/70 italic leading-relaxed">Perimenopause'da kadın küçük erkek değil. IF + aşırı kardiyo yanlış. <strong>Ağır direnç + yüksek protein + zone 2</strong> — bu üçlü her şeydir.</p>
+  </div>
+
+  <!-- HEDEF KARTI -->
+  <div class="bg-forest text-ivory rounded-3xl p-6 mb-6 glow">
+    <p class="text-clay-light text-[10px] uppercase tracking-widest mb-4">Pınar · 44 Yaş · Hedef Metrikleri</p>
+    <div class="grid grid-cols-2 gap-4 text-sm">
+      <div>
+        <p class="text-clay-light text-[9px] uppercase tracking-wider">VO2 Max</p>
+        <p class="font-serif text-2xl mt-1">35+</p>
+        <p class="text-[10px] text-ivory/60 mt-1">Apple Watch ölçer</p>
+      </div>
+      <div>
+        <p class="text-clay-light text-[9px] uppercase tracking-wider">Protein</p>
+        <p class="font-serif text-2xl mt-1">110-130g</p>
+        <p class="text-[10px] text-ivory/60 mt-1">günlük · 1.6-2.0g/kg</p>
+      </div>
+      <div>
+        <p class="text-clay-light text-[9px] uppercase tracking-wider">Kas Kütlesi</p>
+        <p class="font-serif text-2xl mt-1">+2 kg</p>
+        <p class="text-[10px] text-ivory/60 mt-1">12 ayda · DEXA takip</p>
+      </div>
+      <div>
+        <p class="text-clay-light text-[9px] uppercase tracking-wider">Bel/Kalça</p>
+        <p class="font-serif text-2xl mt-1">≤0.80</p>
+        <p class="text-[10px] text-ivory/60 mt-1">metabolik risk ölçütü</p>
+      </div>
+      <div>
+        <p class="text-clay-light text-[9px] uppercase tracking-wider">Uyku</p>
+        <p class="font-serif text-2xl mt-1">7+ saat</p>
+        <p class="text-[10px] text-ivory/60 mt-1">tutarlı saat · non-negotiable</p>
+      </div>
+      <div>
+        <p class="text-clay-light text-[9px] uppercase tracking-wider">ApoB</p>
+        <p class="font-serif text-2xl mt-1">&lt; 80</p>
+        <p class="text-[10px] text-ivory/60 mt-1">kardiyo risk · yılda test</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1. HAREKET -->
+  <div class="bg-white rounded-3xl p-6 glow mb-5">
+    <div class="flex items-baseline gap-2 mb-4">
+      <span class="font-serif text-2xl text-clay">1.</span>
+      <h3 class="font-serif text-xl text-forest">Ağır Direnç · 3-4× hafta</h3>
+    </div>
+    <p class="text-xs text-forest/70 mb-3 leading-relaxed">Perimenopause'da <strong>en önemli ilaç</strong>. 2022 çalışması: direnç yapan kadınlar 12 ayda <strong>%20 daha az yağ</strong> kazanıyor. Kas = metabolizma + kemik yoğunluğu + kortizol tamponu.</p>
+    <ul class="space-y-2 text-sm font-serif text-forest">
+      <li class="flex justify-between border-b border-cream pb-2"><span>Squat (bacak)</span><span class="text-clay text-xs">3×8-10 · ağır</span></li>
+      <li class="flex justify-between border-b border-cream pb-2"><span>Deadlift (arka zincir)</span><span class="text-clay text-xs">3×5-8 · ağır</span></li>
+      <li class="flex justify-between border-b border-cream pb-2"><span>Hip Thrust (kalça)</span><span class="text-clay text-xs">3×10-12</span></li>
+      <li class="flex justify-between border-b border-cream pb-2"><span>Bench / Push-up</span><span class="text-clay text-xs">3×8-10</span></li>
+      <li class="flex justify-between border-b border-cream pb-2"><span>Row / Pull-up</span><span class="text-clay text-xs">3×8-10</span></li>
+      <li class="flex justify-between"><span>Overhead Press</span><span class="text-clay text-xs">3×8-10</span></li>
+    </ul>
+    <p class="mt-3 text-[11px] text-forest/60 italic">Progressif yük şart — her hafta 0.5-2kg ekle. Hafif ağırlık 20 tekrar = zaman kaybı 40+ kadında.</p>
+  </div>
+
+  <!-- 2. ZONE 2 -->
+  <div class="bg-white rounded-3xl p-6 glow mb-5">
+    <div class="flex items-baseline gap-2 mb-4">
+      <span class="font-serif text-2xl text-clay">2.</span>
+      <h3 class="font-serif text-xl text-forest">Zone 2 Kardiyo · 3-4× hafta</h3>
+    </div>
+    <p class="text-xs text-forest/70 mb-3 leading-relaxed">Nefes normal, konuşabiliyorsun ama şarkı söyleyemiyorsun. Bu zone yağ oksidasyonunu en verimli yapar ve <strong>kortizol yükseltmez</strong>. Perimenopause'un ideal kardiyosu.</p>
+    <ul class="space-y-2 text-sm text-forest">
+      <li class="flex justify-between border-b border-cream pb-2 font-serif"><span>Nabız hedefi</span><span class="text-clay text-xs">(220-44)×0.65-0.75 = <strong>115-132 bpm</strong></span></li>
+      <li class="flex justify-between border-b border-cream pb-2 font-serif"><span>Süre</span><span class="text-clay text-xs">45-60 dk · haftada 3-4</span></li>
+      <li class="flex justify-between border-b border-cream pb-2 font-serif"><span>Format</span><span class="text-clay text-xs">Hızlı yürüyüş · eğimli tabanç · bisiklet</span></li>
+      <li class="flex justify-between font-serif"><span>Bonus</span><span class="text-clay text-xs">Açken yapılırsa yağ yakımı ↑</span></li>
+    </ul>
+  </div>
+
+  <!-- 3. VO2MAX -->
+  <div class="bg-white rounded-3xl p-6 glow mb-5">
+    <div class="flex items-baseline gap-2 mb-4">
+      <span class="font-serif text-2xl text-clay">3.</span>
+      <h3 class="font-serif text-xl text-forest">VO2 Max · Haftada 1 Norveç 4×4</h3>
+    </div>
+    <p class="text-xs text-forest/70 mb-3 leading-relaxed">Peter Attia: <strong>VO2max en güçlü longevity prediktörü</strong>. Yüksek VO2max = %5 ölüm oranı, düşük = %45. 44 yaş kadında hedef <strong>35+ ml/kg/dk</strong>.</p>
+    <div class="bg-cream/40 rounded-xl p-3 text-xs text-forest/80 leading-relaxed">
+      <strong>Norveç 4×4 protokolü:</strong><br>
+      • 10 dk ısınma<br>
+      • 4 dk yüksek (%85-95 nabız, zor konuşma)<br>
+      • 3 dk aktif dinlenme (zone 2)<br>
+      • ×4 tekrar<br>
+      • 5 dk soğuma<br>
+      <span class="text-clay italic">Toplam 35 dk · haftada 1 yeter</span>
+    </div>
+  </div>
+
+  <!-- 4. PROTEİN -->
+  <div class="bg-white rounded-3xl p-6 glow mb-5">
+    <div class="flex items-baseline gap-2 mb-4">
+      <span class="font-serif text-2xl text-clay">4.</span>
+      <h3 class="font-serif text-xl text-forest">Protein · 110-130g/gün</h3>
+    </div>
+    <p class="text-xs text-forest/70 mb-3 leading-relaxed">Türk kadını ortalama 65g/gün protein yer. Perimenopause'da bu <strong>kas kaybı yolu</strong>. Hedef: <strong>1.6-2.0g/kg · her öğünde 30-40g</strong>. Leucine pik 3g lazım → kas protein sentezi.</p>
+    <ul class="space-y-2 text-sm font-serif text-forest">
+      <li class="flex justify-between border-b border-cream pb-2"><span>Kahvaltı · 30-40g</span><span class="text-clay text-xs">3 yumurta + peynir · veya whey shake</span></li>
+      <li class="flex justify-between border-b border-cream pb-2"><span>Öğle · 35-45g</span><span class="text-clay text-xs">150g tavuk/balık/et · veya 200g yoğurt+mercimek</span></li>
+      <li class="flex justify-between border-b border-cream pb-2"><span>Atıştırma · 20g</span><span class="text-clay text-xs">süzme yoğurt · cottage cheese · whey</span></li>
+      <li class="flex justify-between"><span>Akşam · 30-40g</span><span class="text-clay text-xs">balık · et · lor peyniri</span></li>
+    </ul>
+    <p class="mt-3 text-[11px] text-forest/60 italic">Protein tozu ÖNERİSİ: <strong>Optimum Nutrition Gold Standard Whey Isolate</strong> veya <strong>MyProtein Impact Whey Isolate</strong> (TR/EU)</p>
+  </div>
+
+  <!-- 5. METABOLİZMA BIOHACK -->
+  <div class="bg-white rounded-3xl p-6 glow mb-5">
+    <div class="flex items-baseline gap-2 mb-4">
+      <span class="font-serif text-2xl text-clay">5.</span>
+      <h3 class="font-serif text-xl text-forest">Metabolizma Tetikleyicileri</h3>
+    </div>
+    <div class="space-y-3 text-sm">
+      <div class="border-b border-cream pb-3">
+        <p class="font-serif text-forest">Sauna · 4× hafta · 20 dk · 80-90°C</p>
+        <p class="text-[11px] text-forest/60 mt-1">Finlandiya kohort: haftada 4-7 sauna %40 kalp-damar ölüm ↓. HSP70 protein, detox, kardiyo benzetimi.</p>
+      </div>
+      <div class="border-b border-cream pb-3">
+        <p class="font-serif text-forest">Soğuk duş / Ice plunge · her sabah</p>
+        <p class="text-[11px] text-forest/60 mt-1">30 sn son duş soğuk → kahverengi yağ aktive, dopamin ↑ %250, metabolizma %350. Sabah enerji için altın.</p>
+      </div>
+      <div class="border-b border-cream pb-3">
+        <p class="font-serif text-forest">Erken Yemek Penceresi · 8:00-18:00</p>
+        <p class="text-[11px] text-forest/60 mt-1">16:8 IF 40+ kadında KORTİZOL ARTIRIR (Haver). Bunun yerine <strong>erken yemek penceresi</strong> (10 saat): sabah yedir, akşam 18-19'dan sonra kes. Circadian uyumlu.</p>
+      </div>
+      <div class="border-b border-cream pb-3">
+        <p class="font-serif text-forest">Yemek sonrası 10 dk yürüyüş</p>
+        <p class="text-[11px] text-forest/60 mt-1">Glikoz spike'ı %30 düşürür — insülin direnci kritik 44+ kadında. "Fitness snack" en verimli biohack.</p>
+      </div>
+      <div>
+        <p class="font-serif text-forest">Kafein döngüsel · son 13:00</p>
+        <p class="text-[11px] text-forest/60 mt-1">Kafein yarı ömür 6 sa. 13:00 sonrası = uyku kalitesi ↓ = kortizol ↑ = göbek yağı. Non-negotiable kural.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. SUPLEMENT -->
+  <div class="bg-white rounded-3xl p-6 glow mb-5">
+    <div class="flex items-baseline gap-2 mb-4">
+      <span class="font-serif text-2xl text-clay">6.</span>
+      <h3 class="font-serif text-xl text-forest">Longevity Stack</h3>
+    </div>
+    <div class="space-y-2 text-sm">
+      <div class="flex justify-between border-b border-cream pb-2">
+        <div>
+          <p class="font-serif text-forest">Omega-3 (EPA+DHA) 2-3g</p>
+          <p class="text-[10px] text-forest/60">Nordic Naturals Ultimate Omega · Thorne Super EPA</p>
+        </div>
+        <span class="text-clay text-[10px] uppercase tracking-wider">güçlü</span>
+      </div>
+      <div class="flex justify-between border-b border-cream pb-2">
+        <div>
+          <p class="font-serif text-forest">Vit D3 4000 IU + K2 100mcg</p>
+          <p class="text-[10px] text-forest/60">Thorne Vitamin D/K2 · Solgar D3+K2</p>
+        </div>
+        <span class="text-clay text-[10px] uppercase tracking-wider">güçlü</span>
+      </div>
+      <div class="flex justify-between border-b border-cream pb-2">
+        <div>
+          <p class="font-serif text-forest">Kreatin Monohidrat 5g</p>
+          <p class="text-[10px] text-forest/60">Optimum Nutrition Micronized Creatine · Thorne Creatine</p>
+        </div>
+        <span class="text-clay text-[10px] uppercase tracking-wider">güçlü</span>
+      </div>
+      <div class="flex justify-between border-b border-cream pb-2">
+        <div>
+          <p class="font-serif text-forest">Magnezyum Glisinat 400mg</p>
+          <p class="text-[10px] text-forest/60">Thorne Magnesium Bisglycinate · Pure Encapsulations</p>
+        </div>
+        <span class="text-clay text-[10px] uppercase tracking-wider">güçlü</span>
+      </div>
+      <div class="flex justify-between border-b border-cream pb-2">
+        <div>
+          <p class="font-serif text-forest">Taurine 2g</p>
+          <p class="text-[10px] text-forest/60">NOW Foods Taurine · Thorne Taurine</p>
+        </div>
+        <span class="text-clay text-[10px] uppercase tracking-wider">güçlü</span>
+      </div>
+      <div class="flex justify-between border-b border-cream pb-2">
+        <div>
+          <p class="font-serif text-forest">Ashwagandha (KSM-66) 600mg</p>
+          <p class="text-[10px] text-forest/60">Jarrow KSM-66 · Solgar Ashwagandha</p>
+        </div>
+        <span class="text-clay text-[10px] uppercase tracking-wider">orta</span>
+      </div>
+      <div class="flex justify-between border-b border-cream pb-2">
+        <div>
+          <p class="font-serif text-forest">Kollajen Peptid 15-20g</p>
+          <p class="text-[10px] text-forest/60">Vital Proteins Collagen Peptides · Solgar Collagen</p>
+        </div>
+        <span class="text-clay text-[10px] uppercase tracking-wider">orta</span>
+      </div>
+      <div class="flex justify-between border-b border-cream pb-2">
+        <div>
+          <p class="font-serif text-forest">Spermidine 1-2mg</p>
+          <p class="text-[10px] text-forest/60">SpermidineLIFE · The Longevity Labs</p>
+        </div>
+        <span class="text-clay text-[10px] uppercase tracking-wider">orta</span>
+      </div>
+      <div class="flex justify-between">
+        <div>
+          <p class="font-serif text-forest">Berberine 500mg × 2</p>
+          <p class="text-[10px] text-forest/60">Thorne Berberine · yemekten önce</p>
+        </div>
+        <span class="text-clay text-[10px] uppercase tracking-wider">orta</span>
+      </div>
+    </div>
+    <p class="mt-3 text-[11px] text-forest/60 italic"><strong>ALMAYIN:</strong> NMN oral (kanıt zayıf), NAD+ içecek (hype), detox çay, koloidal gümüş, "hepsi bir arada" multi (doz düşük).</p>
+  </div>
+
+  <!-- 7. GLP-1 -->
+  <div class="bg-white rounded-3xl p-6 glow mb-5">
+    <div class="flex items-baseline gap-2 mb-4">
+      <span class="font-serif text-2xl text-clay">7.</span>
+      <h3 class="font-serif text-xl text-forest">GLP-1 (Ozempic/Wegovy/Mounjaro)</h3>
+    </div>
+    <p class="text-xs text-forest/70 mb-3 leading-relaxed">2026'da CEO-elite arasında standartlaştı. Peter Attia: "Güçlü araç, ama kas koruyucu strateji şart. Yüksek protein + ağır direnç olmadan %25-40 kas kaybı olabilir."</p>
+    <div class="bg-cream/40 rounded-xl p-3 text-xs text-forest/80 leading-relaxed space-y-2">
+      <p><strong>Kimin için?</strong> BMI &gt;27 veya insülin direnci + ağır direnç yapabilen kişi</p>
+      <p><strong>Kimin için DEĞİL?</strong> Kas kütlesi düşük · yeme bozukluğu hikayesi · gebelik planı</p>
+      <p><strong>TR erişim:</strong> Saxenda (liraglutid) · Ozempic off-label · Wegovy yavaş giriyor · Rybelsus (oral semaglutid)</p>
+      <p><strong>Kritik:</strong> Yanında <strong>protein 2g/kg</strong> + direnç antrenmanı OLMADAN başlama. Yağ ile birlikte kas eriyor.</p>
+      <p class="text-clay italic">Önce doktor + DEXA baseline. "Arkadaşım aldı" ile başlama.</p>
+    </div>
+  </div>
+
+  <!-- 8. TEST PANELİ -->
+  <div class="bg-white rounded-3xl p-6 glow mb-5">
+    <div class="flex items-baseline gap-2 mb-4">
+      <span class="font-serif text-2xl text-clay">8.</span>
+      <h3 class="font-serif text-xl text-forest">Yılda 1 Kan + DEXA</h3>
+    </div>
+    <ul class="space-y-1.5 text-sm font-serif text-forest">
+      <li class="border-b border-cream pb-1.5"><strong>ApoB</strong> <span class="text-clay text-xs float-right">hedef &lt;80</span></li>
+      <li class="border-b border-cream pb-1.5"><strong>Lp(a)</strong> <span class="text-clay text-xs float-right">genetik · 1 kez ölç</span></li>
+      <li class="border-b border-cream pb-1.5"><strong>HbA1c + Açlık İnsülin</strong> <span class="text-clay text-xs float-right">insülin direnci</span></li>
+      <li class="border-b border-cream pb-1.5"><strong>25-OH Vit D</strong> <span class="text-clay text-xs float-right">hedef 50-80 ng/mL</span></li>
+      <li class="border-b border-cream pb-1.5"><strong>Omega-3 Index</strong> <span class="text-clay text-xs float-right">hedef &gt;%8</span></li>
+      <li class="border-b border-cream pb-1.5"><strong>Ferritin</strong> <span class="text-clay text-xs float-right">kadın kritik · 50+</span></li>
+      <li class="border-b border-cream pb-1.5"><strong>FSH + Estradiol + Progesteron</strong> <span class="text-clay text-xs float-right">perimenopause haritası</span></li>
+      <li class="border-b border-cream pb-1.5"><strong>TSH + Free T3/T4</strong> <span class="text-clay text-xs float-right">tiroid</span></li>
+      <li class="border-b border-cream pb-1.5"><strong>hs-CRP</strong> <span class="text-clay text-xs float-right">inflamasyon</span></li>
+      <li class="border-b border-cream pb-1.5"><strong>DEXA Scan</strong> <span class="text-clay text-xs float-right">yağ · kas · kemik yoğunluğu</span></li>
+      <li><strong>CGM (Libre 3)</strong> <span class="text-clay text-xs float-right">14 gün · hangi yemek spike yapıyor</span></li>
+    </ul>
+    <p class="mt-3 text-[11px] text-forest/60 italic">İstanbul test merkezleri: Acıbadem · Amerikan Hastanesi · LIV. DEXA için: yıllık 1 yeter.</p>
+  </div>
+
+  <!-- 9. GÜNLÜK RİTÜEL -->
+  <div class="bg-forest text-ivory rounded-3xl p-6 glow mb-5">
+    <p class="text-clay-light text-[10px] uppercase tracking-widest mb-4">Pınar · İdeal Günlük Ritüel</p>
+    <div class="space-y-2.5 text-sm">
+      <div class="flex gap-3"><span class="font-serif text-clay-light w-14 shrink-0">06:30</span><span>Uyan · soğuk duş 30sn · 500ml su + tuz</span></div>
+      <div class="flex gap-3"><span class="font-serif text-clay-light w-14 shrink-0">06:45</span><span>15dk sabah yürüyüşü (zone 1 · açken) + güneş</span></div>
+      <div class="flex gap-3"><span class="font-serif text-clay-light w-14 shrink-0">07:15</span><span>Kahvaltı: 3 yumurta + peynir + zeytin (40g protein)</span></div>
+      <div class="flex gap-3"><span class="font-serif text-clay-light w-14 shrink-0">08:00</span><span>Takviyeler: D3+K2, Omega-3, Kollajen, B-Kompleks</span></div>
+      <div class="flex gap-3"><span class="font-serif text-clay-light w-14 shrink-0">12:30</span><span>Öğle: 150g tavuk/balık + sebze + bulgur (40g protein)</span></div>
+      <div class="flex gap-3"><span class="font-serif text-clay-light w-14 shrink-0">13:00</span><span>Son kafein · sonra yürü 10 dk</span></div>
+      <div class="flex gap-3"><span class="font-serif text-clay-light w-14 shrink-0">16:00</span><span>Ashwagandha · küçük atıştırma (yoğurt+chia)</span></div>
+      <div class="flex gap-3"><span class="font-serif text-clay-light w-14 shrink-0">17:00</span><span>Direnç 45 dk VEYA Zone 2 60 dk</span></div>
+      <div class="flex gap-3"><span class="font-serif text-clay-light w-14 shrink-0">18:30</span><span>Akşam: balık/et + sebze (35g protein) — son yemek</span></div>
+      <div class="flex gap-3"><span class="font-serif text-clay-light w-14 shrink-0">20:00</span><span>Sauna 20dk (varsa) · kitap</span></div>
+      <div class="flex gap-3"><span class="font-serif text-clay-light w-14 shrink-0">21:30</span><span>Mavi ışık kes · Mg glisinat + Taurin</span></div>
+      <div class="flex gap-3"><span class="font-serif text-clay-light w-14 shrink-0">22:30</span><span>Uyku (hedef 7+ sa)</span></div>
+    </div>
+  </div>
+
+  <details class="bg-cream/40 rounded-2xl p-5">
+    <summary class="font-serif text-forest cursor-pointer text-sm">📚 Kaynaklar / Öneriler</summary>
+    <ul class="mt-3 space-y-2 text-xs text-forest/80 font-sans leading-relaxed">
+      <li>• Peter Attia — "Outlive" kitabı + The Drive podcast</li>
+      <li>• Dr. Mary Claire Haver — "The New Menopause" kitabı</li>
+      <li>• Dr. Stacy Sims — "Roar" kitabı + @drstacysims Instagram</li>
+      <li>• Dr. Gabrielle Lyon — "Forever Strong" (muscle-centric medicine)</li>
+      <li>• Huberman Lab podcast — uyku, soğuk, sauna protokolleri</li>
+      <li>• Attia AMA #80, #81 (2026) — GLP-1, VO2max, biological age</li>
+    </ul>
+  </details>
+</section>
+
 <!-- =============== KOÇ =============== -->
 <section id="page-coach" class="hidden-page">
   <div class="mb-6">
@@ -369,9 +703,10 @@ let state = (() => {
     return {
       days: s.days || {},
       shopBought: s.shopBought || {},
+      aesCat: s.aesCat || 'face',
       personalContext: s.personalContext || '44 yaş, kadın, Restar Group CEO (otomotiv/savunma). Yüksek iş yoğunluğu, kronik stres, perimenopause penceresi. Doğa ve deniz tutkusu. Hızlı + net + aksiyon odaklı.',
     };
-  } catch { return { days: {}, shopBought: {}, personalContext: '' }; }
+  } catch { return { days: {}, shopBought: {}, aesCat: 'face', personalContext: '' }; }
 })();
 function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
 
@@ -392,6 +727,8 @@ function switchTab(tab) {
   if (tab === 'today') renderToday();
   if (tab === 'routine') renderRoutine();
   if (tab === 'shop') renderShop();
+  if (tab === 'aesthetic') renderAesthetic();
+  if (tab === 'longevity') renderLongevity();
   if (tab === 'settings') renderSettings();
 }
 document.querySelectorAll('.tab-btn').forEach(b => b.addEventListener('click', () => switchTab(b.dataset.tab)));
@@ -753,6 +1090,206 @@ function toggleBought(id) {
   else state.shopBought[id] = new Date().toISOString();
   save();
   renderShop();
+}
+
+/* ================= ESTETİK ================= */
+const AESTHETIC_FACE = [
+  { id:'baby-botox', name:'Baby Botox (Mini Botox)', tag:'Non-invaziv · 10dk', cycle:'Her 3-4 ay',
+    what:'Geleneksel Botox\'un <strong>yarı dozu</strong>. Alın, kaş arası (glabella), kuş ayakları, masseter (çene) kasına mikro enjeksiyon.',
+    why:'<strong>NEDEN:</strong> Yeni çizgi oluşmasını önler — "önleyici Botox". İfaden kaybolmaz, doğal kalır. 44 yaşta aktif koruma. Erken başlamak = daha az doza daha çok yıl.',
+    cost:'8.000-15.000 TL · bölgeye göre', ev:'güçlü', color:'#5A3472', icon:'◇' },
+
+  { id:'filler-contour', name:'Dolgu (Dermal Filler)', tag:'Volüm + kontur', cycle:'12-18 ayda 1',
+    what:'Hyaluronic asit bazlı (Juvederm, Restylane, Belotero). Elmacık, çene hattı, gözaltı (tear trough), dudak, nazolabial (gülüş) çizgisi.',
+    why:'<strong>NEDEN:</strong> 40+ sonrası yüzde volüm kaybı → yüz "düşme" görüntüsü. Doğru yere strategik dolgu = <strong>8-10 yaş geri</strong>. 2026 trendi "less is more": abartı değil kontur desteği.',
+    cost:'12.000-25.000 TL · bölge başına', ev:'güçlü', color:'#7A4A8C', icon:'❖' },
+
+  { id:'rejuran', name:'Rejuran (Polynucleotide)', tag:'2026 YILDIZI', cycle:'4 hafta × 3 seans + 6 ayda booster',
+    what:'Somon DNA\'sından saflaştırılmış polinükleotid. Cilt altına mikro-enjeksiyon — <strong>hücre yenilenmesini mesajlar</strong>, volüm eklemez.',
+    why:'<strong>NEDEN:</strong> 2026\'nın en büyük trendi. Özellikle <strong>göz altı koyu halkalar, ince çizgiler, crepey (kırışık) cilt</strong> için altın. Cilt kalitesini moleküler seviyede onarır. Dolgudan akıllı alternatif.',
+    cost:'6.000-10.000 TL · seans', ev:'güçlü', color:'#B8648A', icon:'❋' },
+
+  { id:'profhilo', name:'Profhilo (Skin Booster)', tag:'Aura + sıkılaşma', cycle:'4 hafta × 2 seans + 6 ayda yenileme',
+    what:'Saf stabilize hyaluronik asit. 5 stratejik noktaya enjekte (BAP tekniği) → yüzde yayılır, dolgu gibi volüm yapmaz.',
+    why:'<strong>NEDEN:</strong> Cilde "içten ışıltı" verir — Kim Kardashian\'ın "cam cilt" kaynağı. Hidrasyon + sıkılaşma + doku kalitesi. <strong>44 yaşa ideal</strong>, boyun ve dekolte için de yap.',
+    cost:'8.000-15.000 TL · seans', ev:'güçlü', color:'#9B6BB8', icon:'◈' },
+
+  { id:'sunekos', name:'Sunekos', tag:'Göz altı uzmanı', cycle:'2 hafta × 4 seans',
+    what:'Amino asit kompleksi + HA. Dermapen veya enjeksiyon ile uygulanır — <strong>kollajen + elastin üretimi</strong> tetikler.',
+    why:'<strong>NEDEN:</strong> Göz altı için en etkili ürün. İnce, kırışık, yorgun göz çevresinde dolgu kullanma hatalı (şişlik yapar) — Sunekos doku tamir eder. Ağız çevresi, boyun için de iyi.',
+    cost:'5.000-8.000 TL · seans', ev:'güçlü', color:'#B39DDB', icon:'✾', darkText:true },
+
+  { id:'juvelook', name:'Juvelook / Lenisna', tag:'Kore biostimulator', cycle:'4-6 hafta × 3 seans',
+    what:'PDLLA (poli-L-laktik asit) + HA karışımı. Subdermal enjeksiyon — kendi kollajenini tetikler, <strong>3-6 ayda sonuç olgunlaşır</strong>.',
+    why:'<strong>NEDEN:</strong> Kore\'den yayılan 2026 trendi. Sculptra\'nın akıllı versiyonu. Cilt kalitesi + hafif yüz kaldırma. Dolgu istemeyen ama regenerasyon arayanlar için.',
+    cost:'10.000-18.000 TL · seans', ev:'orta', color:'#5E35B1', icon:'◆' },
+
+  { id:'exosome', name:'Exosome Tedavisi', tag:'Topikal + dermapen', cycle:'2-3 hafta × 3-4 seans',
+    what:'Kök hücre türevi sinyal molekülleri. <strong>Dermapen/microneedling sonrası topikal</strong> — cildi "onar" sinyali.',
+    why:'<strong>NEDEN:</strong> Mikroneedling sonrası en güçlü iyileştirici. Cilt tonu, gözenek, hafif kollajen. <strong>Dikkat:</strong> Enjeksiyon FDA onaysız — topikal olduğundan emin ol. Markalar: ExoSCRT, ExoPASS.',
+    cost:'6.000-12.000 TL · seans', ev:'orta', color:'#C06F9A', icon:'⋄' },
+
+  { id:'meso', name:'Mezoterapi (NCTF 135HA)', tag:'Klasik glow', cycle:'Haftada 1 × 4-6 seans + aylık',
+    what:'Cilt altına vitamin + HA + amino asit kokteyli mikro-enjeksiyon. NCTF 135HA, Fusion Mesoline, DermaHeal markaları.',
+    why:'<strong>NEDEN:</strong> Düzenli hidrasyon + canlılık. Botox çizgiyi dondurur, mezo <strong>cilt kalitesini</strong> artırır. Ayda 1 bakım dozu ile sürdürülebilir.',
+    cost:'2.500-5.000 TL · seans', ev:'orta', color:'#8E24AA', icon:'∗' },
+
+  { id:'prp', name:'PRP (Vampir Maskesi)', tag:'Doğal', cycle:'4-6 hafta × 3 seans',
+    what:'Kendi kanından santrifüjlenmiş trombosit-zengin plazma. Dermapen veya enjeksiyon ile.',
+    why:'<strong>NEDEN:</strong> Doğal büyüme faktörleri = kendi kendine yenileme. Saç dökülmesi (skalp PRP altın standart!), cilt dokusu, ince çizgi. 2-3 ayda sonuç belirginleşir.',
+    cost:'4.000-7.000 TL · seans', ev:'güçlü', color:'#AA5F7A', icon:'❂' },
+
+  { id:'hifu', name:'HIFU (Ultraformer III / Ultherapy)', tag:'Non-invaziv yüz germe', cycle:'Yılda 1',
+    what:'Yüksek yoğunluklu odaklanmış ultrason — <strong>SMAS tabakası</strong> (yüzün deep plane\'i, cerrahının hedefi). Kas altı kollajen kontraksiyonu.',
+    why:'<strong>NEDEN:</strong> Yüz germe ameliyatının non-invaziv alternatifi. <strong>Jawline (çene hattı) sıkılaştırma</strong>, düşük kaş, boyun gevşekliği için en güçlü cihaz. 3-6 ayda sonuç olgunlaşır, 1-2 yıl sürer.',
+    cost:'15.000-40.000 TL · bölgeye göre', ev:'güçlü', color:'#4A1F5C', icon:'✦' },
+
+  { id:'morpheus', name:'Morpheus8 Face', tag:'RF + mikroneedle', cycle:'4-6 hafta × 3 seans',
+    what:'Mikro-iğne + radyo frekans — <strong>derin dermise</strong> ulaşır (4mm). Kendi kollajen/elastin üretimini maksimuma çeker.',
+    why:'<strong>NEDEN:</strong> Akne izi, gözenek, ince çizgi, cilt sıkılaşma tek platformda. Kim Kardashian sonrası viral. 3-5 gün kızarıklık downtime. HIFU\'ya tamamlayıcı.',
+    cost:'10.000-25.000 TL · seans', ev:'güçlü', color:'#3D1F4D', icon:'◐' },
+
+  { id:'pico', name:'Pico Laser (PicoSure/PicoWay)', tag:'Leke + doku', cycle:'4 hafta × 3-5 seans',
+    what:'Ultra kısa nabız pikosaniye lazer — pigmenti <strong>parçalayıp atar</strong>, kollajen Pico tetikler.',
+    why:'<strong>NEDEN:</strong> Melazma, güneş lekesi, yaş lekesi için <strong>altın standart</strong>. Gözenek sıkılaşması. 44 yaşta pigment çok yaygın — yılda 1 seri cilt tonunu eşitler.',
+    cost:'5.000-12.000 TL · seans', ev:'güçlü', color:'#6B2B8A', icon:'✧' },
+
+  { id:'oxygeneo', name:'OxyGeneo + Geneo Hydra', tag:'Event öncesi', cycle:'Ayda 1',
+    what:'Eksfoliasyon + "capnophoria" oksijen kabarcıkları + aktif nemli infüzyon. 45 dk, hiç downtime yok.',
+    why:'<strong>NEDEN:</strong> Toplantı/düğün/kamera öncesi en iyi "hızlı ışıltı". Cilt 24 saat aydınlatıcı. Mini bakım — ağır müdahaleler arası.',
+    cost:'2.500-4.500 TL · seans', ev:'orta', color:'#9A6BAA', icon:'◯' },
+
+  { id:'iv-vitamin', name:'IV Vitamin Drip', tag:'Sistemik glow', cycle:'Ayda 1-2',
+    what:'Damardan yüksek doz vitamin kokteyli. Myers (Mg+B+C), NAD+ drip, Glutathione aydınlatıcı en popüler.',
+    why:'<strong>NEDEN:</strong> Yorgun CEO + cilt donukluğu + bağışıklık kombosu. Glutathione içten aydınlatıcı (Asyalı kadınların sırrı). Jet-lag sonrası toparlamak için altın.',
+    cost:'2.000-5.000 TL · seans', ev:'orta', color:'#7E3F8F', icon:'❁' },
+];
+
+const AESTHETIC_BODY = [
+  { id:'emsculpt', name:'Emsculpt NEO', tag:'2026 viral', cycle:'Haftada 2 × 4 seans',
+    what:'30 dk tek seansta: <strong>Radyo frekans + HIFEM</strong> (yüksek şiddetli elektromanyetik). Yağı eritirken aynı anda kası kasar.',
+    why:'<strong>NEDEN:</strong> Perimenopause\'un altın çözümü — karın yağını eritir + karın kasını yapar + selülit azaltır. Tek cihaz 3 iş. Downtime sıfır. Göbek, basen, uyluk, kalça.',
+    cost:'15.000-35.000 TL · 4 seans paket', ev:'güçlü', color:'#C93757', icon:'❤' },
+
+  { id:'emtone', name:'Emtone', tag:'Selülit silgisi', cycle:'Haftada 2 × 4 seans',
+    what:'RF + hedefli titreşim — selülitin <strong>5 nedenini birden</strong> hedefler: cilt gevşekliği, yağ, bağ dokusu, dolaşım, metabolik.',
+    why:'<strong>NEDEN:</strong> 2026\'nın en yüksek ROI\'li selülit tedavisi. Non-invaziv, ağrısız, downtime yok. Uyluk, kalça, kol arka. Emsculpt + Emtone = "contouring ikiz" kombo.',
+    cost:'12.000-25.000 TL · paket', ev:'güçlü', color:'#D14870', icon:'◒' },
+
+  { id:'morpheus-body', name:'Morpheus8 Body', tag:'Derin sıkılaşma', cycle:'4-6 hafta × 3 seans',
+    what:'Vücut versiyonu — <strong>8mm derinliğe</strong> RF + mikroneedling. Yağlı alanlarda hem sıkılaşma hem hafif yağ azalma.',
+    why:'<strong>NEDEN:</strong> Cerrahi-dışı en güçlü <strong>karın sıkılaştırma</strong> (hamilelik sonrası, kilo verme sonrası). Kol arkası sarkma, popo sıkılık, diz üstü selülit. 3-6 ayda sonuç olgunlaşır.',
+    cost:'10.000-30.000 TL · seans', ev:'güçlü', color:'#B8395A', icon:'◐' },
+
+  { id:'qwo', name:'QWO Injeksiyonu', tag:'Selülit iğnesi', cycle:'3 hafta × 3 seans',
+    what:'Kollajenaz enzimi enjeksiyonu — <strong>selülitin fibröz bantlarını kimyasal olarak çözer</strong>. Sadece gluteal (kalça).',
+    why:'<strong>NEDEN:</strong> Kalçadaki çukurlu selülite altın standart. Tek FDA-onaylı enjekte selülit çözümü. TR\'de seçili kliniklerde mevcut. Morarma normal — 7-10 gün sarı morluk.',
+    cost:'15.000-30.000 TL · 3 seans', ev:'güçlü', color:'#A32848', icon:'❈' },
+
+  { id:'evolvex', name:'EvolveX (InMode)', tag:'3\'ü 1 arada', cycle:'Haftada 1 × 6-8 seans',
+    what:'Tek platformda 3 handpiece: <strong>Tite (RF sıkılaşma) + Trim (yağ azaltma) + Tone (kas)</strong>. Vücudun istediğin bölgesine göre modülasyon.',
+    why:'<strong>NEDEN:</strong> Tüm vücut kontür ihtiyacına hit. Karın + kol arka + uyluk. Ameliyatsız lipo + sıkılaşma. Haftada 1, 6-8 hafta proje.',
+    cost:'25.000-60.000 TL · paket', ev:'orta', color:'#8B1E3F', icon:'❖' },
+
+  { id:'endermologie', name:'Endermologie (LPG Alliance)', tag:'Lenfatik + selülit', cycle:'Haftada 1-2 × 10+ seans',
+    what:'Mekanik rulolarla motorize derin cilt masajı — <strong>lenfatik drenaj + fibröz yumuşatma</strong>.',
+    why:'<strong>NEDEN:</strong> Fransız klasiği. Ağır müdahalenin ön hazırlığı veya sürdürme terapisi. Ödem, ayak bileği şişliği, hafif selülit. Downtime sıfır, relax.',
+    cost:'1.500-3.000 TL · seans · 10+ seans paket indirim', ev:'orta', color:'#C94A75', icon:'❂' },
+
+  { id:'cellfina', name:'Cellfina', tag:'Cerrahi selülit', cycle:'Tek seans · 1-3 yıl sürer',
+    what:'Minimal invaziv cerrahi — selülitin <strong>fibröz bantlarını</strong> cilt altından kesen cihaz. Lokal anestezi altında.',
+    why:'<strong>NEDEN:</strong> Derin çukurlu selülit için <strong>tek seanslık kalıcı çözüm</strong>. 2-3 gün downtime, morarma 2 hafta. Uzun vadeli en güçlü kanıtlı çözüm.',
+    cost:'35.000-70.000 TL · tek', ev:'güçlü', color:'#751F3E', icon:'◆' },
+
+  { id:'coolsculpt', name:'CoolSculpting Elite', tag:'Yağ dondurma', cycle:'Tek seans + 3 ay sonuç',
+    what:'Kriyolipolizis — hedef yağı <strong>-11°C\'ye dondurur</strong>, apoptoz ile ölür, 3 ayda vücut atar.',
+    why:'<strong>NEDEN:</strong> İnatçı lokal yağ (iç uyluk, alt karın, "muffin top") için. Kilolu değilsen ve diyet+spor çözmüyorsa. Bir aplikatör = bir bölge. Emsculpt yağ + kas, CoolSculpting sadece yağ.',
+    cost:'10.000-25.000 TL · aplikatör', ev:'güçlü', color:'#5A7B9D', icon:'❄' },
+
+  { id:'hifu-body', name:'HIFU Vücut', tag:'Sıkılaşma', cycle:'Yılda 1-2',
+    what:'Ultraformer III vücut kartuşu — karın, kol arka, uyluk iç, jawline-eşiti bölgelerde <strong>derin SMAS benzeri sıkılaşma</strong>.',
+    why:'<strong>NEDEN:</strong> Kol arkası, karın alt sarkma, iç uyluk için. Cilt gevşek ama yağ çok değilse ideal. Morpheus8\'dan daha az downtime.',
+    cost:'8.000-18.000 TL · bölge', ev:'orta', color:'#723B58', icon:'✧' },
+];
+
+const AESTHETIC_PARIS = [
+  { id:'br-p50', name:'Biologique Recherche P50 Protokolü', tag:'Parisian Glow', cycle:'Haftada 1-2 klinik + evde günlük',
+    what:'Skin Instant Lab cilt analizi + <strong>P50 1970 Lotion</strong> (efsane asit toniği) + <strong>Masque Vivant</strong> (maya maskesi) + kişisel serum protokolü.',
+    why:'<strong>NEDEN:</strong> Dünyanın en efsane spa protokolü — Victoria Beckham, Kim K, J.Lo sırrı. <strong>2 haftada cilt dönüşümü</strong>. İstanbul\'da Nişantaşı, Bebek, Zorlu BR merkezleri.',
+    cost:'3.000-6.000 TL · seans · ürünler ek', ev:'güçlü', color:'#8B2C2C', icon:'❀' },
+
+  { id:'guinot-hydradermie', name:'Guinot Hydradermie', tag:'Fransız klasiği', cycle:'3-4 hafta',
+    what:'Galvanic + yüksek frekans + aktif maddeler. <strong>Ionization fazı</strong> aktif maddeleri derine iter, <strong>Rolling fazı</strong> oksijenize eder.',
+    why:'<strong>NEDEN:</strong> 60 yıllık French protokol — cilt spa\'nın altın standartı. Her tipte cilde uyarlanır. İstanbul Guinot kliniği + tanınmış dermospaları.',
+    cost:'2.000-3.500 TL · seans', ev:'orta', color:'#C94775', icon:'❃' },
+
+  { id:'caudalie-vinoperfect', name:'Caudalie Vinoperfect Ritüeli', tag:'Aydınlatıcı', cycle:'Evde günlük',
+    what:'Vinoperfect Serum (viniferine — hydroquinone\'dan 62x etkili lekeye) + Glycolic Night Cream + Vinopure.',
+    why:'<strong>NEDEN:</strong> Fransız eczane starıdır — 40+ yaş cilt tonu dengeleme. Melazma, güneş lekesi, gri donukluk. Sabah+akşam 2 ay = fark.',
+    cost:'~1.500 TL · 3 ürün seti', ev:'güçlü', color:'#6B3458', icon:'◇' },
+
+  { id:'french-philosophy', name:'French "Less is More" Felsefesi', tag:'Ritüel', cycle:'Her gün',
+    what:'Fransız kadın cilt bakımı: <strong>çift temizlik (yağ → jel) + toner + serum + krem + SPF</strong>. Maksimum 5 adım, ama her adım kaliteli.',
+    why:'<strong>NEDEN:</strong> 10-katlı Kore rutini cildi yoruyor. Fransız akıllıca az-ama-öz. Düzenlilik + uyku + güneş kremi + hidrasyon = Parisian glow formülü. Patched bariyerli cilt = ışıltı.',
+    cost:'bilinç · şart değil yatırım', ev:'güçlü', color:'#3D1F4D', icon:'◈' },
+
+  { id:'clarins-extra-firming', name:'Clarins Extra-Firming / Double Serum', tag:'Fransız klasiği', cycle:'Evde günlük',
+    what:'Double Serum (21 bitki ekstresi) + Extra-Firming Day & Night krem + Eye Serum.',
+    why:'<strong>NEDEN:</strong> Fransız kadının "göze çarpmayan lüks" seçimi. 40+ cildin günlük sıkılık + canlılık bakımı. 8 hafta kanıtlı cilt yoğunluğu artışı.',
+    cost:'~3.500 TL · 3 ürün', ev:'orta', color:'#A8648B', icon:'✾' },
+];
+
+function renderAesthetic() {
+  const cat = state.aesCat || 'face';
+  ['face','body','paris'].forEach(c => {
+    const btn = document.getElementById('aes-tab-' + c);
+    if (!btn) return;
+    if (c === cat) { btn.classList.remove('bg-cream','text-forest'); btn.classList.add('bg-forest','text-ivory'); }
+    else { btn.classList.remove('bg-forest','text-ivory'); btn.classList.add('bg-cream','text-forest'); }
+  });
+  const data = cat === 'face' ? AESTHETIC_FACE : cat === 'body' ? AESTHETIC_BODY : AESTHETIC_PARIS;
+  document.getElementById('aesContainer').innerHTML = data.map(aesCard).join('');
+}
+
+function filterAes(cat) {
+  state.aesCat = cat;
+  save();
+  renderAesthetic();
+}
+
+function aesCard(item) {
+  const textColor = item.darkText ? '#3D1F4D' : '#F5F0F8';
+  return `<div class="bg-white rounded-2xl overflow-hidden glow mb-3">
+    <div class="p-4 text-ivory" style="background:linear-gradient(135deg, ${item.color}, ${item.color}cc); color:${textColor};">
+      <div class="flex items-start justify-between gap-3">
+        <div class="flex-1 min-w-0">
+          <p class="text-[9px] uppercase tracking-widest opacity-70 mb-1">${item.tag}</p>
+          <h4 class="font-serif text-lg leading-tight">${item.name}</h4>
+        </div>
+        <div class="font-serif text-3xl leading-none opacity-80">${item.icon}</div>
+      </div>
+      <p class="text-[10px] mt-2 opacity-80"><strong>Aralık:</strong> ${item.cycle}</p>
+    </div>
+    <div class="p-4 space-y-3">
+      <div>
+        <p class="text-[9px] uppercase tracking-widest text-clay mb-1">Ne yapar</p>
+        <p class="text-xs text-forest/85 leading-relaxed">${item.what}</p>
+      </div>
+      <div class="bg-cream/40 rounded-xl p-3">
+        <p class="text-xs text-forest/90 leading-relaxed">${item.why}</p>
+      </div>
+      <div class="flex items-center justify-between pt-1">
+        <span class="text-[10px] text-clay uppercase tracking-wider">${item.ev} kanıt</span>
+        <span class="font-serif text-sm text-forest">${item.cost}</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ================= LONGEVITY ================= */
+function renderLongevity() {
+  // Sayfa statik HTML — render için özel iş yok
+  // İleride tracking eklersek burada olur
 }
 
 /* ================= KOÇ ================= */
