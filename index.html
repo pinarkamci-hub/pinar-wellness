@@ -177,7 +177,7 @@ tailwind.config = {
       <div>
         <p class="text-clay uppercase tracking-wider text-xs mb-2">Sabah · her gün</p>
         <ul class="space-y-1 font-serif text-forest">
-          <li>1. Sensai Creamy Soap</li>
+          <li>1. <strong>Sensai Creamy Soap</strong> <span class="text-[10px] text-clay">yumuşak temizlik</span></li>
           <li>2. iS Clinical Pro-Heal Serum</li>
           <li>3. <strong>SkinCeuticals H.A. Intensifier Multi-Glycan Peptide</strong> ✨ <span class="text-[10px] text-clay">YENİ</span></li>
           <li>4. Sensai Cellular Performance Cream</li>
@@ -187,7 +187,15 @@ tailwind.config = {
         <p class="mt-2 text-[10px] text-forest/60 italic leading-snug">H.A. Intensifier: peptid + multi-glycan + %1.3 hyaluronik asit. Pro-Heal antioksidanı kapatır → cilde hidrasyon kilidi + sıkılaşma ekler. Krem öncesi 2-3 damla.</p>
       </div>
       <div>
-        <p class="text-clay uppercase tracking-wider text-xs mb-2">Akşam · gün değişir</p>
+        <p class="text-clay uppercase tracking-wider text-xs mb-2">Akşam · ilk adım her gün</p>
+        <ul class="space-y-1 font-serif text-forest">
+          <li>1. <strong>Genosys Snow O2 Cleanser</strong> ✨ <span class="text-[10px] text-clay">oksijenli derin temizlik</span></li>
+          <li class="text-[11px] text-forest/60 italic">Cilt hassas/kuruysa o gece Sensai'ye dön</li>
+        </ul>
+        <p class="mt-2 text-[10px] text-forest/60 italic leading-snug">Çift temizlik değil — Sensai (sabah) ↔ Genosys (akşam) rotasyon. Genosys aktif rutin (retinoid/A.G.E./oil) öncesi gözenek + glow hazırlığı.</p>
+      </div>
+      <div>
+        <p class="text-clay uppercase tracking-wider text-xs mb-2">Akşam · aktif gün değişir</p>
         <ul class="space-y-1 font-serif text-forest">
           <li>Pzt/Çar/Cum: <strong>Environ C-Quence 3</strong> + Sensai Ultra</li>
           <li>Sal/Per: <strong>SkinCeuticals A.G.E.</strong> + La Mer Night</li>
@@ -219,8 +227,17 @@ tailwind.config = {
   <!-- TAKVİYE -->
   <div class="bg-white rounded-3xl p-6 glow">
     <h3 class="font-serif text-xl text-forest mb-4">Günlük Takviye</h3>
+
+    <p class="text-[10px] uppercase tracking-widest text-clay mb-2">Gummy · sabah kahvaltıyla</p>
+    <ul class="space-y-2 text-sm font-serif text-forest mb-4">
+      <li class="flex justify-between border-b border-cream pb-2"><span>D Vitamini Gummy ✨</span><span class="text-clay">1 adet · doz etikete bak (hedef 2000 IU+)</span></li>
+      <li class="flex justify-between border-b border-cream pb-2"><span>Safran (Affron) Gummy ✨</span><span class="text-clay">1 adet · 28 mg · mood + uyku</span></li>
+    </ul>
+    <p class="text-[10px] text-forest/60 italic leading-snug mb-4">Safran: perimenopause mood, kortizol denge, uyku kalitesi (orta-güçlü kanıt). D3 gummy K2 içermiyorsa → K2 100mcg ayrıca al.</p>
+
+    <p class="text-[10px] uppercase tracking-widest text-clay mb-2">Kapsül · gün boyu</p>
     <ul class="space-y-2 text-sm font-serif text-forest">
-      <li class="flex justify-between border-b border-cream pb-2"><span>Vit D3 + K2</span><span class="text-clay">2000-4000 IU · öğlen</span></li>
+      <li class="flex justify-between border-b border-cream pb-2"><span>K2 (MK-7)</span><span class="text-clay">100 mcg · D3 gummy K2'siz ise</span></li>
       <li class="flex justify-between border-b border-cream pb-2"><span>Omega-3 (EPA+DHA)</span><span class="text-clay">2 g · yemekle</span></li>
       <li class="flex justify-between border-b border-cream pb-2"><span>Magnezyum glisinat</span><span class="text-clay">400 mg · yatmadan</span></li>
       <li class="flex justify-between border-b border-cream pb-2"><span>Kreatin monohidrat</span><span class="text-clay">5 g · sabit saat</span></li>
@@ -745,7 +762,7 @@ function getTonight() {
     type: 'Retinol Gecesi',
     hero: 'Environ C-Quence 3',
     steps: [
-      { id:'pm_clean', t:'Sensai Creamy Soap', s:'temizleyici + fırça' },
+      { id:'pm_clean', t:'Genosys Snow O2 Cleanser', s:'oksijenli köpük · hassas günde Sensai' },
       { id:'pm_active', t:'Environ C-Quence 3', s:'ana aktif · 3-4 damla' },
       { id:'pm_cream', t:'Sensai Ultra Intensive Cream', s:'bariyer onarımı' },
       { id:'pm_eye', t:'Sensai Melt Rich Eye', s:'göz çevresi' },
@@ -755,7 +772,7 @@ function getTonight() {
     type: 'Anti-Glycation',
     hero: 'SkinCeuticals A.G.E. Interrupter',
     steps: [
-      { id:'pm_clean', t:'Sensai Creamy Soap', s:'temizleyici' },
+      { id:'pm_clean', t:'Genosys Snow O2 Cleanser', s:'oksijenli köpük · hassas günde Sensai' },
       { id:'pm_active', t:'SkinCeuticals A.G.E. Interrupter', s:'anti-aging serum' },
       { id:'pm_cream', t:'La Mer Rejuvenating Night', s:'lüks gece nem' },
       { id:'pm_eye', t:'Sensai Melt Rich Eye', s:'göz çevresi' },
@@ -765,7 +782,7 @@ function getTonight() {
     type: 'Onarım Gecesi',
     hero: 'Environ Oil Capsule + La Mer Concentrate',
     steps: [
-      { id:'pm_clean', t:'Sensai Creamy Soap', s:'temizleyici' },
+      { id:'pm_clean', t:'Genosys Snow O2 Cleanser', s:'oksijenli köpük · hassas günde Sensai' },
       { id:'pm_active', t:'Environ Moisture+ Oil Capsule', s:'1 kapsül yüze' },
       { id:'pm_cream', t:'La Mer The Concentrate', s:'SOS tamir' },
       { id:'pm_eye', t:'Sensai Melt Rich Eye', s:'göz çevresi' },
@@ -775,7 +792,7 @@ function getTonight() {
     type: 'Maske Günü · Pazar',
     hero: 'Environ Revival Masque',
     steps: [
-      { id:'pm_clean', t:'Sensai Creamy Soap', s:'temizleyici' },
+      { id:'pm_clean', t:'Genosys Snow O2 Cleanser', s:'oksijenli köpük · hassas günde Sensai' },
       { id:'pm_mask', t:'Environ Revival Masque', s:'veya Celltermi Sheet — 20 dk' },
       { id:'pm_cream', t:'Sensai Ultra Intensive Cream', s:'maske sonrası nem' },
       { id:'pm_eye', t:'Sensai Melt Rich Eye', s:'göz çevresi' },
