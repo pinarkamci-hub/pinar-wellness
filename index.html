@@ -78,6 +78,9 @@ tailwind.config = {
     <button class="tab-btn font-sans text-[9px] md:text-xs px-1.5 md:px-3 py-2 rounded-full flex flex-col items-center gap-0.5" data-tab="longevity">
       <span class="text-base md:text-xl">∞</span><span>Longevity</span>
     </button>
+    <button class="tab-btn font-sans text-[9px] md:text-xs px-1.5 md:px-3 py-2 rounded-full flex flex-col items-center gap-0.5" data-tab="health">
+      <span class="text-base md:text-xl">⊕</span><span>Sağlık</span>
+    </button>
     <button class="tab-btn font-sans text-[9px] md:text-xs px-1.5 md:px-3 py-2 rounded-full flex flex-col items-center gap-0.5" data-tab="shop">
       <span class="text-base md:text-xl">⚘</span><span>Alış</span>
     </button>
@@ -722,6 +725,392 @@ tailwind.config = {
   </details>
 </section>
 
+<!-- =============== SAĞLIK =============== -->
+<section id="page-health" class="hidden-page">
+  <div class="mb-6">
+    <p class="text-clay font-sans text-xs uppercase tracking-[0.2em] mb-2">Acıbadem Ataşehir · 30 Nisan 2026</p>
+    <h2 class="font-serif text-4xl text-forest">Sağlık</h2>
+  </div>
+
+  <!-- ŞEKER -->
+  <div class="bg-white rounded-3xl p-6 glow mb-4">
+    <div class="flex items-baseline justify-between mb-3">
+      <p class="font-serif text-xl text-forest">Şeker</p>
+      <span class="text-clay font-sans text-[10px] uppercase tracking-wider">açlık glukoz</span>
+    </div>
+    <div class="flex items-baseline gap-3 mb-3">
+      <p class="font-serif text-6xl text-forest">96</p>
+      <p class="text-forest/60 font-sans text-sm">mg/dL</p>
+      <span class="ml-auto text-clay text-2xl">◐</span>
+    </div>
+    <div class="grid grid-cols-3 gap-2 text-center text-[10px] font-sans">
+      <div class="bg-cream/40 rounded-xl py-2"><p class="text-forest/50 uppercase tracking-wider">Lab ref</p><p class="font-serif text-forest text-sm mt-1">70-100</p></div>
+      <div class="bg-clay/15 rounded-xl py-2"><p class="text-clay uppercase tracking-wider">Optimal</p><p class="font-serif text-forest text-sm mt-1">&lt;90</p></div>
+      <div class="bg-forest/10 rounded-xl py-2"><p class="text-forest/50 uppercase tracking-wider">Diyabet</p><p class="font-serif text-forest text-sm mt-1">≥126</p></div>
+    </div>
+    <p class="mt-3 text-[11px] text-forest/60 italic leading-relaxed">Lab "normal" diyor — ama 96 üst sınıra yakın. Attia hedefi &lt;90. Aksiyon: yemek sonrası 10 dk yürü, akşam karbı çek. <strong>HbA1c</strong> (3 aylık ortalama) bir sonraki kanda mutlaka iste.</p>
+  </div>
+
+  <!-- KOLESTEROL -->
+  <div class="bg-white rounded-3xl p-6 glow mb-6">
+    <div class="flex items-baseline justify-between mb-4">
+      <p class="font-serif text-xl text-forest">Kolesterol</p>
+      <span class="text-clay font-sans text-[10px] uppercase tracking-wider">lipit profili</span>
+    </div>
+
+    <div class="grid grid-cols-2 gap-3 mb-4">
+      <div class="bg-cream/30 rounded-2xl p-4">
+        <p class="text-forest/50 font-sans text-[10px] uppercase tracking-wider mb-1">HDL · iyi</p>
+        <div class="flex items-baseline gap-1">
+          <p class="font-serif text-3xl text-forest">72</p>
+          <span class="text-clay text-base ml-auto">✓</span>
+        </div>
+        <p class="text-[10px] text-forest/50 mt-1">ref &gt;50 · optimal &gt;60</p>
+      </div>
+      <div class="bg-cream/30 rounded-2xl p-4">
+        <p class="text-forest/50 font-sans text-[10px] uppercase tracking-wider mb-1">LDL · kötü</p>
+        <div class="flex items-baseline gap-1">
+          <p class="font-serif text-3xl text-forest">104</p>
+          <span class="text-clay text-base ml-auto">◐</span>
+        </div>
+        <p class="text-[10px] text-forest/50 mt-1">ref 50-130 · Attia &lt;80</p>
+      </div>
+      <div class="bg-cream/30 rounded-2xl p-4">
+        <p class="text-forest/50 font-sans text-[10px] uppercase tracking-wider mb-1">Trigliserid</p>
+        <div class="flex items-baseline gap-1">
+          <p class="font-serif text-3xl text-forest">96</p>
+          <span class="text-clay text-base ml-auto">✓</span>
+        </div>
+        <p class="text-[10px] text-forest/50 mt-1">ref 50-150 · &lt;100 ideal</p>
+      </div>
+      <div class="bg-cream/30 rounded-2xl p-4">
+        <p class="text-forest/50 font-sans text-[10px] uppercase tracking-wider mb-1">Total</p>
+        <div class="flex items-baseline gap-1">
+          <p class="font-serif text-3xl text-forest">194</p>
+          <span class="text-clay text-base ml-auto">✓</span>
+        </div>
+        <p class="text-[10px] text-forest/50 mt-1">ref 92-200 · az anlamlı</p>
+      </div>
+    </div>
+
+    <div class="bg-forest/5 rounded-2xl p-4">
+      <p class="font-sans text-[10px] uppercase tracking-wider text-clay mb-2">TG/HDL Oranı · insülin direnci göstergesi</p>
+      <div class="flex items-baseline gap-2">
+        <p class="font-serif text-3xl text-forest">1.33</p>
+        <span class="text-clay text-base">✓</span>
+        <p class="text-forest/60 text-[11px] ml-auto">hedef &lt;1.5 · mükemmel</p>
+      </div>
+    </div>
+
+    <p class="mt-3 text-[11px] text-forest/60 italic leading-relaxed">Lipit profili gerçekten iyi — HDL 72 mükemmel. LDL hafif yüksek ama HDL çok yüksek olduğu için toplam risk düşük. <strong>apoB</strong> bir sonraki kanda iste — kardiyo riskin gerçek ölçütü (Attia: hedef &lt;80).</p>
+  </div>
+
+  <!-- ÖZET -->
+  <div class="bg-forest text-ivory rounded-3xl p-6 mb-6 glow">
+    <p class="text-clay-light text-[10px] uppercase tracking-widest mb-4">Özet · 30.04.2026</p>
+    <div class="space-y-4 text-sm">
+      <div class="flex items-start gap-3">
+        <span class="text-clay font-serif text-lg shrink-0">✓</span>
+        <div>
+          <p class="font-serif text-base">Kardiyo-metabolik mükemmel</p>
+          <p class="text-ivory/60 text-xs mt-0.5">HDL 72, LDL 104, TG 96, TSH 1.72, eGFR 97.9, CRP 0.08 — risk düşük</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-3">
+        <span class="text-clay font-serif text-lg shrink-0">◐</span>
+        <div>
+          <p class="font-serif text-base">Lipaz hafif yüksek (72, ref &lt;53)</p>
+          <p class="text-ivory/60 text-xs mt-0.5">Genelde anlamsız, ama 6 hafta sonra tekrarla. Akşam alkol + çok yağlı yemek azalt</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-3">
+        <span class="text-clay font-serif text-lg shrink-0">◐</span>
+        <div>
+          <p class="font-serif text-base">Ferritin 55 — orta</p>
+          <p class="text-ivory/60 text-xs mt-0.5">"Normal" ama performans/saç/enerji için 70+ ideal. Hayvansal demir + C vitamini</p>
+        </div>
+      </div>
+      <div class="flex items-start gap-3">
+        <span class="text-clay font-serif text-lg shrink-0">⚠</span>
+        <div>
+          <p class="font-serif text-base">Eksik kritik testler var</p>
+          <p class="text-ivory/60 text-xs mt-0.5">apoB · HbA1c · Vitamin D · Hormon paneli (FSH/Estradiol/Progesteron) · Lp(a) — bir sonraki kanda mutlaka iste</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1. LİPİT PROFİLİ -->
+  <div class="bg-white rounded-3xl p-6 glow mb-5">
+    <div class="flex items-baseline gap-2 mb-4">
+      <span class="font-serif text-2xl text-clay">1.</span>
+      <h3 class="font-serif text-xl text-forest">Lipit Profili</h3>
+    </div>
+    <p class="text-xs text-forest/70 mb-4 leading-relaxed">Attia: kolesterol değil <strong>apoB</strong> ve <strong>Lp(a)</strong> takip et. Bu panelde apoB yok — bir sonraki kanda iste.</p>
+    <ul class="space-y-3 text-sm">
+      <li class="flex justify-between items-baseline border-b border-cream pb-2">
+        <div><p class="font-serif text-forest">HDL</p><p class="text-[10px] text-forest/50">koruyucu kolesterol</p></div>
+        <div class="text-right"><p class="font-serif text-forest text-base">72 <span class="text-clay text-xs">✓</span></p><p class="text-[10px] text-forest/50">ref &gt;50 · optimal &gt;60</p></div>
+      </li>
+      <li class="flex justify-between items-baseline border-b border-cream pb-2">
+        <div><p class="font-serif text-forest">LDL</p><p class="text-[10px] text-forest/50">"kötü" kolesterol</p></div>
+        <div class="text-right"><p class="font-serif text-forest text-base">104 <span class="text-clay text-xs">◐</span></p><p class="text-[10px] text-forest/50">ref 50-130 · Attia &lt;80</p></div>
+      </li>
+      <li class="flex justify-between items-baseline border-b border-cream pb-2">
+        <div><p class="font-serif text-forest">Trigliserid</p><p class="text-[10px] text-forest/50">metabolik sağlık</p></div>
+        <div class="text-right"><p class="font-serif text-forest text-base">96 <span class="text-clay text-xs">✓</span></p><p class="text-[10px] text-forest/50">ref 50-150 · optimal &lt;100</p></div>
+      </li>
+      <li class="flex justify-between items-baseline">
+        <div><p class="font-serif text-forest">Total Kolesterol</p><p class="text-[10px] text-forest/50">en az anlamlı</p></div>
+        <div class="text-right"><p class="font-serif text-forest text-base">194 <span class="text-clay text-xs">✓</span></p><p class="text-[10px] text-forest/50">ref 92-200</p></div>
+      </li>
+    </ul>
+    <p class="mt-4 text-[11px] text-forest/60 italic leading-relaxed">TG/HDL oranı = 96/72 = <strong>1.33</strong> → mükemmel insülin duyarlılığı (hedef &lt;1.5). LDL hafif yüksek ama HDL çok iyi → toplam risk düşük.</p>
+  </div>
+
+  <!-- 2. METABOLİK / BÖBREK -->
+  <div class="bg-white rounded-3xl p-6 glow mb-5">
+    <div class="flex items-baseline gap-2 mb-4">
+      <span class="font-serif text-2xl text-clay">2.</span>
+      <h3 class="font-serif text-xl text-forest">Metabolik · Böbrek</h3>
+    </div>
+    <ul class="space-y-3 text-sm">
+      <li class="flex justify-between items-baseline border-b border-cream pb-2">
+        <div><p class="font-serif text-forest">Glukoz, Açlık</p><p class="text-[10px] text-forest/50">tek nokta · HbA1c daha iyi</p></div>
+        <div class="text-right"><p class="font-serif text-forest text-base">96 <span class="text-clay text-xs">◐</span></p><p class="text-[10px] text-forest/50">ref 70-100 · optimal &lt;90</p></div>
+      </li>
+      <li class="flex justify-between items-baseline border-b border-cream pb-2">
+        <div><p class="font-serif text-forest">eGFR</p><p class="text-[10px] text-forest/50">böbrek fonksiyonu</p></div>
+        <div class="text-right"><p class="font-serif text-forest text-base">97.9 <span class="text-clay text-xs">✓</span></p><p class="text-[10px] text-forest/50">&gt;90 normal · mükemmel</p></div>
+      </li>
+      <li class="flex justify-between items-baseline border-b border-cream pb-2">
+        <div><p class="font-serif text-forest">Kreatinin</p><p class="text-[10px] text-forest/50">kas + böbrek</p></div>
+        <div class="text-right"><p class="font-serif text-forest text-base">0.75 <span class="text-clay text-xs">✓</span></p><p class="text-[10px] text-forest/50">ref 0.55-1.02</p></div>
+      </li>
+      <li class="flex justify-between items-baseline">
+        <div><p class="font-serif text-forest">BUN (Üre Azotu)</p><p class="text-[10px] text-forest/50">protein metabolizması</p></div>
+        <div class="text-right"><p class="font-serif text-forest text-base">12 <span class="text-clay text-xs">✓</span></p><p class="text-[10px] text-forest/50">protein alımı yeterli</p></div>
+      </li>
+    </ul>
+    <p class="mt-4 text-[11px] text-forest/60 italic leading-relaxed">Glukoz 96 — ref aralığında ama Attia hedefi &lt;90. Yemek sonrası 10 dk yürü, akşam karbı çek. CGM (Levels/Veri) bir hafta dene → gerçek metabolik resim.</p>
+  </div>
+
+  <!-- 3. KARACİĞER / PANKREAS -->
+  <div class="bg-white rounded-3xl p-6 glow mb-5">
+    <div class="flex items-baseline gap-2 mb-4">
+      <span class="font-serif text-2xl text-clay">3.</span>
+      <h3 class="font-serif text-xl text-forest">Karaciğer · Pankreas</h3>
+    </div>
+    <ul class="space-y-3 text-sm">
+      <li class="flex justify-between items-baseline border-b border-cream pb-2">
+        <div><p class="font-serif text-forest">ALT</p><p class="text-[10px] text-forest/50">karaciğer enzimi</p></div>
+        <div class="text-right"><p class="font-serif text-forest text-base">35 <span class="text-clay text-xs">✓</span></p><p class="text-[10px] text-forest/50">ref 7-40 · kadın optimal &lt;25</p></div>
+      </li>
+      <li class="flex justify-between items-baseline border-b border-cream pb-2">
+        <div><p class="font-serif text-forest">AST</p><p class="text-[10px] text-forest/50">karaciğer + kas</p></div>
+        <div class="text-right"><p class="font-serif text-forest text-base">19 <span class="text-clay text-xs">✓</span></p><p class="text-[10px] text-forest/50">ref &lt;40</p></div>
+      </li>
+      <li class="flex justify-between items-baseline border-b border-cream pb-2">
+        <div><p class="font-serif text-forest">GGT</p><p class="text-[10px] text-forest/50">karaciğer · alkol marker</p></div>
+        <div class="text-right"><p class="font-serif text-forest text-base">23 <span class="text-clay text-xs">✓</span></p><p class="text-[10px] text-forest/50">ref 5-38</p></div>
+      </li>
+      <li class="flex justify-between items-baseline border-b border-cream pb-2">
+        <div><p class="font-serif text-forest">ALP</p><p class="text-[10px] text-forest/50">kemik + safra</p></div>
+        <div class="text-right"><p class="font-serif text-forest text-base">29 <span class="text-clay text-xs">↓</span></p><p class="text-[10px] text-forest/50">ref 34-107 · DÜŞÜK</p></div>
+      </li>
+      <li class="flex justify-between items-baseline border-b border-cream pb-2">
+        <div><p class="font-serif text-forest">Lipaz</p><p class="text-[10px] text-forest/50">pankreas</p></div>
+        <div class="text-right"><p class="font-serif text-forest text-base">72 <span class="text-clay text-xs">↑</span></p><p class="text-[10px] text-forest/50">ref 12-53 · YÜKSEK</p></div>
+      </li>
+      <li class="flex justify-between items-baseline">
+        <div><p class="font-serif text-forest">Bilirubin Total</p><p class="text-[10px] text-forest/50">karaciğer atığı</p></div>
+        <div class="text-right"><p class="font-serif text-forest text-base">0.40 <span class="text-clay text-xs">✓</span></p><p class="text-[10px] text-forest/50">ref 0.30-1.20</p></div>
+      </li>
+    </ul>
+    <p class="mt-4 text-[11px] text-forest/60 italic leading-relaxed"><strong>ALP düşük</strong> → çinko/magnezyum eksikliği veya hipotiroid göstergesi olabilir; tiroid normal, çinko düzeyini kontrol et. <strong>Lipaz hafif yüksek</strong> → semptom yoksa (karın ağrısı, bulantı) genelde anlamsız; 6 hafta sonra tekrarla, akşam alkol + ağır yağlı yemek azalt.</p>
+  </div>
+
+  <!-- 4. TİROİD -->
+  <div class="bg-white rounded-3xl p-6 glow mb-5">
+    <div class="flex items-baseline gap-2 mb-4">
+      <span class="font-serif text-2xl text-clay">4.</span>
+      <h3 class="font-serif text-xl text-forest">Tiroid</h3>
+    </div>
+    <ul class="space-y-3 text-sm">
+      <li class="flex justify-between items-baseline border-b border-cream pb-2">
+        <div><p class="font-serif text-forest">TSH</p><p class="text-[10px] text-forest/50">tiroid uyarıcı hormon</p></div>
+        <div class="text-right"><p class="font-serif text-forest text-base">1.72 <span class="text-clay text-xs">✓</span></p><p class="text-[10px] text-forest/50">ref 0.25-4.55 · optimal 1-2</p></div>
+      </li>
+      <li class="flex justify-between items-baseline border-b border-cream pb-2">
+        <div><p class="font-serif text-forest">FT4 (Tiroksin)</p><p class="text-[10px] text-forest/50">depo hormon</p></div>
+        <div class="text-right"><p class="font-serif text-forest text-base">14.81 <span class="text-clay text-xs">✓</span></p><p class="text-[10px] text-forest/50">ref 11.50-22.70 pmol/L</p></div>
+      </li>
+      <li class="flex justify-between items-baseline">
+        <div><p class="font-serif text-forest">FT3 (Triiyodotironin)</p><p class="text-[10px] text-forest/50">aktif hormon</p></div>
+        <div class="text-right"><p class="font-serif text-forest text-base">4.81 <span class="text-clay text-xs">✓</span></p><p class="text-[10px] text-forest/50">ref 3.50-6.50 pmol/L</p></div>
+      </li>
+    </ul>
+    <p class="mt-4 text-[11px] text-forest/60 italic leading-relaxed">Tiroid mükemmel — TSH 1.72 optimal aralıkta (longevity 1-2 hedefler). Eğer enerji/saç/kilo şikayeti olursa <strong>Anti-TPO + Anti-TG</strong> antikorları ekle (Hashimoto taraması).</p>
+  </div>
+
+  <!-- 5. VİTAMİN / MİNERAL -->
+  <div class="bg-white rounded-3xl p-6 glow mb-5">
+    <div class="flex items-baseline gap-2 mb-4">
+      <span class="font-serif text-2xl text-clay">5.</span>
+      <h3 class="font-serif text-xl text-forest">Vitamin · Mineral</h3>
+    </div>
+    <ul class="space-y-3 text-sm">
+      <li class="flex justify-between items-baseline border-b border-cream pb-2">
+        <div><p class="font-serif text-forest">Vitamin B12</p><p class="text-[10px] text-forest/50">enerji + nöro</p></div>
+        <div class="text-right"><p class="font-serif text-forest text-base">560 <span class="text-clay text-xs">✓</span></p><p class="text-[10px] text-forest/50">&gt;400 normal · optimal &gt;500</p></div>
+      </li>
+      <li class="flex justify-between items-baseline border-b border-cream pb-2">
+        <div><p class="font-serif text-forest">Ferritin</p><p class="text-[10px] text-forest/50">demir deposu</p></div>
+        <div class="text-right"><p class="font-serif text-forest text-base">55 <span class="text-clay text-xs">◐</span></p><p class="text-[10px] text-forest/50">ref 10-291 · optimal 70-150</p></div>
+      </li>
+      <li class="flex justify-between items-baseline border-b border-cream pb-2">
+        <div><p class="font-serif text-forest">Sodyum</p><p class="text-[10px] text-forest/50">elektrolit</p></div>
+        <div class="text-right"><p class="font-serif text-forest text-base">140 <span class="text-clay text-xs">✓</span></p><p class="text-[10px] text-forest/50">ref 136-145</p></div>
+      </li>
+      <li class="flex justify-between items-baseline border-b border-cream pb-2">
+        <div><p class="font-serif text-forest">Potasyum</p><p class="text-[10px] text-forest/50">elektrolit · kalp</p></div>
+        <div class="text-right"><p class="font-serif text-forest text-base">4.49 <span class="text-clay text-xs">✓</span></p><p class="text-[10px] text-forest/50">ref 3.50-5.10</p></div>
+      </li>
+      <li class="flex justify-between items-baseline">
+        <div><p class="font-serif text-forest">Kalsiyum</p><p class="text-[10px] text-forest/50">kemik · sinir</p></div>
+        <div class="text-right"><p class="font-serif text-forest text-base">10.20 <span class="text-clay text-xs">✓</span></p><p class="text-[10px] text-forest/50">ref 8.70-10.40</p></div>
+      </li>
+    </ul>
+    <p class="mt-4 text-[11px] text-forest/60 italic leading-relaxed"><strong>Ferritin 55:</strong> kadın 40+ için "yeterli" ama performans/saç dökülmesi/enerji için 70-150 ideal. Aksiyon → kırmızı et 2×/hafta + C vitaminli yemek (limon/biber). Demir takviyesi gerekmez bu seviyede.</p>
+  </div>
+
+  <!-- 6. HEMATOLOJİ -->
+  <div class="bg-white rounded-3xl p-6 glow mb-5">
+    <div class="flex items-baseline gap-2 mb-4">
+      <span class="font-serif text-2xl text-clay">6.</span>
+      <h3 class="font-serif text-xl text-forest">Hematoloji</h3>
+    </div>
+    <ul class="space-y-3 text-sm">
+      <li class="flex justify-between items-baseline border-b border-cream pb-2">
+        <div><p class="font-serif text-forest">Hemoglobin</p><p class="text-[10px] text-forest/50">oksijen taşıyıcı</p></div>
+        <div class="text-right"><p class="font-serif text-forest text-base">14.2 <span class="text-clay text-xs">✓</span></p><p class="text-[10px] text-forest/50">ref 11.5-16.5</p></div>
+      </li>
+      <li class="flex justify-between items-baseline border-b border-cream pb-2">
+        <div><p class="font-serif text-forest">Hematokrit</p><p class="text-[10px] text-forest/50">kan hacmi</p></div>
+        <div class="text-right"><p class="font-serif text-forest text-base">40.0 <span class="text-clay text-xs">✓</span></p><p class="text-[10px] text-forest/50">ref 37-47</p></div>
+      </li>
+      <li class="flex justify-between items-baseline border-b border-cream pb-2">
+        <div><p class="font-serif text-forest">MCV</p><p class="text-[10px] text-forest/50">eritrosit hacmi</p></div>
+        <div class="text-right"><p class="font-serif text-forest text-base">86.4 <span class="text-clay text-xs">✓</span></p><p class="text-[10px] text-forest/50">ref 80-100</p></div>
+      </li>
+      <li class="flex justify-between items-baseline border-b border-cream pb-2">
+        <div><p class="font-serif text-forest">Lökosit</p><p class="text-[10px] text-forest/50">bağışıklık</p></div>
+        <div class="text-right"><p class="font-serif text-forest text-base">10.29 <span class="text-clay text-xs">✓</span></p><p class="text-[10px] text-forest/50">ref 4.06-10.60 · üst sınıra yakın</p></div>
+      </li>
+      <li class="flex justify-between items-baseline">
+        <div><p class="font-serif text-forest">Trombosit</p><p class="text-[10px] text-forest/50">pıhtılaşma</p></div>
+        <div class="text-right"><p class="font-serif text-forest text-base">352 <span class="text-clay text-xs">✓</span></p><p class="text-[10px] text-forest/50">ref 150-439</p></div>
+      </li>
+    </ul>
+    <p class="mt-4 text-[11px] text-forest/60 italic leading-relaxed">Lökosit 10.29 üst sınıra yakın — viral/bakteriyel enfeksiyon, stres veya egzersiz sonrası olabilir. Semptom yoksa anlamsız; 6 hafta sonra düşmüş olur.</p>
+  </div>
+
+  <!-- 7. İNFLAMASYON -->
+  <div class="bg-white rounded-3xl p-6 glow mb-5">
+    <div class="flex items-baseline gap-2 mb-4">
+      <span class="font-serif text-2xl text-clay">7.</span>
+      <h3 class="font-serif text-xl text-forest">İnflamasyon</h3>
+    </div>
+    <ul class="space-y-3 text-sm">
+      <li class="flex justify-between items-baseline border-b border-cream pb-2">
+        <div><p class="font-serif text-forest">CRP</p><p class="text-[10px] text-forest/50">akut faz proteini</p></div>
+        <div class="text-right"><p class="font-serif text-forest text-base">0.08 <span class="text-clay text-xs">✓</span></p><p class="text-[10px] text-forest/50">ref &lt;0.50 · mükemmel düşük</p></div>
+      </li>
+      <li class="flex justify-between items-baseline">
+        <div><p class="font-serif text-forest">NLR</p><p class="text-[10px] text-forest/50">nötrofil/lenfosit oranı</p></div>
+        <div class="text-right"><p class="font-serif text-forest text-base">1.64 <span class="text-clay text-xs">✓</span></p><p class="text-[10px] text-forest/50">ref &lt;5.5 · longevity &lt;2</p></div>
+      </li>
+    </ul>
+    <p class="mt-4 text-[11px] text-forest/60 italic leading-relaxed">İki marker da mükemmel — sistemik inflamasyon yok. Bu en önemli longevity göstergelerinden ikisi. <strong>hsCRP</strong> (high-sensitivity) bir sonraki kanda iste — daha hassas ölçer.</p>
+  </div>
+
+  <!-- 8. EKSİK TESTLER -->
+  <div class="bg-clay/10 border border-clay/30 rounded-3xl p-6 mb-5">
+    <div class="flex items-baseline gap-2 mb-4">
+      <span class="font-serif text-2xl text-clay">⊕</span>
+      <h3 class="font-serif text-xl text-forest">Bir sonraki kanda iste</h3>
+    </div>
+    <p class="text-xs text-forest/70 mb-4 leading-relaxed">Bu panelde olmayan ama 44 yaş + perimenopause penceresi için kritik testler:</p>
+    <ul class="space-y-3 text-sm">
+      <li class="border-b border-cream pb-3">
+        <p class="font-serif text-forest">apoB</p>
+        <p class="text-[11px] text-forest/60 mt-0.5">Attia okulunun #1 kardiyo risk markeri. LDL'den çok daha kesin. Hedef: &lt;80 mg/dL</p>
+      </li>
+      <li class="border-b border-cream pb-3">
+        <p class="font-serif text-forest">HbA1c</p>
+        <p class="text-[11px] text-forest/60 mt-0.5">3 aylık ortalama glukoz. Tek nokta açlık glukozundan çok daha anlamlı. Hedef: &lt;5.4%</p>
+      </li>
+      <li class="border-b border-cream pb-3">
+        <p class="font-serif text-forest">Lp(a) (Lipoprotein-a)</p>
+        <p class="text-[11px] text-forest/60 mt-0.5">Genetik kardiyo risk — bir kerelik. Yüksekse erken kalp hastalığı riski 2-4×. Hedef: &lt;30 nmol/L</p>
+      </li>
+      <li class="border-b border-cream pb-3">
+        <p class="font-serif text-forest">Vitamin D (25-OH)</p>
+        <p class="text-[11px] text-forest/60 mt-0.5">Türkiye'de neredeyse herkeste düşük. Kemik + bağışıklık + ruh hali. Hedef: 40-60 ng/mL</p>
+      </li>
+      <li class="border-b border-cream pb-3">
+        <p class="font-serif text-forest">Hormon paneli — FSH, LH, Estradiol, Progesteron</p>
+        <p class="text-[11px] text-forest/60 mt-0.5">Perimenopause'un nerede olduğunu söyler. FSH &gt;25 = perimenopause başlamış. Mary Claire Haver: 40+ kadın yıllık çekmeli</p>
+      </li>
+      <li class="border-b border-cream pb-3">
+        <p class="font-serif text-forest">Testosteron, DHEA-S</p>
+        <p class="text-[11px] text-forest/60 mt-0.5">Kadında da kritik — libido, kas, enerji, motivasyon. 40+ düşmeye başlar</p>
+      </li>
+      <li class="border-b border-cream pb-3">
+        <p class="font-serif text-forest">Magnezyum (RBC veya serum)</p>
+        <p class="text-[11px] text-forest/60 mt-0.5">Uyku + stres + kas + kemik. Çoğu kadın eksik. RBC magnezyum daha kesin</p>
+      </li>
+      <li class="border-b border-cream pb-3">
+        <p class="font-serif text-forest">Çinko</p>
+        <p class="text-[11px] text-forest/60 mt-0.5">Bağışıklık + cilt + ALP enzimi (senin ALP'in düşük çıktı, çinko bağlantılı olabilir)</p>
+      </li>
+      <li class="border-b border-cream pb-3">
+        <p class="font-serif text-forest">Homosistein</p>
+        <p class="text-[11px] text-forest/60 mt-0.5">B vitaminleri metabolizma kalitesi. Yüksekse kardiyo + bilişsel risk. Hedef: &lt;7</p>
+      </li>
+      <li>
+        <p class="font-serif text-forest">hsCRP (high-sensitivity)</p>
+        <p class="text-[11px] text-forest/60 mt-0.5">Standart CRP'den 10× hassas. Düşük dereceli inflamasyon yakalar. Hedef: &lt;1.0</p>
+      </li>
+    </ul>
+  </div>
+
+  <!-- AKSİYON -->
+  <div class="bg-forest text-ivory rounded-3xl p-6 mb-5">
+    <p class="text-clay-light text-[10px] uppercase tracking-widest mb-4">Şimdi yapılacaklar</p>
+    <ul class="space-y-3 text-sm">
+      <li class="flex gap-3"><span class="text-clay font-serif shrink-0">1.</span><span>Bir sonraki kanda <strong>apoB + HbA1c + Vit D + hormon paneli</strong> iste — 8-12 hafta sonra</span></li>
+      <li class="flex gap-3"><span class="text-clay font-serif shrink-0">2.</span><span><strong>Lipaz tekrar</strong> — 6 hafta sonra. Ara dönemde akşam alkol + ağır yağlı yemek azalt</span></li>
+      <li class="flex gap-3"><span class="text-clay font-serif shrink-0">3.</span><span><strong>Çinko düzeyi kontrol</strong> — düşük ALP nedeni olabilir. Kabak çekirdeği + kırmızı et</span></li>
+      <li class="flex gap-3"><span class="text-clay font-serif shrink-0">4.</span><span><strong>Ferritin 70+ hedef</strong> — kırmızı et 2×/hafta, mercimek + C vitaminli (limon, biber, maydanoz) yemek</span></li>
+      <li class="flex gap-3"><span class="text-clay font-serif shrink-0">5.</span><span><strong>Glukoz &lt;90 hedef</strong> — yemek sonrası 10 dk yürüyüş, akşam karbı çek</span></li>
+    </ul>
+  </div>
+
+  <details class="bg-cream/40 rounded-2xl p-5 mb-5">
+    <summary class="font-serif text-forest cursor-pointer text-sm">📐 Optimal aralıklar nereden</summary>
+    <ul class="mt-3 space-y-2 text-xs text-forest/80 font-sans leading-relaxed">
+      <li>• <strong>Peter Attia</strong> — Outlive + The Drive #224, #266 (lipit + apoB), #301 (kadın hormon)</li>
+      <li>• <strong>Mary Claire Haver</strong> — The New Menopause (40+ kadın hormon paneli)</li>
+      <li>• <strong>Stacy Sims</strong> — kadın 40+ ferritin/D vitamini hedefleri</li>
+      <li>• <strong>Rhonda Patrick</strong> — FoundMyFitness micronutrient panel</li>
+      <li>• Türkiye lab ref aralıkları "popülasyon ortalaması" — longevity ≠ popülasyon</li>
+    </ul>
+  </details>
+
+  <p class="text-[10px] text-forest/40 font-sans text-center italic">Bu sayfa hekim tavsiyesi değil — kişisel biomarker takibidir. Tedavi/ilaç kararları doktorunla.</p>
+</section>
+
 <!-- =============== KOÇ =============== -->
 <section id="page-coach" class="hidden-page">
   <div class="mb-6">
@@ -814,6 +1203,7 @@ function switchTab(tab) {
   if (tab === 'shop') renderShop();
   if (tab === 'aesthetic') renderAesthetic();
   if (tab === 'longevity') renderLongevity();
+  if (tab === 'health') window.scrollTo({ top: 0 });
   if (tab === 'settings') renderSettings();
 }
 document.querySelectorAll('.tab-btn').forEach(b => b.addEventListener('click', () => switchTab(b.dataset.tab)));
