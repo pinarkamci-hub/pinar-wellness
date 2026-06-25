@@ -66,7 +66,10 @@ tailwind.config = {
 <!-- TAB NAV -->
 <nav class="fixed md:sticky bottom-0 md:top-16 left-0 right-0 z-30 bg-ivory/95 backdrop-blur border-t md:border-t-0 md:border-b border-cream">
   <div class="max-w-3xl mx-auto px-1 py-2 flex justify-around">
-    <button class="tab-btn active font-sans text-[9px] md:text-xs px-1.5 md:px-3 py-2 rounded-full flex flex-col items-center gap-0.5" data-tab="today">
+    <button class="tab-btn active font-sans text-[9px] md:text-xs px-1.5 md:px-3 py-2 rounded-full flex flex-col items-center gap-0.5" data-tab="moda">
+      <span class="text-base md:text-xl">❖</span><span>Moda</span>
+    </button>
+    <button class="tab-btn font-sans text-[9px] md:text-xs px-1.5 md:px-3 py-2 rounded-full flex flex-col items-center gap-0.5" data-tab="today">
       <span class="text-base md:text-xl">◉</span><span>Bugün</span>
     </button>
     <button class="tab-btn font-sans text-[9px] md:text-xs px-1.5 md:px-3 py-2 rounded-full flex flex-col items-center gap-0.5" data-tab="routine">
@@ -84,9 +87,6 @@ tailwind.config = {
     <button class="tab-btn font-sans text-[9px] md:text-xs px-1.5 md:px-3 py-2 rounded-full flex flex-col items-center gap-0.5" data-tab="shop">
       <span class="text-base md:text-xl">⚘</span><span>Alış</span>
     </button>
-    <button class="tab-btn font-sans text-[9px] md:text-xs px-1.5 md:px-3 py-2 rounded-full flex flex-col items-center gap-0.5" data-tab="moda">
-      <span class="text-base md:text-xl">❖</span><span>Moda</span>
-    </button>
     <button class="tab-btn font-sans text-[9px] md:text-xs px-1.5 md:px-3 py-2 rounded-full flex flex-col items-center gap-0.5" data-tab="coach">
       <span class="text-base md:text-xl">✦</span><span>Koç</span>
     </button>
@@ -102,7 +102,7 @@ tailwind.config = {
 <main class="max-w-3xl mx-auto px-5 py-6">
 
 <!-- =============== BUGÜN =============== -->
-<section id="page-today" class="active-page">
+<section id="page-today" class="hidden-page">
 
   <div class="mb-8">
     <p id="dayLabel" class="text-clay font-sans text-xs uppercase tracking-[0.2em] mb-2"></p>
@@ -1142,21 +1142,21 @@ tailwind.config = {
 </section>
 
 <!-- =============== MODA =============== -->
-<section id="page-moda" class="hidden-page">
+<section id="page-moda" class="active-page">
   <div class="mb-6">
     <p class="text-clay font-sans text-xs uppercase tracking-[0.2em] mb-2">Gardırop · Kombin · Alışveriş</p>
     <h2 class="font-serif text-4xl text-forest">Moda</h2>
-    <p class="mt-3 text-xs text-forest/60 italic leading-relaxed">Kendi parçalarını gir → kişisel stilistin kombin yapsın. Sonra eksikleri senin marka evreninde önersin.</p>
+    <p class="mt-3 text-xs text-forest/60 italic leading-relaxed">Parçalarını ekle (foto koyabilirsin) → otomatik kombin çıksın. Her şey cihazında kayıtlı kalır.</p>
   </div>
 
-  <!-- Stil profili -->
-  <details class="bg-cream/40 rounded-2xl p-5 mb-5">
-    <summary class="font-serif text-forest cursor-pointer text-sm">❖ Stil profilim — kombin bunu kullanır</summary>
-    <div class="mt-3">
-      <textarea id="styleProfile" rows="4" class="w-full bg-white rounded-2xl p-3 outline-none text-sm resize-none" placeholder="Örn: 44 yaş CEO. Smart-casual + iş şıklığı. Sade, kaliteli, kapsül gardırop. Sevdiğim renkler: lacivert, krem, taba, siyah. Vücut: ... Kaçındığım: aşırı parlak/desenli."></textarea>
-      <button onclick="saveStyleProfile()" class="mt-3 bg-forest text-ivory font-sans text-xs uppercase tracking-wider px-5 py-2 rounded-full">Kaydet</button>
+  <!-- Otomatik öneri -->
+  <div class="mb-6">
+    <div class="flex items-center justify-between mb-3">
+      <h3 class="font-serif text-xl text-forest">✦ Önerilen kombinler</h3>
+      <button onclick="renderModa()" class="text-[10px] text-clay uppercase tracking-widest hover:text-forest transition">↻ yenile</button>
     </div>
-  </details>
+    <div id="autoCombos" class="space-y-3"></div>
+  </div>
 
   <!-- Parça ekle -->
   <div class="bg-white rounded-3xl p-6 glow mb-5">
@@ -1171,10 +1171,17 @@ tailwind.config = {
         <option value="canta">Çanta</option>
         <option value="aksesuar">Aksesuar (şal/takı/kemer)</option>
       </select>
-      <input id="wColor" type="text" placeholder="Renk (lacivert)" class="bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none">
+      <input id="wColor" type="text" placeholder="Renk" class="bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none">
     </div>
     <input id="wName" type="text" placeholder="Parça adı (ör: yün blazer)" class="w-full bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none mb-2">
     <input id="wBrand" type="text" placeholder="Marka — opsiyonel (Massimo Dutti)" class="w-full bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none mb-3">
+    <div class="flex items-center gap-3 mb-3">
+      <label class="flex-shrink-0 bg-cream/50 text-forest font-sans text-[11px] uppercase tracking-wider px-4 py-2.5 rounded-full text-center cursor-pointer">
+        📷 Fotoğraf
+        <input id="wPhoto" type="file" accept="image/*" onchange="onPhotoPick(event)" class="hidden">
+      </label>
+      <div id="wPhotoPreview" class="flex items-center gap-2 min-w-0"></div>
+    </div>
     <button onclick="addWardrobeItem()" class="w-full bg-clay text-ivory font-sans text-xs uppercase tracking-widest py-3 rounded-full">+ Gardıroba ekle</button>
   </div>
 
@@ -1189,12 +1196,21 @@ tailwind.config = {
 
   <!-- Aksiyonlar -->
   <div class="bg-forest text-ivory rounded-3xl p-6 mb-5 glow">
-    <p class="text-clay-light text-[10px] uppercase tracking-widest mb-1">Kişisel stilist</p>
-    <p class="font-serif text-xl mb-4">Claude kombin yapsın</p>
-    <button onclick="buildOutfitPrompt()" class="w-full bg-clay text-ivory font-sans uppercase tracking-widest text-xs py-3 rounded-full mb-2">◈ Kombin yap</button>
+    <p class="text-clay-light text-[10px] uppercase tracking-widest mb-1">Daha derin öneri</p>
+    <p class="font-serif text-xl mb-4">Claude'a sor</p>
+    <button onclick="buildOutfitPrompt()" class="w-full bg-clay text-ivory font-sans uppercase tracking-widest text-xs py-3 rounded-full mb-2">◈ Akıllı kombin</button>
     <button onclick="buildShoppingPrompt()" class="w-full bg-forest-light/60 text-ivory font-sans uppercase tracking-widest text-xs py-3 rounded-full">✦ Alışveriş önerisi</button>
-    <p class="text-ivory/50 text-[11px] mt-3 leading-snug">Gardırobun + stil profilin Claude'a kopyalanır, yeni sekme açılır. Yanıtı oradan oku.</p>
+    <p class="text-ivory/50 text-[11px] mt-3 leading-snug">Yukarıdaki öneriler anında çıkar. Daha kişisel/derin yorum için bu butonlar gardırobunu Claude'a taşır.</p>
   </div>
+
+  <!-- Stil profili -->
+  <details class="bg-cream/40 rounded-2xl p-5 mb-3">
+    <summary class="font-serif text-forest cursor-pointer text-sm">❖ Stil profilim</summary>
+    <div class="mt-3">
+      <textarea id="styleProfile" rows="4" class="w-full bg-white rounded-2xl p-3 outline-none text-sm resize-none" placeholder="Örn: 44 yaş CEO. Smart-casual + iş şıklığı. Sade, kaliteli, kapsül gardırop. Sevdiğim renkler: lacivert, krem, taba, siyah. Kaçındığım: aşırı parlak/desenli."></textarea>
+      <button onclick="saveStyleProfile()" class="mt-3 bg-forest text-ivory font-sans text-xs uppercase tracking-wider px-5 py-2 rounded-full">Kaydet</button>
+    </div>
+  </details>
 
   <!-- Marka evreni -->
   <details class="bg-cream/40 rounded-2xl p-5">
@@ -1253,7 +1269,10 @@ let state = (() => {
     };
   } catch { return { days: {}, shopBought: {}, aesCat: 'face', personalContext: '', wardrobe: [], styleProfile: '' }; }
 })();
-function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+function save() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+  catch (e) { try { toast('Depolama doldu — birkaç fotoğrafı sil'); } catch {} }
+}
 
 function today() { return new Date().toISOString().slice(0,10); }
 function getToday() {
@@ -1975,13 +1994,85 @@ const MODA_CATS = [
   { key:'aksesuar', label:'Aksesuar', icon:'✧' },
 ];
 
+/* --- Renk algılama --- */
+const COLOR_MAP = {
+  'siyah':'#1c1c1c','beyaz':'#f3f3f0','gri':'#9a9a9a','antrasit':'#3a3d42',
+  'lacivert':'#1d2b4a','mavi':'#3f6fb0','açık mavi':'#9cc3e0',
+  'kırmızı':'#bf3a31','bordo':'#6e2030','pembe':'#d98aae','pudra':'#e7c2cf',
+  'mor':'#7a4b8a','yeşil':'#3f7d4f','haki':'#6b6f3a','sarı':'#dcc24f',
+  'turuncu':'#d4763a','kahve':'#5a3d2b','taba':'#a9683f','bej':'#cbb892',
+  'krem':'#ece3cf','ten':'#d8b89a','altın':'#c9a13b','gümüş':'#c4c7cc'
+};
+const NEUTRALS = ['siyah','beyaz','gri','antrasit','lacivert','bej','krem','taba','kahve','ten','gümüş'];
+
+function nearestColorName(r,g,b){
+  let best='', bd=1e9;
+  for (const [name,hex] of Object.entries(COLOR_MAP)){
+    const rr=parseInt(hex.slice(1,3),16), gg=parseInt(hex.slice(3,5),16), bb=parseInt(hex.slice(5,7),16);
+    const d=(r-rr)**2+(g-gg)**2+(b-bb)**2;
+    if (d<bd){ bd=d; best=name; }
+  }
+  return best;
+}
+function swatchHex(item){
+  if (item.colorHex) return item.colorHex;
+  const c = (item.color||'').toLowerCase().trim();
+  return COLOR_MAP[c] || '#cbb8d4';
+}
+
+/* --- Fotoğraf seçimi: sıkıştır + baskın rengi anla --- */
+let pendingPhoto = null, pendingHex = null;
+function onPhotoPick(e){
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = ev => {
+    const img = new Image();
+    img.onload = () => {
+      const max = 360, sc = Math.min(1, max/Math.max(img.width, img.height));
+      const c = document.createElement('canvas');
+      c.width = Math.max(1, Math.round(img.width*sc));
+      c.height = Math.max(1, Math.round(img.height*sc));
+      const ctx = c.getContext('2d');
+      ctx.drawImage(img, 0, 0, c.width, c.height);
+      pendingPhoto = c.toDataURL('image/jpeg', 0.7);
+      const d = ctx.getImageData(0,0,c.width,c.height).data;
+      let R=0,G=0,B=0,n=0;
+      for (let i=0;i<d.length;i+=4){ if (d[i+3]<200) continue; R+=d[i];G+=d[i+1];B+=d[i+2];n++; }
+      let name='';
+      if (n){ R=Math.round(R/n);G=Math.round(G/n);B=Math.round(B/n);
+        pendingHex = '#'+[R,G,B].map(x=>x.toString(16).padStart(2,'0')).join('');
+        name = nearestColorName(R,G,B);
+        const cf = document.getElementById('wColor');
+        if (!cf.value.trim()) cf.value = name;
+      }
+      document.getElementById('wPhotoPreview').innerHTML =
+        `<img src="${pendingPhoto}" class="w-12 h-12 object-cover rounded-lg flex-shrink-0">
+         <span class="text-[11px] text-forest/60 truncate">Algılanan renk: <b>${name||'—'}</b></span>`;
+    };
+    img.src = ev.target.result;
+  };
+  r.readAsDataURL(f);
+}
+
 function renderModa() {
-  document.getElementById('styleProfile').value = state.styleProfile || '';
-  const list = document.getElementById('wardrobeList');
+  const sp = document.getElementById('styleProfile');
+  if (sp) sp.value = state.styleProfile || '';
   const items = state.wardrobe || [];
   document.getElementById('wCount').textContent = items.length ? `${items.length} parça` : '';
+
+  // Otomatik kombinler
+  const auto = document.getElementById('autoCombos');
+  const combos = buildAutoCombos();
+  if (!combos.length) {
+    auto.innerHTML = `<p class="text-xs text-forest/50 italic bg-cream/30 rounded-2xl p-5 text-center">En az 1 üst + 1 alt (ya da 1 elbise) ekle — kombinler burada kendiliğinden çıkar.</p>`;
+  } else {
+    auto.innerHTML = combos.map(comboCard).join('');
+  }
+
+  // Gardırop
+  const list = document.getElementById('wardrobeList');
   if (!items.length) {
-    list.innerHTML = `<p class="text-xs text-forest/50 italic bg-cream/30 rounded-2xl p-5 text-center">Henüz parça yok. Yukarıdan ekle — sonra "Kombin yap"a bas.</p>`;
+    list.innerHTML = `<p class="text-xs text-forest/50 italic bg-cream/30 rounded-2xl p-5 text-center">Henüz parça yok. Yukarıdan ekle — fotoğraf da koyabilirsin.</p>`;
     return;
   }
   list.innerHTML = MODA_CATS.map(cat => {
@@ -1994,14 +2085,64 @@ function renderModa() {
   }).join('');
 }
 
+function itemThumb(item, size) {
+  const s = size || 'w-12 h-12';
+  return item.photo
+    ? `<img src="${item.photo}" class="${s} object-cover rounded-lg flex-shrink-0">`
+    : `<span class="${s} rounded-lg flex-shrink-0 inline-block border border-black/5" style="background:${swatchHex(item)}"></span>`;
+}
+
 function wardrobeRow(item) {
   const meta = [item.color, item.brand].filter(Boolean).join(' · ');
   return `<div class="bg-white rounded-2xl p-3 glow flex items-center gap-3">
+    ${itemThumb(item, 'w-14 h-14')}
     <div class="flex-1 min-w-0">
       <p class="font-serif text-sm text-forest leading-tight truncate">${item.name}</p>
-      ${meta ? `<p class="text-[11px] text-forest/60 mt-0.5 truncate">${meta}</p>` : ''}
+      ${meta ? `<p class="text-[11px] text-forest/60 mt-0.5 truncate flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full inline-block flex-shrink-0" style="background:${swatchHex(item)}"></span>${meta}</p>` : ''}
     </div>
     <button onclick="deleteWardrobeItem('${item.id}')" class="flex-shrink-0 text-forest/30 hover:text-clay text-sm w-8 h-8 rounded-full hover:bg-cream/50 transition">🗑</button>
+  </div>`;
+}
+
+/* --- Otomatik kombin üretici (yerel kural, AI gerekmez) --- */
+function isNeutral(item){ return NEUTRALS.includes((item.color||'').toLowerCase().trim()); }
+function colorOk(a, b){
+  const ca=(a.color||'').toLowerCase().trim(), cb=(b.color||'').toLowerCase().trim();
+  if (!ca || !cb) return true;
+  return isNeutral(a) || isNeutral(b) || ca===cb;
+}
+function pick(items, cat){ return items.filter(i => i.cat === cat); }
+
+function buildAutoCombos(){
+  const items = state.wardrobe || [];
+  const ust = pick(items,'ust'), alt = pick(items,'alt'), elbise = pick(items,'elbise');
+  const dis = pick(items,'dis'), ayk = pick(items,'ayakkabi'), cnt = pick(items,'canta'), aks = pick(items,'aksesuar');
+  const labels = ['Ofis','Toplantı','Akşam','Hafta sonu','Şık-rahat'];
+  const out = [];
+  // Üst + Alt kombinleri
+  for (const u of ust){
+    for (const a of alt){
+      if (!colorOk(u,a)) continue;
+      out.push([u, a, dis[0], ayk[0], cnt[0], aks[0]].filter(Boolean));
+      if (out.length >= 5) break;
+    }
+    if (out.length >= 5) break;
+  }
+  // Elbise kombinleri
+  for (const e of elbise){
+    if (out.length >= 5) break;
+    out.push([e, dis[0], ayk[0], cnt[0], aks[0]].filter(Boolean));
+  }
+  return out.slice(0,5).map((parts,i) => ({ label: labels[i % labels.length], parts }));
+}
+
+function comboCard(combo){
+  const thumbs = combo.parts.map(p => itemThumb(p, 'w-12 h-12')).join('');
+  const names = combo.parts.map(p => p.name).join(' + ');
+  return `<div class="bg-white rounded-2xl p-3 glow">
+    <p class="text-[10px] text-clay uppercase tracking-widest mb-2">◈ ${combo.label}</p>
+    <div class="flex items-center gap-2 overflow-x-auto pb-1">${thumbs}</div>
+    <p class="text-[11px] text-forest/70 mt-2 leading-snug">${names}</p>
   </div>`;
 }
 
@@ -2015,11 +2156,16 @@ function addWardrobeItem() {
     name,
     color: document.getElementById('wColor').value.trim(),
     brand: document.getElementById('wBrand').value.trim(),
+    photo: pendingPhoto || null,
+    colorHex: pendingHex || null,
   });
   save();
   document.getElementById('wName').value = '';
   document.getElementById('wColor').value = '';
   document.getElementById('wBrand').value = '';
+  document.getElementById('wPhoto').value = '';
+  document.getElementById('wPhotoPreview').innerHTML = '';
+  pendingPhoto = null; pendingHex = null;
   renderModa();
   toast('Eklendi ✓');
 }
@@ -2142,7 +2288,7 @@ function toast(m) {
 }
 
 /* ================= INIT ================= */
-renderToday();
+renderModa();
 </script>
 
 </body>
