@@ -84,6 +84,9 @@ tailwind.config = {
     <button class="tab-btn font-sans text-[9px] md:text-xs px-1.5 md:px-3 py-2 rounded-full flex flex-col items-center gap-0.5" data-tab="shop">
       <span class="text-base md:text-xl">⚘</span><span>Alış</span>
     </button>
+    <button class="tab-btn font-sans text-[9px] md:text-xs px-1.5 md:px-3 py-2 rounded-full flex flex-col items-center gap-0.5" data-tab="moda">
+      <span class="text-base md:text-xl">❖</span><span>Moda</span>
+    </button>
     <button class="tab-btn font-sans text-[9px] md:text-xs px-1.5 md:px-3 py-2 rounded-full flex flex-col items-center gap-0.5" data-tab="coach">
       <span class="text-base md:text-xl">✦</span><span>Koç</span>
     </button>
@@ -1138,6 +1141,72 @@ tailwind.config = {
   </div>
 </section>
 
+<!-- =============== MODA =============== -->
+<section id="page-moda" class="hidden-page">
+  <div class="mb-6">
+    <p class="text-clay font-sans text-xs uppercase tracking-[0.2em] mb-2">Gardırop · Kombin · Alışveriş</p>
+    <h2 class="font-serif text-4xl text-forest">Moda</h2>
+    <p class="mt-3 text-xs text-forest/60 italic leading-relaxed">Kendi parçalarını gir → kişisel stilistin kombin yapsın. Sonra eksikleri senin marka evreninde önersin.</p>
+  </div>
+
+  <!-- Stil profili -->
+  <details class="bg-cream/40 rounded-2xl p-5 mb-5">
+    <summary class="font-serif text-forest cursor-pointer text-sm">❖ Stil profilim — kombin bunu kullanır</summary>
+    <div class="mt-3">
+      <textarea id="styleProfile" rows="4" class="w-full bg-white rounded-2xl p-3 outline-none text-sm resize-none" placeholder="Örn: 44 yaş CEO. Smart-casual + iş şıklığı. Sade, kaliteli, kapsül gardırop. Sevdiğim renkler: lacivert, krem, taba, siyah. Vücut: ... Kaçındığım: aşırı parlak/desenli."></textarea>
+      <button onclick="saveStyleProfile()" class="mt-3 bg-forest text-ivory font-sans text-xs uppercase tracking-wider px-5 py-2 rounded-full">Kaydet</button>
+    </div>
+  </details>
+
+  <!-- Parça ekle -->
+  <div class="bg-white rounded-3xl p-6 glow mb-5">
+    <h3 class="font-serif text-xl text-forest mb-3">Parça ekle</h3>
+    <div class="grid grid-cols-2 gap-2 mb-2">
+      <select id="wCat" class="bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none">
+        <option value="ust">Üst (bluz/gömlek/triko)</option>
+        <option value="alt">Alt (pantolon/etek)</option>
+        <option value="elbise">Elbise</option>
+        <option value="dis">Dış (blazer/kaban/trenç)</option>
+        <option value="ayakkabi">Ayakkabı</option>
+        <option value="canta">Çanta</option>
+        <option value="aksesuar">Aksesuar (şal/takı/kemer)</option>
+      </select>
+      <input id="wColor" type="text" placeholder="Renk (lacivert)" class="bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none">
+    </div>
+    <input id="wName" type="text" placeholder="Parça adı (ör: yün blazer)" class="w-full bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none mb-2">
+    <input id="wBrand" type="text" placeholder="Marka — opsiyonel (Massimo Dutti)" class="w-full bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none mb-3">
+    <button onclick="addWardrobeItem()" class="w-full bg-clay text-ivory font-sans text-xs uppercase tracking-widest py-3 rounded-full">+ Gardıroba ekle</button>
+  </div>
+
+  <!-- Gardırop -->
+  <div class="mb-6">
+    <div class="flex items-center justify-between mb-3">
+      <h3 class="font-serif text-xl text-forest">Gardırobum</h3>
+      <span id="wCount" class="text-[10px] text-clay uppercase tracking-widest"></span>
+    </div>
+    <div id="wardrobeList" class="space-y-4"></div>
+  </div>
+
+  <!-- Aksiyonlar -->
+  <div class="bg-forest text-ivory rounded-3xl p-6 mb-5 glow">
+    <p class="text-clay-light text-[10px] uppercase tracking-widest mb-1">Kişisel stilist</p>
+    <p class="font-serif text-xl mb-4">Claude kombin yapsın</p>
+    <button onclick="buildOutfitPrompt()" class="w-full bg-clay text-ivory font-sans uppercase tracking-widest text-xs py-3 rounded-full mb-2">◈ Kombin yap</button>
+    <button onclick="buildShoppingPrompt()" class="w-full bg-forest-light/60 text-ivory font-sans uppercase tracking-widest text-xs py-3 rounded-full">✦ Alışveriş önerisi</button>
+    <p class="text-ivory/50 text-[11px] mt-3 leading-snug">Gardırobun + stil profilin Claude'a kopyalanır, yeni sekme açılır. Yanıtı oradan oku.</p>
+  </div>
+
+  <!-- Marka evreni -->
+  <details class="bg-cream/40 rounded-2xl p-5">
+    <summary class="font-serif text-forest cursor-pointer text-sm">⚘ Alışveriş marka evrenim</summary>
+    <div class="mt-3 space-y-2 text-xs text-forest/80 font-sans leading-snug">
+      <p><span class="text-clay uppercase tracking-widest text-[9px]">Günlük · High-street</span><br>Mango · H&M · Koton · Marks &amp; Spencer · Trendyol satıcıları</p>
+      <p><span class="text-clay uppercase tracking-widest text-[9px]">Premium TR</span><br>Beymen · Massimo Dutti · İpekyol · Rue · Nocturne · Atelier Aliz</p>
+      <p><span class="text-clay uppercase tracking-widest text-[9px]">Lüks · Çanta &amp; Ayakkabı</span><br>Hermès · Prada</p>
+    </div>
+  </details>
+</section>
+
 <!-- =============== AYAR =============== -->
 <section id="page-settings" class="hidden-page">
   <div class="mb-6">
@@ -1179,8 +1248,10 @@ let state = (() => {
       shopBought: s.shopBought || {},
       aesCat: s.aesCat || 'face',
       personalContext: s.personalContext || '44 yaş, kadın, Restar Group CEO (otomotiv/savunma). Yüksek iş yoğunluğu, kronik stres, perimenopause penceresi. Doğa ve deniz tutkusu. Hızlı + net + aksiyon odaklı.',
+      wardrobe: s.wardrobe || [],
+      styleProfile: s.styleProfile || '',
     };
-  } catch { return { days: {}, shopBought: {}, aesCat: 'face', personalContext: '' }; }
+  } catch { return { days: {}, shopBought: {}, aesCat: 'face', personalContext: '', wardrobe: [], styleProfile: '' }; }
 })();
 function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
 
@@ -1203,6 +1274,7 @@ function switchTab(tab) {
   if (tab === 'shop') renderShop();
   if (tab === 'aesthetic') renderAesthetic();
   if (tab === 'longevity') renderLongevity();
+  if (tab === 'moda') renderModa();
   if (tab === 'health') window.scrollTo({ top: 0 });
   if (tab === 'settings') renderSettings();
 }
@@ -1890,6 +1962,144 @@ async function copyAndOpenClaude() {
   }
   toast('Kopyalandı ✓');
   setTimeout(() => window.open('https://claude.ai/new', '_blank'), 250);
+}
+
+/* ================= MODA ================= */
+const MODA_CATS = [
+  { key:'ust',      label:'Üst',      icon:'◈' },
+  { key:'alt',      label:'Alt',      icon:'◇' },
+  { key:'elbise',   label:'Elbise',   icon:'❖' },
+  { key:'dis',      label:'Dış',      icon:'❉' },
+  { key:'ayakkabi', label:'Ayakkabı', icon:'✦' },
+  { key:'canta',    label:'Çanta',    icon:'⬡' },
+  { key:'aksesuar', label:'Aksesuar', icon:'✧' },
+];
+
+function renderModa() {
+  document.getElementById('styleProfile').value = state.styleProfile || '';
+  const list = document.getElementById('wardrobeList');
+  const items = state.wardrobe || [];
+  document.getElementById('wCount').textContent = items.length ? `${items.length} parça` : '';
+  if (!items.length) {
+    list.innerHTML = `<p class="text-xs text-forest/50 italic bg-cream/30 rounded-2xl p-5 text-center">Henüz parça yok. Yukarıdan ekle — sonra "Kombin yap"a bas.</p>`;
+    return;
+  }
+  list.innerHTML = MODA_CATS.map(cat => {
+    const group = items.filter(i => i.cat === cat.key);
+    if (!group.length) return '';
+    return `<div>
+      <p class="text-[10px] text-clay uppercase tracking-widest mb-2">${cat.icon} ${cat.label} · ${group.length}</p>
+      <div class="space-y-2">${group.map(wardrobeRow).join('')}</div>
+    </div>`;
+  }).join('');
+}
+
+function wardrobeRow(item) {
+  const meta = [item.color, item.brand].filter(Boolean).join(' · ');
+  return `<div class="bg-white rounded-2xl p-3 glow flex items-center gap-3">
+    <div class="flex-1 min-w-0">
+      <p class="font-serif text-sm text-forest leading-tight truncate">${item.name}</p>
+      ${meta ? `<p class="text-[11px] text-forest/60 mt-0.5 truncate">${meta}</p>` : ''}
+    </div>
+    <button onclick="deleteWardrobeItem('${item.id}')" class="flex-shrink-0 text-forest/30 hover:text-clay text-sm w-8 h-8 rounded-full hover:bg-cream/50 transition">🗑</button>
+  </div>`;
+}
+
+function addWardrobeItem() {
+  const name = document.getElementById('wName').value.trim();
+  if (!name) { toast('Parça adı gir'); return; }
+  if (!Array.isArray(state.wardrobe)) state.wardrobe = [];
+  state.wardrobe.push({
+    id: 'w' + Date.now() + Math.floor(Math.random()*1000),
+    cat: document.getElementById('wCat').value,
+    name,
+    color: document.getElementById('wColor').value.trim(),
+    brand: document.getElementById('wBrand').value.trim(),
+  });
+  save();
+  document.getElementById('wName').value = '';
+  document.getElementById('wColor').value = '';
+  document.getElementById('wBrand').value = '';
+  renderModa();
+  toast('Eklendi ✓');
+}
+
+function deleteWardrobeItem(id) {
+  state.wardrobe = (state.wardrobe || []).filter(i => i.id !== id);
+  save(); renderModa();
+}
+
+function saveStyleProfile() {
+  state.styleProfile = document.getElementById('styleProfile').value;
+  save(); toast('Kaydedildi ✓');
+}
+
+function wardrobeText() {
+  const items = state.wardrobe || [];
+  if (!items.length) return '(gardırop boş)';
+  return MODA_CATS.map(cat => {
+    const group = items.filter(i => i.cat === cat.key);
+    if (!group.length) return '';
+    const lines = group.map(i => `  - ${i.name}${i.color ? ` (${i.color})` : ''}${i.brand ? ` — ${i.brand}` : ''}`).join('\n');
+    return `${cat.label}:\n${lines}`;
+  }).filter(Boolean).join('\n');
+}
+
+const MODA_PERSONA = `Sen Pınar'ın kişisel stilisti + image danışmanısın. 44 yaş kadın CEO. Kapsül gardırop mantığı, vücut tipine + renk paletine uygun, smart-casual'dan iş şıklığına. Abartma, kanıtsız trend dayatma. Türkçe yanıt ver, marka adları orijinal kalsın.`;
+
+function modaProfileBlock() {
+  return `## STİL PROFİLİ\n${state.styleProfile || '(stil profili girilmemiş — gardıroptan çıkarım yap)'}\n\n## GARDIROP\n${wardrobeText()}`;
+}
+
+async function copyOpenClaude(prompt) {
+  try { await navigator.clipboard.writeText(prompt); } catch {
+    const ta = document.createElement('textarea'); ta.value = prompt;
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+  }
+  toast('Kopyalandı ✓');
+  setTimeout(() => window.open('https://claude.ai/new', '_blank'), 250);
+}
+
+function buildOutfitPrompt() {
+  if (!(state.wardrobe || []).length) { toast('Önce parça ekle'); return; }
+  const p = `${MODA_PERSONA}
+
+${modaProfileBlock()}
+
+## GÖREV
+Yukarıdaki gardıroptaki parçalarla kombinler kur.
+
+Kurallar:
+- SONUÇ → OPSİYON → AKSİYON formatı.
+- 4-5 farklı kombin ver. Her kombin için: ortam (ofis / toplantı / akşam / hafta sonu), parça listesi (sadece gardıropta OLAN parçalardan), kısa "neden çalışıyor" notu.
+- Renk + oran uyumunu somut açıkla (ör: "lacivert blazer + krem pantolon, taba çanta ile bağla").
+- Sadece elimdeki parçaları kullan, hayali parça uydurma.
+- En sonda: gardıropta tekrar eden / eksik kalan 1-2 noktayı kısaca işaretle.`;
+  copyOpenClaude(p);
+}
+
+function buildShoppingPrompt() {
+  if (!(state.wardrobe || []).length) { toast('Önce parça ekle'); return; }
+  const p = `${MODA_PERSONA}
+
+${modaProfileBlock()}
+
+## MARKA EVRENİM (öneriler bunlarla sınırlı)
+- Günlük / high-street: Mango, H&M, Koton, Marks & Spencer, Trendyol satıcıları
+- Premium TR: Beymen, Massimo Dutti, İpekyol, Rue, Nocturne, Atelier Aliz
+- Lüks (çanta & ayakkabı): Hermès, Prada
+
+## GÖREV
+Mevcut gardırobu DAHA İYİ kombinlenebilir hale getirmek için alışveriş önerisi ver.
+
+Kurallar:
+- SONUÇ → OPSİYON → AKSİYON formatı.
+- Önce gardıroptaki BOŞLUĞU teşhis et (ör: "tüm üstler koyu, nötr açık bir bluz yok").
+- Max 5-6 somut parça öner. Her biri için: ne (parça + renk), hangi marka tier'ı, mevcut hangi parçalarla en az 2 yeni kombin açar, tahmini bütçe bandı.
+- Önceliklendir: önce 2-3 "kilit parça" (en çok kombin açan), sonra "isteğe bağlı".
+- Çanta/ayakkabıda lüks (Hermès/Prada) ile uygun alternatifi yan yana ver — ROI dürüst olsun.
+- Sadece gerçekten kombin açan parçayı öner; "trend diye al" deme.`;
+  copyOpenClaude(p);
 }
 
 /* ================= AYAR ================= */
