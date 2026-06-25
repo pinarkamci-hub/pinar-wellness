@@ -1217,6 +1217,35 @@ tailwind.config = {
     <div id="wardrobeList" class="space-y-4"></div>
   </div>
 
+  <!-- Alışveriş Listem -->
+  <div class="mb-6">
+    <div class="flex items-center justify-between mb-3">
+      <h3 class="font-serif text-xl text-forest">🛍 Alışveriş Listem</h3>
+      <span id="shCount" class="text-[10px] text-clay uppercase tracking-widest"></span>
+    </div>
+    <p class="text-[11px] text-forest/55 mb-3 leading-snug">Beğendiğin ürünü ekle — marka, görsel ve satın alma linkiyle. Almak istediklerin tek yerde.</p>
+
+    <div class="bg-white rounded-3xl p-6 glow mb-4">
+      <input id="shName" type="text" placeholder="Ürün adı (ör: yün blazer)" class="w-full bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none mb-2">
+      <input id="shBrand" type="text" placeholder="Marka (ör: Max Mara)" class="w-full bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none mb-2">
+      <input id="shLink" type="url" inputmode="url" placeholder="Satın alma linki (ürün sayfası)" class="w-full bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none mb-2">
+      <div class="grid grid-cols-2 gap-2 mb-2">
+        <label class="bg-cream/50 text-forest font-sans text-[11px] uppercase tracking-wider px-4 py-3 rounded-full text-center cursor-pointer hover:bg-cream/70 transition">
+          📷 Çek
+          <input id="shPhotoCam" type="file" accept="image/*" capture="environment" onchange="onWishPhotoPick(event)" class="hidden">
+        </label>
+        <label class="bg-cream/50 text-forest font-sans text-[11px] uppercase tracking-wider px-4 py-3 rounded-full text-center cursor-pointer hover:bg-cream/70 transition">
+          🖼 Galeriden
+          <input id="shPhotoGal" type="file" accept="image/*" onchange="onWishPhotoPick(event)" class="hidden">
+        </label>
+      </div>
+      <div id="shPhotoPreview" class="flex items-center gap-2 min-w-0 mb-3"></div>
+      <button onclick="addWishItem()" class="w-full bg-clay text-ivory font-sans text-xs uppercase tracking-widest py-3 rounded-full">+ Listeye ekle</button>
+    </div>
+
+    <div id="wishlistList" class="grid grid-cols-2 gap-3"></div>
+  </div>
+
   <!-- Aksiyonlar -->
   <div class="bg-forest text-ivory rounded-3xl p-6 mb-5 glow">
     <p class="text-clay-light text-[10px] uppercase tracking-widest mb-1">Daha derin öneri</p>
@@ -1314,10 +1343,11 @@ let state = (() => {
       aesCat: s.aesCat || 'face',
       personalContext: s.personalContext || '44 yaş, kadın, Restar Group CEO (otomotiv/savunma). Yüksek iş yoğunluğu, kronik stres, perimenopause penceresi. Doğa ve deniz tutkusu. Hızlı + net + aksiyon odaklı.',
       wardrobe: s.wardrobe || [],
+      wishlist: s.wishlist || [],
       styleProfile: s.styleProfile || '',
       bodyProfile: s.bodyProfile || {},
     };
-  } catch { return { days: {}, shopBought: {}, aesCat: 'face', personalContext: '', wardrobe: [], styleProfile: '', bodyProfile: {} }; }
+  } catch { return { days: {}, shopBought: {}, aesCat: 'face', personalContext: '', wardrobe: [], wishlist: [], styleProfile: '', bodyProfile: {} }; }
 })();
 function save() {
   try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
@@ -2070,10 +2100,8 @@ function swatchHex(item){
   return COLOR_MAP[c] || '#cbb8d4';
 }
 
-/* --- Fotoğraf seçimi: sıkıştır + baskın rengi anla --- */
-let pendingPhoto = null, pendingHex = null;
-function onPhotoPick(e){
-  const f = e.target.files[0]; if (!f) return;
+/* --- Fotoğraf işleme: sıkıştır + baskın rengi anla --- */
+function processPhoto(file, done){
   const r = new FileReader();
   r.onload = ev => {
     const img = new Image();
@@ -2084,33 +2112,52 @@ function onPhotoPick(e){
       c.height = Math.max(1, Math.round(img.height*sc));
       const ctx = c.getContext('2d');
       ctx.drawImage(img, 0, 0, c.width, c.height);
-      pendingPhoto = c.toDataURL('image/jpeg', 0.7);
+      const dataUrl = c.toDataURL('image/jpeg', 0.7);
       const d = ctx.getImageData(0,0,c.width,c.height).data;
-      // Merkez kutuyu örnekle, açık fonu (beyaz/stüdyo) ele
       const x0=Math.floor(c.width*0.2), x1=Math.ceil(c.width*0.8);
       const y0=Math.floor(c.height*0.2), y1=Math.ceil(c.height*0.8);
       let R=0,G=0,B=0,n=0;
       for (let y=y0;y<y1;y++) for (let x=x0;x<x1;x++){
         const i=(y*c.width+x)*4; if (d[i+3]<200) continue;
-        const r=d[i],g=d[i+1],b=d[i+2];
-        if (r>238&&g>238&&b>238) continue;     // beyaz fonu atla
-        R+=r;G+=g;B+=b;n++;
+        const r2=d[i],g2=d[i+1],b2=d[i+2];
+        if (r2>238&&g2>238&&b2>238) continue;     // beyaz fonu atla
+        R+=r2;G+=g2;B+=b2;n++;
       }
       if (!n){ for (let i=0;i<d.length;i+=4){ if (d[i+3]<200) continue; R+=d[i];G+=d[i+1];B+=d[i+2];n++; } }
-      let name='';
+      let hex=null, name='';
       if (n){ R=Math.round(R/n);G=Math.round(G/n);B=Math.round(B/n);
-        pendingHex = '#'+[R,G,B].map(x=>x.toString(16).padStart(2,'0')).join('');
+        hex = '#'+[R,G,B].map(x=>x.toString(16).padStart(2,'0')).join('');
         name = nearestColorName(R,G,B);
-        const cf = document.getElementById('wColor');
-        if (!cf.value.trim()) cf.value = name;
       }
-      document.getElementById('wPhotoPreview').innerHTML =
-        `<img src="${pendingPhoto}" class="w-12 h-12 object-cover rounded-lg flex-shrink-0">
-         <span class="text-[11px] text-forest/60 truncate">Algılanan renk: <b>${name||'—'}</b></span>`;
+      done({ dataUrl, hex, name });
     };
     img.src = ev.target.result;
   };
-  r.readAsDataURL(f);
+  r.readAsDataURL(file);
+}
+
+let pendingPhoto = null, pendingHex = null;
+function onPhotoPick(e){
+  const f = e.target.files[0]; if (!f) return;
+  processPhoto(f, ({dataUrl, hex, name}) => {
+    pendingPhoto = dataUrl; pendingHex = hex;
+    const cf = document.getElementById('wColor');
+    if (cf && !cf.value.trim()) cf.value = name;
+    document.getElementById('wPhotoPreview').innerHTML =
+      `<img src="${dataUrl}" class="w-12 h-12 object-cover rounded-lg flex-shrink-0">
+       <span class="text-[11px] text-forest/60 truncate">Algılanan renk: <b>${name||'—'}</b></span>`;
+  });
+}
+
+let pendingWishPhoto = null;
+function onWishPhotoPick(e){
+  const f = e.target.files[0]; if (!f) return;
+  processPhoto(f, ({dataUrl}) => {
+    pendingWishPhoto = dataUrl;
+    document.getElementById('shPhotoPreview').innerHTML =
+      `<img src="${dataUrl}" class="w-12 h-12 object-cover rounded-lg flex-shrink-0">
+       <span class="text-[11px] text-forest/60 truncate">Görsel eklendi ✓</span>`;
+  });
 }
 
 function renderModa() {
@@ -2141,6 +2188,9 @@ function renderModa() {
     gw.classList.add('hidden');
     document.getElementById('photoGallery').innerHTML = '';
   }
+
+  // Alışveriş listem
+  renderWishlist();
 
   // Gardırop
   const list = document.getElementById('wardrobeList');
@@ -2256,8 +2306,66 @@ function deleteWardrobeItem(id) {
 }
 
 function openPhoto(id) {
-  const it = (state.wardrobe || []).find(x => x.id === id);
+  const it = (state.wardrobe || []).concat(state.wishlist || []).find(x => x.id === id);
   if (it && it.photo) openLightbox(it.photo);
+}
+
+/* --- Alışveriş Listem (wishlist) --- */
+function renderWishlist() {
+  const el = document.getElementById('wishlistList');
+  const items = state.wishlist || [];
+  document.getElementById('shCount').textContent = items.length ? `${items.length} ürün` : '';
+  el.innerHTML = items.length
+    ? items.map(wishCard).join('')
+    : `<p class="col-span-2 text-xs text-forest/50 italic bg-cream/30 rounded-2xl p-5 text-center">Liste boş. Beğendiğin ürünü marka, görsel ve linkiyle ekle.</p>`;
+}
+
+function wishCard(item) {
+  const img = item.photo
+    ? `<img src="${item.photo}" onclick="openPhoto('${item.id}')" class="w-full h-40 object-cover cursor-zoom-in">`
+    : `<div class="w-full h-40 bg-cream/40 flex items-center justify-center text-forest/30 font-serif text-3xl">🛍</div>`;
+  const buy = item.link
+    ? `<a href="${escAttr(item.link)}" target="_blank" rel="noopener" class="block text-center bg-clay text-ivory font-sans uppercase tracking-widest text-[10px] py-2.5 rounded-full">↗ Satın al</a>`
+    : `<p class="text-center text-[10px] text-forest/40 italic py-2">link yok</p>`;
+  return `<div class="bg-white rounded-2xl overflow-hidden glow flex flex-col">
+    ${img}
+    <div class="p-3 flex-1 flex flex-col">
+      ${item.brand ? `<p class="text-[10px] text-clay uppercase tracking-wider truncate">${item.brand}</p>` : ''}
+      <p class="font-serif text-sm text-forest leading-tight mt-0.5 mb-3">${item.name}</p>
+      <div class="mt-auto flex items-center gap-2">
+        <div class="flex-1 min-w-0">${buy}</div>
+        <button onclick="deleteWishItem('${item.id}')" class="flex-shrink-0 text-forest/30 hover:text-clay w-8 h-8 rounded-full hover:bg-cream/50 transition">🗑</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function addWishItem() {
+  const name = document.getElementById('shName').value.trim();
+  if (!name) { toast('Ürün adı gir'); return; }
+  if (!Array.isArray(state.wishlist)) state.wishlist = [];
+  state.wishlist.push({
+    id: 'sh' + Date.now() + Math.floor(Math.random()*1000),
+    name,
+    brand: document.getElementById('shBrand').value.trim(),
+    link: document.getElementById('shLink').value.trim(),
+    photo: pendingWishPhoto || null,
+  });
+  save();
+  document.getElementById('shName').value = '';
+  document.getElementById('shBrand').value = '';
+  document.getElementById('shLink').value = '';
+  document.getElementById('shPhotoCam').value = '';
+  document.getElementById('shPhotoGal').value = '';
+  document.getElementById('shPhotoPreview').innerHTML = '';
+  pendingWishPhoto = null;
+  renderWishlist();
+  toast('Eklendi ✓');
+}
+
+function deleteWishItem(id) {
+  state.wishlist = (state.wishlist || []).filter(i => i.id !== id);
+  save(); renderWishlist();
 }
 function openLightbox(src) {
   const lb = document.getElementById('lightbox');
