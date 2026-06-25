@@ -1149,6 +1149,37 @@ tailwind.config = {
     <p class="mt-3 text-xs text-forest/60 italic leading-relaxed">Parçalarını ekle (foto koyabilirsin) → otomatik kombin çıksın. Her şey cihazında kayıtlı kalır.</p>
   </div>
 
+  <!-- Nereye gidiyorsun -->
+  <div class="bg-forest text-ivory rounded-3xl p-6 mb-6 glow">
+    <p class="text-clay-light text-[10px] uppercase tracking-widest mb-1">Etkinlik / yer</p>
+    <p class="font-serif text-xl mb-3">Nereye gidiyorsun?</p>
+    <input id="occasion" type="text" placeholder="Örn: iş toplantısı · akşam yemeği · Bodrum hafta sonu · davet" class="w-full bg-forest-light/50 rounded-2xl p-3 outline-none text-sm text-ivory placeholder-ivory/40 mb-3">
+    <button onclick="buildOccasionPrompt()" class="w-full bg-clay text-ivory font-sans uppercase tracking-widest text-xs py-3 rounded-full">◈ Gardırobumdan + alışveriş öner</button>
+    <p class="text-ivory/50 text-[11px] mt-3 leading-snug">Önce eldeki parçalardan kombin kurar, sonra eksikleri marka evreninden tamamlar — boyuna/kilona uygun, dik gösteren siluetle.</p>
+  </div>
+
+  <!-- Ölçülerim -->
+  <div class="bg-white rounded-3xl p-6 glow mb-5">
+    <h3 class="font-serif text-xl text-forest mb-1">Ölçülerim</h3>
+    <p class="text-[11px] text-forest/55 mb-3 leading-snug">Bir kez gir — öneriler seni dik/uzun gösterecek, hacim eklemeyecek şekilde kurulur.</p>
+    <div class="grid grid-cols-3 gap-2 mb-2">
+      <input id="bHeight" type="number" inputmode="numeric" placeholder="Boy (cm)" class="bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none">
+      <input id="bWeight" type="number" inputmode="numeric" placeholder="Kilo (kg)" class="bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none">
+      <input id="bSize" type="text" placeholder="Beden (38)" class="bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none">
+    </div>
+    <select id="bShape" class="w-full bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none mb-2">
+      <option value="">Vücut tipi seç (opsiyonel)</option>
+      <option value="Kum saati">Kum saati (bel belirgin)</option>
+      <option value="Armut">Armut (alt yarı dolgun)</option>
+      <option value="Elma">Elma (orta bölge dolgun)</option>
+      <option value="Dikdörtgen">Dikdörtgen (düz hat)</option>
+      <option value="Ters üçgen">Ters üçgen (üst yarı geniş)</option>
+      <option value="?">Emin değilim</option>
+    </select>
+    <input id="bNotes" type="text" placeholder="Kaçındığım / gizlemek istediğim — opsiyonel" class="w-full bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none mb-3">
+    <button onclick="saveBodyProfile()" class="bg-forest text-ivory font-sans text-xs uppercase tracking-wider px-5 py-2 rounded-full">Kaydet</button>
+  </div>
+
   <!-- Otomatik öneri -->
   <div class="mb-6">
     <div class="flex items-center justify-between mb-3">
@@ -1266,8 +1297,9 @@ let state = (() => {
       personalContext: s.personalContext || '44 yaş, kadın, Restar Group CEO (otomotiv/savunma). Yüksek iş yoğunluğu, kronik stres, perimenopause penceresi. Doğa ve deniz tutkusu. Hızlı + net + aksiyon odaklı.',
       wardrobe: s.wardrobe || [],
       styleProfile: s.styleProfile || '',
+      bodyProfile: s.bodyProfile || {},
     };
-  } catch { return { days: {}, shopBought: {}, aesCat: 'face', personalContext: '', wardrobe: [], styleProfile: '' }; }
+  } catch { return { days: {}, shopBought: {}, aesCat: 'face', personalContext: '', wardrobe: [], styleProfile: '', bodyProfile: {} }; }
 })();
 function save() {
   try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
@@ -2036,8 +2068,17 @@ function onPhotoPick(e){
       ctx.drawImage(img, 0, 0, c.width, c.height);
       pendingPhoto = c.toDataURL('image/jpeg', 0.7);
       const d = ctx.getImageData(0,0,c.width,c.height).data;
+      // Merkez kutuyu örnekle, açık fonu (beyaz/stüdyo) ele
+      const x0=Math.floor(c.width*0.2), x1=Math.ceil(c.width*0.8);
+      const y0=Math.floor(c.height*0.2), y1=Math.ceil(c.height*0.8);
       let R=0,G=0,B=0,n=0;
-      for (let i=0;i<d.length;i+=4){ if (d[i+3]<200) continue; R+=d[i];G+=d[i+1];B+=d[i+2];n++; }
+      for (let y=y0;y<y1;y++) for (let x=x0;x<x1;x++){
+        const i=(y*c.width+x)*4; if (d[i+3]<200) continue;
+        const r=d[i],g=d[i+1],b=d[i+2];
+        if (r>238&&g>238&&b>238) continue;     // beyaz fonu atla
+        R+=r;G+=g;B+=b;n++;
+      }
+      if (!n){ for (let i=0;i<d.length;i+=4){ if (d[i+3]<200) continue; R+=d[i];G+=d[i+1];B+=d[i+2];n++; } }
       let name='';
       if (n){ R=Math.round(R/n);G=Math.round(G/n);B=Math.round(B/n);
         pendingHex = '#'+[R,G,B].map(x=>x.toString(16).padStart(2,'0')).join('');
@@ -2057,6 +2098,9 @@ function onPhotoPick(e){
 function renderModa() {
   const sp = document.getElementById('styleProfile');
   if (sp) sp.value = state.styleProfile || '';
+  const b = state.bodyProfile || {};
+  const setv = (id,v) => { const el=document.getElementById(id); if (el) el.value = v ?? ''; };
+  setv('bHeight', b.h); setv('bWeight', b.w); setv('bSize', b.size); setv('bShape', b.shape); setv('bNotes', b.notes);
   const items = state.wardrobe || [];
   document.getElementById('wCount').textContent = items.length ? `${items.length} parça` : '';
 
@@ -2180,6 +2224,62 @@ function saveStyleProfile() {
   save(); toast('Kaydedildi ✓');
 }
 
+function saveBodyProfile() {
+  state.bodyProfile = {
+    h: document.getElementById('bHeight').value.trim(),
+    w: document.getElementById('bWeight').value.trim(),
+    size: document.getElementById('bSize').value.trim(),
+    shape: document.getElementById('bShape').value,
+    notes: document.getElementById('bNotes').value.trim(),
+  };
+  save(); toast('Ölçüler kaydedildi ✓');
+}
+
+function bodyBlock() {
+  const b = state.bodyProfile || {};
+  const parts = [];
+  if (b.h) parts.push(`boy ${b.h} cm`);
+  if (b.w) parts.push(`kilo ${b.w} kg`);
+  if (b.size) parts.push(`beden ${b.size}`);
+  if (b.shape && b.shape !== '?') parts.push(`vücut tipi ${b.shape}`);
+  return `## ÖLÇÜLERİM\n${parts.length ? parts.join(', ') : '(ölçü girilmemiş)'}${b.notes ? `\nKaçındığım: ${b.notes}` : ''}`;
+}
+
+const FLATTER_RULES = `## GÖRÜNÜM KURALI (ZORUNLU)
+- Beni ASLA şişman / geniş / kısa gösterecek parça önerme.
+- Boyuma ve kiloma oranlı, dik ve uzun gösteren siluet kur.
+- Tercih et: dikey hatlar, bel vurgusu, dökümlü kumaş, V/dikey yaka, tek-renk blok, doğru pantolon boyu.
+- Kaçın: hacim ekleyen oversize, yatay çizgi/iri desen, parlak-yapışkan kumaş, balon/yüksek gramaj kesim, yanlış bel hattı.`;
+
+const BRANDS_BLOCK = `## MARKA EVRENİM (alışveriş önerileri bunlarla sınırlı)
+- Günlük / high-street: Mango, H&M, Koton, Marks & Spencer, Trendyol satıcıları
+- Premium TR: Beymen, Massimo Dutti, İpekyol, Rue, Nocturne, Atelier Aliz
+- Lüks (çanta & ayakkabı): Hermès, Prada`;
+
+function buildOccasionPrompt() {
+  if (!(state.wardrobe || []).length) { toast('Önce parça ekle'); return; }
+  const occ = (document.getElementById('occasion').value || '').trim();
+  if (!occ) { toast('Nereye gideceğini yaz'); return; }
+  const p = `${MODA_PERSONA}
+
+${bodyBlock()}
+
+${modaProfileBlock()}
+
+${BRANDS_BLOCK}
+
+## ETKİNLİK
+${occ}
+
+${FLATTER_RULES}
+
+## GÖREV
+"${occ}" için beni hazırla. SONUÇ → OPSİYON → AKSİYON formatı, kısa ve net.
+1) Önce GARDIROBUMDAN en iyi kombini kur — sadece elimdeki parçalar, renk + oran uyumunu somut açıkla, neden dik/uzun gösterdiğini söyle.
+2) Sonra bu kombini tamamlayacak / yükseltecek EKSİK 1-3 parçayı marka evrenimden öner — ne, renk, hangi marka tier'ı, tahmini bütçe. Sadece gerçekten kombin açan parçayı öner.`;
+  copyOpenClaude(p);
+}
+
 function wardrobeText() {
   const items = state.wardrobe || [];
   if (!items.length) return '(gardırop boş)';
@@ -2210,14 +2310,18 @@ function buildOutfitPrompt() {
   if (!(state.wardrobe || []).length) { toast('Önce parça ekle'); return; }
   const p = `${MODA_PERSONA}
 
+${bodyBlock()}
+
 ${modaProfileBlock()}
+
+${FLATTER_RULES}
 
 ## GÖREV
 Yukarıdaki gardıroptaki parçalarla kombinler kur.
 
 Kurallar:
 - SONUÇ → OPSİYON → AKSİYON formatı.
-- 4-5 farklı kombin ver. Her kombin için: ortam (ofis / toplantı / akşam / hafta sonu), parça listesi (sadece gardıropta OLAN parçalardan), kısa "neden çalışıyor" notu.
+- 4-5 farklı kombin ver. Her kombin için: ortam (ofis / toplantı / akşam / hafta sonu), parça listesi (sadece gardıropta OLAN parçalardan), kısa "neden çalışıyor + neden beni dik/uzun gösterir" notu.
 - Renk + oran uyumunu somut açıkla (ör: "lacivert blazer + krem pantolon, taba çanta ile bağla").
 - Sadece elimdeki parçaları kullan, hayali parça uydurma.
 - En sonda: gardıropta tekrar eden / eksik kalan 1-2 noktayı kısaca işaretle.`;
@@ -2228,12 +2332,13 @@ function buildShoppingPrompt() {
   if (!(state.wardrobe || []).length) { toast('Önce parça ekle'); return; }
   const p = `${MODA_PERSONA}
 
+${bodyBlock()}
+
 ${modaProfileBlock()}
 
-## MARKA EVRENİM (öneriler bunlarla sınırlı)
-- Günlük / high-street: Mango, H&M, Koton, Marks & Spencer, Trendyol satıcıları
-- Premium TR: Beymen, Massimo Dutti, İpekyol, Rue, Nocturne, Atelier Aliz
-- Lüks (çanta & ayakkabı): Hermès, Prada
+${BRANDS_BLOCK}
+
+${FLATTER_RULES}
 
 ## GÖREV
 Mevcut gardırobu DAHA İYİ kombinlenebilir hale getirmek için alışveriş önerisi ver.
@@ -2244,6 +2349,7 @@ Kurallar:
 - Max 5-6 somut parça öner. Her biri için: ne (parça + renk), hangi marka tier'ı, mevcut hangi parçalarla en az 2 yeni kombin açar, tahmini bütçe bandı.
 - Önceliklendir: önce 2-3 "kilit parça" (en çok kombin açan), sonra "isteğe bağlı".
 - Çanta/ayakkabıda lüks (Hermès/Prada) ile uygun alternatifi yan yana ver — ROI dürüst olsun.
+- Önerdiğin her parça beni dik/uzun gösteren siluete hizmet etmeli; şişman gösterecek kesim önerme.
 - Sadece gerçekten kombin açan parçayı öner; "trend diye al" deme.`;
   copyOpenClaude(p);
 }
