@@ -1155,29 +1155,7 @@ tailwind.config = {
     <p class="font-serif text-xl mb-3">Nereye gidiyorsun?</p>
     <input id="occasion" type="text" placeholder="Örn: iş toplantısı · akşam yemeği · Bodrum hafta sonu · davet" class="w-full bg-forest-light/50 rounded-2xl p-3 outline-none text-sm text-ivory placeholder-ivory/40 mb-3">
     <button onclick="buildOccasionPrompt()" class="w-full bg-clay text-ivory font-sans uppercase tracking-widest text-xs py-3 rounded-full">◈ Gardırobumdan + alışveriş öner</button>
-    <p class="text-ivory/50 text-[11px] mt-3 leading-snug">Önce eldeki parçalardan kombin kurar, sonra eksikleri marka evreninden tamamlar — boyuna/kilona uygun, dik gösteren siluetle.</p>
-  </div>
-
-  <!-- Ölçülerim -->
-  <div class="bg-white rounded-3xl p-6 glow mb-5">
-    <h3 class="font-serif text-xl text-forest mb-1">Ölçülerim</h3>
-    <p class="text-[11px] text-forest/55 mb-3 leading-snug">Bir kez gir — öneriler seni dik/uzun gösterecek, hacim eklemeyecek şekilde kurulur.</p>
-    <div class="grid grid-cols-3 gap-2 mb-2">
-      <input id="bHeight" type="number" inputmode="numeric" placeholder="Boy (cm)" class="bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none">
-      <input id="bWeight" type="number" inputmode="numeric" placeholder="Kilo (kg)" class="bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none">
-      <input id="bSize" type="text" placeholder="Beden (38)" class="bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none">
-    </div>
-    <select id="bShape" class="w-full bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none mb-2">
-      <option value="">Vücut tipi seç (opsiyonel)</option>
-      <option value="Kum saati">Kum saati (bel belirgin)</option>
-      <option value="Armut">Armut (alt yarı dolgun)</option>
-      <option value="Elma">Elma (orta bölge dolgun)</option>
-      <option value="Dikdörtgen">Dikdörtgen (düz hat)</option>
-      <option value="Ters üçgen">Ters üçgen (üst yarı geniş)</option>
-      <option value="?">Emin değilim</option>
-    </select>
-    <input id="bNotes" type="text" placeholder="Kaçındığım / gizlemek istediğim — opsiyonel" class="w-full bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none mb-3">
-    <button onclick="saveBodyProfile()" class="bg-forest text-ivory font-sans text-xs uppercase tracking-wider px-5 py-2 rounded-full">Kaydet</button>
+    <p class="text-ivory/50 text-[11px] mt-3 leading-snug">Önce eldeki parçalardan kombin kurar, sonra eksikleri marka evreninden tamamlar — boyuna/kilona uygun, dik gösteren siluetle. <span class="text-clay-light">Ölçülerini ⚙ Ayarlar'dan gir.</span></p>
   </div>
 
   <!-- Otomatik öneri -->
@@ -1265,6 +1243,27 @@ tailwind.config = {
     <p class="text-xs text-forest/60 mb-3">Koç bu bilgileri kullanır.</p>
     <textarea id="personalContext" rows="4" class="w-full bg-cream/30 rounded-2xl p-3 outline-none text-sm resize-none"></textarea>
     <button onclick="savePersonalContext()" class="mt-3 bg-forest text-ivory font-sans text-xs uppercase tracking-wider px-5 py-2 rounded-full">Kaydet</button>
+  </div>
+
+  <div class="bg-white rounded-3xl p-6 glow mb-4">
+    <h3 class="font-serif text-lg text-forest mb-1">Ölçülerim</h3>
+    <p class="text-[11px] text-forest/55 mb-3 leading-snug">Moda önerileri bunu kullanır — seni dik/uzun gösterecek, hacim eklemeyecek şekilde.</p>
+    <div class="grid grid-cols-3 gap-2 mb-2">
+      <input id="bHeight" type="number" inputmode="numeric" placeholder="Boy (cm)" class="bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none">
+      <input id="bWeight" type="number" inputmode="numeric" placeholder="Kilo (kg)" class="bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none">
+      <input id="bSize" type="text" placeholder="Beden (38)" class="bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none">
+    </div>
+    <select id="bShape" class="w-full bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none mb-2">
+      <option value="">Vücut tipi seç (opsiyonel)</option>
+      <option value="Kum saati">Kum saati (bel belirgin)</option>
+      <option value="Armut">Armut (alt yarı dolgun)</option>
+      <option value="Elma">Elma (orta bölge dolgun)</option>
+      <option value="Dikdörtgen">Dikdörtgen (düz hat)</option>
+      <option value="Ters üçgen">Ters üçgen (üst yarı geniş)</option>
+      <option value="?">Emin değilim</option>
+    </select>
+    <input id="bNotes" type="text" placeholder="Kaçındığım / gizlemek istediğim — opsiyonel" class="w-full bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none mb-3">
+    <button onclick="saveBodyProfile()" class="bg-forest text-ivory font-sans text-xs uppercase tracking-wider px-5 py-2 rounded-full">Kaydet</button>
   </div>
 
   <div class="bg-white rounded-3xl p-6 glow mb-4">
@@ -2098,9 +2097,6 @@ function onPhotoPick(e){
 function renderModa() {
   const sp = document.getElementById('styleProfile');
   if (sp) sp.value = state.styleProfile || '';
-  const b = state.bodyProfile || {};
-  const setv = (id,v) => { const el=document.getElementById(id); if (el) el.value = v ?? ''; };
-  setv('bHeight', b.h); setv('bWeight', b.w); setv('bSize', b.size); setv('bShape', b.shape); setv('bNotes', b.notes);
   const items = state.wardrobe || [];
   document.getElementById('wCount').textContent = items.length ? `${items.length} parça` : '';
 
@@ -2357,6 +2353,9 @@ Kurallar:
 /* ================= AYAR ================= */
 function renderSettings() {
   document.getElementById('personalContext').value = state.personalContext || '';
+  const b = state.bodyProfile || {};
+  const setv = (id,v) => { const el=document.getElementById(id); if (el) el.value = v ?? ''; };
+  setv('bHeight', b.h); setv('bWeight', b.w); setv('bSize', b.size); setv('bShape', b.shape); setv('bNotes', b.notes);
 }
 function savePersonalContext() {
   state.personalContext = document.getElementById('personalContext').value;
