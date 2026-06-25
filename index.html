@@ -1167,6 +1167,15 @@ tailwind.config = {
     <div id="autoCombos" class="space-y-3"></div>
   </div>
 
+  <!-- Fotoğraflarım -->
+  <div id="photoGalleryWrap" class="mb-6 hidden">
+    <div class="flex items-center justify-between mb-3">
+      <h3 class="font-serif text-xl text-forest">📷 Fotoğraflarım</h3>
+      <span id="galleryCount" class="text-[10px] text-clay uppercase tracking-widest"></span>
+    </div>
+    <div id="photoGallery" class="grid grid-cols-3 gap-2"></div>
+  </div>
+
   <!-- Parça ekle -->
   <div class="bg-white rounded-3xl p-6 glow mb-5">
     <h3 class="font-serif text-xl text-forest mb-3">Parça ekle</h3>
@@ -1183,14 +1192,19 @@ tailwind.config = {
       <input id="wColor" type="text" placeholder="Renk" class="bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none">
     </div>
     <input id="wName" type="text" placeholder="Parça adı (ör: yün blazer)" class="w-full bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none mb-2">
-    <input id="wBrand" type="text" placeholder="Marka — opsiyonel (Massimo Dutti)" class="w-full bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none mb-3">
-    <div class="flex items-center gap-3 mb-3">
-      <label class="flex-shrink-0 bg-cream/50 text-forest font-sans text-[11px] uppercase tracking-wider px-4 py-2.5 rounded-full text-center cursor-pointer">
-        📷 Fotoğraf
-        <input id="wPhoto" type="file" accept="image/*" onchange="onPhotoPick(event)" class="hidden">
+    <input id="wBrand" type="text" placeholder="Marka — opsiyonel (Massimo Dutti)" class="w-full bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none mb-2">
+    <input id="wLink" type="url" inputmode="url" placeholder="Alışveriş linki — opsiyonel (aldığın yer)" class="w-full bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none mb-3">
+    <div class="grid grid-cols-2 gap-2 mb-2">
+      <label class="bg-cream/50 text-forest font-sans text-[11px] uppercase tracking-wider px-4 py-3 rounded-full text-center cursor-pointer hover:bg-cream/70 transition">
+        📷 Çek
+        <input id="wPhotoCam" type="file" accept="image/*" capture="environment" onchange="onPhotoPick(event)" class="hidden">
       </label>
-      <div id="wPhotoPreview" class="flex items-center gap-2 min-w-0"></div>
+      <label class="bg-cream/50 text-forest font-sans text-[11px] uppercase tracking-wider px-4 py-3 rounded-full text-center cursor-pointer hover:bg-cream/70 transition">
+        🖼 Galeriden
+        <input id="wPhotoGal" type="file" accept="image/*" onchange="onPhotoPick(event)" class="hidden">
+      </label>
     </div>
+    <div id="wPhotoPreview" class="flex items-center gap-2 min-w-0 mb-3"></div>
     <button onclick="addWardrobeItem()" class="w-full bg-clay text-ivory font-sans text-xs uppercase tracking-widest py-3 rounded-full">+ Gardıroba ekle</button>
   </div>
 
@@ -1282,6 +1296,11 @@ tailwind.config = {
 </section>
 
 </main>
+
+<!-- Foto büyütme -->
+<div id="lightbox" onclick="closeLightbox()" class="fixed inset-0 z-50 bg-ink/90 hidden items-center justify-center p-6 cursor-zoom-out">
+  <img id="lightboxImg" src="" alt="" class="max-w-full max-h-full rounded-2xl shadow-2xl">
+</div>
 
 <script>
 /* ================= STATE ================= */
@@ -2109,6 +2128,20 @@ function renderModa() {
     auto.innerHTML = combos.map(comboCard).join('');
   }
 
+  // Fotoğraflarım
+  const photos = items.filter(i => i.photo);
+  const gw = document.getElementById('photoGalleryWrap');
+  if (photos.length) {
+    gw.classList.remove('hidden');
+    document.getElementById('galleryCount').textContent = `${photos.length} foto`;
+    document.getElementById('photoGallery').innerHTML = photos.map(i =>
+      `<button onclick="openPhoto('${i.id}')" class="aspect-square rounded-xl overflow-hidden glow"><img src="${i.photo}" class="w-full h-full object-cover"></button>`
+    ).join('');
+  } else {
+    gw.classList.add('hidden');
+    document.getElementById('photoGallery').innerHTML = '';
+  }
+
   // Gardırop
   const list = document.getElementById('wardrobeList');
   if (!items.length) {
@@ -2125,20 +2158,24 @@ function renderModa() {
   }).join('');
 }
 
+function escAttr(s){ return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;'); }
+
 function itemThumb(item, size) {
   const s = size || 'w-12 h-12';
   return item.photo
-    ? `<img src="${item.photo}" class="${s} object-cover rounded-lg flex-shrink-0">`
+    ? `<img src="${item.photo}" onclick="event.stopPropagation();openPhoto('${item.id}')" class="${s} object-cover rounded-lg flex-shrink-0 cursor-zoom-in">`
     : `<span class="${s} rounded-lg flex-shrink-0 inline-block border border-black/5" style="background:${swatchHex(item)}"></span>`;
 }
 
 function wardrobeRow(item) {
   const meta = [item.color, item.brand].filter(Boolean).join(' · ');
+  const link = item.link ? `<a href="${escAttr(item.link)}" target="_blank" rel="noopener" class="text-[11px] text-clay underline mt-1 inline-block truncate max-w-full">↗ Alışveriş linki</a>` : '';
   return `<div class="bg-white rounded-2xl p-3 glow flex items-center gap-3">
     ${itemThumb(item, 'w-14 h-14')}
     <div class="flex-1 min-w-0">
       <p class="font-serif text-sm text-forest leading-tight truncate">${item.name}</p>
       ${meta ? `<p class="text-[11px] text-forest/60 mt-0.5 truncate flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full inline-block flex-shrink-0" style="background:${swatchHex(item)}"></span>${meta}</p>` : ''}
+      ${link}
     </div>
     <button onclick="deleteWardrobeItem('${item.id}')" class="flex-shrink-0 text-forest/30 hover:text-clay text-sm w-8 h-8 rounded-full hover:bg-cream/50 transition">🗑</button>
   </div>`;
@@ -2196,6 +2233,7 @@ function addWardrobeItem() {
     name,
     color: document.getElementById('wColor').value.trim(),
     brand: document.getElementById('wBrand').value.trim(),
+    link: document.getElementById('wLink').value.trim(),
     photo: pendingPhoto || null,
     colorHex: pendingHex || null,
   });
@@ -2203,7 +2241,9 @@ function addWardrobeItem() {
   document.getElementById('wName').value = '';
   document.getElementById('wColor').value = '';
   document.getElementById('wBrand').value = '';
-  document.getElementById('wPhoto').value = '';
+  document.getElementById('wLink').value = '';
+  document.getElementById('wPhotoCam').value = '';
+  document.getElementById('wPhotoGal').value = '';
   document.getElementById('wPhotoPreview').innerHTML = '';
   pendingPhoto = null; pendingHex = null;
   renderModa();
@@ -2213,6 +2253,21 @@ function addWardrobeItem() {
 function deleteWardrobeItem(id) {
   state.wardrobe = (state.wardrobe || []).filter(i => i.id !== id);
   save(); renderModa();
+}
+
+function openPhoto(id) {
+  const it = (state.wardrobe || []).find(x => x.id === id);
+  if (it && it.photo) openLightbox(it.photo);
+}
+function openLightbox(src) {
+  const lb = document.getElementById('lightbox');
+  document.getElementById('lightboxImg').src = src;
+  lb.classList.remove('hidden'); lb.classList.add('flex');
+}
+function closeLightbox() {
+  const lb = document.getElementById('lightbox');
+  lb.classList.add('hidden'); lb.classList.remove('flex');
+  document.getElementById('lightboxImg').src = '';
 }
 
 function saveStyleProfile() {
