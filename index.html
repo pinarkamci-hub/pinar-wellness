@@ -1225,9 +1225,9 @@ tailwind.config = {
   <details class="bg-cream/40 rounded-2xl p-5">
     <summary class="font-serif text-forest cursor-pointer text-sm">⚘ Alışveriş marka evrenim</summary>
     <div class="mt-3 space-y-2 text-xs text-forest/80 font-sans leading-snug">
-      <p><span class="text-clay uppercase tracking-widest text-[9px]">Günlük · High-street</span><br>Mango · H&M · Koton · Marks &amp; Spencer · Trendyol satıcıları</p>
-      <p><span class="text-clay uppercase tracking-widest text-[9px]">Premium TR</span><br>Beymen · Massimo Dutti · İpekyol · Rue · Nocturne · Atelier Aliz</p>
-      <p><span class="text-clay uppercase tracking-widest text-[9px]">Lüks · Çanta &amp; Ayakkabı</span><br>Hermès · Prada</p>
+      <p><span class="text-clay uppercase tracking-widest text-[9px]">Günlük · High-street</span><br>Mango · H&M · Koton · Marks &amp; Spencer · Uniqlo · COS · Trendyol satıcıları</p>
+      <p><span class="text-clay uppercase tracking-widest text-[9px]">Premium · Tailoring &amp; Çağdaş</span><br>Beymen · Massimo Dutti · Network · Theory · Sandro · Maje · Sézane · İpekyol · Rue · Nocturne · Atelier Aliz · Vakko · Raisa&amp;Vanessa</p>
+      <p><span class="text-clay uppercase tracking-widest text-[9px]">Lüks</span><br>Max Mara · Loro Piana · Brunello Cucinelli · Hermès · Prada <span class="text-forest/50">(çanta &amp; ayakkabı)</span></p>
     </div>
   </details>
 </section>
@@ -2248,9 +2248,9 @@ const FLATTER_RULES = `## GÖRÜNÜM KURALI (ZORUNLU)
 - Kaçın: hacim ekleyen oversize, yatay çizgi/iri desen, parlak-yapışkan kumaş, balon/yüksek gramaj kesim, yanlış bel hattı.`;
 
 const BRANDS_BLOCK = `## MARKA EVRENİM (alışveriş önerileri bunlarla sınırlı)
-- Günlük / high-street: Mango, H&M, Koton, Marks & Spencer, Trendyol satıcıları
-- Premium TR: Beymen, Massimo Dutti, İpekyol, Rue, Nocturne, Atelier Aliz
-- Lüks (çanta & ayakkabı): Hermès, Prada`;
+- Günlük / high-street: Mango, H&M, Koton, Marks & Spencer, Uniqlo, COS, Trendyol satıcıları
+- Premium · tailoring & çağdaş: Beymen, Massimo Dutti, Network, Theory, Sandro, Maje, Sézane, İpekyol, Rue, Nocturne, Atelier Aliz, Vakko, Raisa&Vanessa
+- Lüks: Max Mara, Loro Piana, Brunello Cucinelli, Hermès, Prada (çanta & ayakkabı)`;
 
 function buildOccasionPrompt() {
   if (!(state.wardrobe || []).length) { toast('Önce parça ekle'); return; }
