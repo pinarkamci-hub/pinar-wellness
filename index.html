@@ -1225,9 +1225,16 @@ tailwind.config = {
       <span id="shCount" class="text-[10px] text-clay uppercase tracking-widest"></span>
     </div>
 
-    <!-- Senin için seçtiğim kapsül -->
+    <!-- Linkli kombin önerisi -->
     <details open class="bg-cream/30 rounded-3xl p-5 mb-5">
-      <summary class="font-serif text-forest cursor-pointer text-sm">✦ Senin için seçtiğim kapsül liste</summary>
+      <summary class="font-serif text-forest cursor-pointer text-sm">◈ Hazır kombin — linkli (satın al)</summary>
+      <p class="text-[11px] text-forest/55 mt-2 mb-4 leading-snug">Komple kombinler. Her parçanın <b>Ara →</b> linki Trendyol'da o ürünü açar. Beğenirsen tüm kombini listene ekle.</p>
+      <div id="linkCombos" class="space-y-3"></div>
+    </details>
+
+    <!-- Senin için seçtiğim kapsül -->
+    <details class="bg-cream/30 rounded-3xl p-5 mb-5">
+      <summary class="font-serif text-forest cursor-pointer text-sm">✦ Tek tek kapsül parçalar</summary>
       <p class="text-[11px] text-forest/55 mt-2 mb-4 leading-snug">Boyuna/kilona uygun, dik gösteren parçalar — marka evreninden. Beğendiğini <b>+ Ekle</b> ile listene al.</p>
       <div id="suggestedBuys" class="space-y-2.5"></div>
     </details>
@@ -1346,25 +1353,49 @@ tailwind.config = {
 <script>
 /* ================= STATE ================= */
 const STORAGE_KEY = 'pk_wellness_v2';
-let state = (() => {
-  try {
-    const s = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-    return {
-      days: s.days || {},
-      shopBought: s.shopBought || {},
-      aesCat: s.aesCat || 'face',
-      personalContext: s.personalContext || '44 yaş, kadın, Restar Group CEO (otomotiv/savunma). Yüksek iş yoğunluğu, kronik stres, perimenopause penceresi. Doğa ve deniz tutkusu. Hızlı + net + aksiyon odaklı.',
-      wardrobe: s.wardrobe || [],
-      wishlist: s.wishlist || [],
-      styleProfile: s.styleProfile || '',
-      bodyProfile: s.bodyProfile || {},
-    };
-  } catch { return { days: {}, shopBought: {}, aesCat: 'face', personalContext: '', wardrobe: [], wishlist: [], styleProfile: '', bodyProfile: {} }; }
-})();
-function save() {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
-  catch (e) { try { toast('Depolama doldu — birkaç fotoğrafı sil'); } catch {} }
+const BACKUP_KEY = 'pk_wellness_v2_bak';
+
+function parseStore(k){ try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch { return null; } }
+function hasItems(o){ return o && ((o.wardrobe && o.wardrobe.length) || (o.wishlist && o.wishlist.length)); }
+
+// Fotoğrafsız hafif yedek — kota dolsa bile parça LİSTESİ asla kaybolmaz
+function slimBackup(st){
+  const strip = arr => (arr || []).map(({ photo, ...rest }) => rest);
+  return JSON.stringify({
+    wardrobe: strip(st.wardrobe), wishlist: strip(st.wishlist),
+    styleProfile: st.styleProfile, bodyProfile: st.bodyProfile,
+    personalContext: st.personalContext, days: st.days,
+    shopBought: st.shopBought, aesCat: st.aesCat,
+  });
 }
+
+let state = (() => {
+  let s = parseStore(STORAGE_KEY);
+  const bak = parseStore(BACKUP_KEY);
+  // Ana veri boş/bozuk ama yedekte parça varsa → yedekten kurtar
+  if (!hasItems(s) && hasItems(bak)) s = Object.assign({}, s || {}, bak);
+  s = s || {};
+  return {
+    days: s.days || {},
+    shopBought: s.shopBought || {},
+    aesCat: s.aesCat || 'face',
+    personalContext: s.personalContext || '44 yaş, kadın, Restar Group CEO (otomotiv/savunma). Yüksek iş yoğunluğu, kronik stres, perimenopause penceresi. Doğa ve deniz tutkusu. Hızlı + net + aksiyon odaklı.',
+    wardrobe: s.wardrobe || [],
+    wishlist: s.wishlist || [],
+    styleProfile: s.styleProfile || '',
+    bodyProfile: s.bodyProfile || {},
+  };
+})();
+
+function save() {
+  let mainOk = false;
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); mainOk = true; }
+  catch (e) { try { toast('Depolama doldu — yedek alındı, birkaç fotoğrafı sil'); } catch {} }
+  // Her durumda hafif (fotoğrafsız) yedeği güncel tut
+  try { localStorage.setItem(BACKUP_KEY, slimBackup(state)); } catch {}
+}
+// Açılışta ana veriyi normalize et (yedekten kurtarıldıysa hemen yeniden yaz)
+save();
 
 function today() { return new Date().toISOString().slice(0,10); }
 function getToday() {
@@ -2118,13 +2149,13 @@ function processPhoto(file, done){
   r.onload = ev => {
     const img = new Image();
     img.onload = () => {
-      const max = 360, sc = Math.min(1, max/Math.max(img.width, img.height));
+      const max = 300, sc = Math.min(1, max/Math.max(img.width, img.height));
       const c = document.createElement('canvas');
       c.width = Math.max(1, Math.round(img.width*sc));
       c.height = Math.max(1, Math.round(img.height*sc));
       const ctx = c.getContext('2d');
       ctx.drawImage(img, 0, 0, c.width, c.height);
-      const dataUrl = c.toDataURL('image/jpeg', 0.7);
+      const dataUrl = c.toDataURL('image/jpeg', 0.62);
       const d = ctx.getImageData(0,0,c.width,c.height).data;
       const x0=Math.floor(c.width*0.2), x1=Math.ceil(c.width*0.8);
       const y0=Math.floor(c.height*0.2), y1=Math.ceil(c.height*0.8);
@@ -2202,6 +2233,7 @@ function renderModa() {
   }
 
   // Alışveriş listem
+  renderLinkCombos();
   renderSuggestedBuys();
   renderWishlist();
 
@@ -2365,7 +2397,7 @@ const SUGGESTED_BUYS = [
   { piece:'Sivri burun siyah topuklu', brand:'Beymen', note:'Bacağı uzatır, her kombini toparlar.', budget:'~3–6K TL', q:'sivri burun siyah stiletto topuklu' },
   { piece:'Yapılı taba deri tote çanta', brand:'Massimo Dutti / Prada', note:'İş + günlük; nötr bağlayıcı.', budget:'MD ~5K · Prada lüks', q:'taba deri tote çanta' },
 ];
-function googleLink(q){ return 'https://www.google.com/search?q=' + encodeURIComponent(q); }
+function shopLink(q){ return 'https://www.trendyol.com/sr?q=' + encodeURIComponent(q); }
 function renderSuggestedBuys(){
   const el = document.getElementById('suggestedBuys');
   if (!el) return;
@@ -2386,9 +2418,66 @@ function addSuggestedBuy(idx){
   if (state.wishlist.some(w => w.name === s.piece && w.brand === s.brand)) { toast('Zaten listende'); return; }
   state.wishlist.push({
     id: 'sh' + Date.now() + Math.floor(Math.random()*1000),
-    name: s.piece, brand: s.brand, note: s.note, link: googleLink(s.q), photo: null,
+    name: s.piece, brand: s.brand, note: s.note, link: shopLink(s.q), photo: null,
   });
   save(); renderWishlist(); toast('Listene eklendi ✓');
+}
+
+/* --- Linkli hazır kombinler --- */
+const LINK_COMBOS = [
+  { label:'Toplantı · güçlü', pieces:[
+    { p:'Lacivert blazer', q:'kadın lacivert blazer ceket' },
+    { p:'Krem ipek gömlek', q:'kadın krem ipek saten gömlek' },
+    { p:'Yüksek bel yün pantolon', q:'kadın yüksek bel yün pantolon düz paça' },
+    { p:'Sivri burun topuklu', q:'kadın sivri burun stiletto siyah' },
+    { p:'Taba deri tote', q:'kadın taba deri tote çanta' },
+  ]},
+  { label:'Akıllı-rahat · gündüz', pieces:[
+    { p:'Merino V-yaka triko', q:'kadın merino V yaka kazak' },
+    { p:'Düz paça pantolon', q:'kadın yüksek bel düz paça pantolon' },
+    { p:'Bej trençkot', q:'kadın bej trençkot' },
+    { p:'Deri loafer', q:'kadın deri loafer ayakkabı' },
+  ]},
+  { label:'Davet · akşam', pieces:[
+    { p:'Saten midi elbise', q:'kadın saten midi elbise davet' },
+    { p:'İnce topuklu sandalet', q:'kadın ince topuklu abiye sandalet' },
+    { p:'Zarif clutch', q:'kadın clutch abiye çanta' },
+  ]},
+];
+
+function renderLinkCombos(){
+  const el = document.getElementById('linkCombos');
+  if (!el) return;
+  el.innerHTML = LINK_COMBOS.map((c, idx) => `
+    <div class="bg-white rounded-2xl p-4 glow">
+      <div class="flex items-center justify-between mb-2">
+        <p class="text-[10px] text-clay uppercase tracking-widest">◈ ${c.label}</p>
+        <button onclick="addComboToWishlist(${idx})" class="text-[9px] font-sans uppercase tracking-widest text-forest/60 hover:text-clay transition">+ hepsini ekle</button>
+      </div>
+      <div class="divide-y divide-cream/70">
+        ${c.pieces.map(pc => `
+          <div class="flex items-center justify-between gap-3 py-2">
+            <span class="font-serif text-sm text-forest leading-tight">${pc.p}</span>
+            <a href="${shopLink(pc.q)}" target="_blank" rel="noopener" class="flex-shrink-0 font-sans text-[10px] uppercase tracking-widest text-clay hover:text-forest transition">Ara →</a>
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+function addComboToWishlist(idx){
+  const c = LINK_COMBOS[idx]; if (!c) return;
+  if (!Array.isArray(state.wishlist)) state.wishlist = [];
+  let added = 0;
+  c.pieces.forEach(pc => {
+    if (state.wishlist.some(w => w.name === pc.p && w.brand === c.label)) return;
+    state.wishlist.push({
+      id: 'sh' + Date.now() + Math.floor(Math.random()*100000),
+      name: pc.p, brand: c.label, note: '', link: shopLink(pc.q), photo: null,
+    });
+    added++;
+  });
+  save(); renderWishlist();
+  toast(added ? `${added} parça listene eklendi ✓` : 'Zaten listende');
 }
 
 function addWishItem() {
