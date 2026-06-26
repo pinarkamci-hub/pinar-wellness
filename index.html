@@ -1218,32 +1218,44 @@ tailwind.config = {
   </div>
 
   <!-- Alışveriş Listem -->
-  <div class="mb-6">
-    <div class="flex items-center justify-between mb-3">
-      <h3 class="font-serif text-xl text-forest">🛍 Alışveriş Listem</h3>
+  <div class="mb-8">
+    <p class="text-clay font-sans text-[11px] uppercase tracking-[0.2em] mb-1">Almak istediklerim</p>
+    <div class="flex items-baseline justify-between mb-4">
+      <h3 class="font-serif text-2xl text-forest">Alışveriş Listem</h3>
       <span id="shCount" class="text-[10px] text-clay uppercase tracking-widest"></span>
     </div>
-    <p class="text-[11px] text-forest/55 mb-3 leading-snug">Beğendiğin ürünü ekle — marka, görsel ve satın alma linkiyle. Almak istediklerin tek yerde.</p>
 
-    <div class="bg-white rounded-3xl p-6 glow mb-4">
-      <input id="shName" type="text" placeholder="Ürün adı (ör: yün blazer)" class="w-full bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none mb-2">
-      <input id="shBrand" type="text" placeholder="Marka (ör: Max Mara)" class="w-full bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none mb-2">
-      <input id="shLink" type="url" inputmode="url" placeholder="Satın alma linki (ürün sayfası)" class="w-full bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none mb-2">
-      <div class="grid grid-cols-2 gap-2 mb-2">
-        <label class="bg-cream/50 text-forest font-sans text-[11px] uppercase tracking-wider px-4 py-3 rounded-full text-center cursor-pointer hover:bg-cream/70 transition">
-          📷 Çek
-          <input id="shPhotoCam" type="file" accept="image/*" capture="environment" onchange="onWishPhotoPick(event)" class="hidden">
-        </label>
-        <label class="bg-cream/50 text-forest font-sans text-[11px] uppercase tracking-wider px-4 py-3 rounded-full text-center cursor-pointer hover:bg-cream/70 transition">
-          🖼 Galeriden
-          <input id="shPhotoGal" type="file" accept="image/*" onchange="onWishPhotoPick(event)" class="hidden">
-        </label>
+    <!-- Senin için seçtiğim kapsül -->
+    <details open class="bg-cream/30 rounded-3xl p-5 mb-5">
+      <summary class="font-serif text-forest cursor-pointer text-sm">✦ Senin için seçtiğim kapsül liste</summary>
+      <p class="text-[11px] text-forest/55 mt-2 mb-4 leading-snug">Boyuna/kilona uygun, dik gösteren parçalar — marka evreninden. Beğendiğini <b>+ Ekle</b> ile listene al.</p>
+      <div id="suggestedBuys" class="space-y-2.5"></div>
+    </details>
+
+    <!-- Listem -->
+    <div id="wishlistList" class="space-y-3"></div>
+
+    <!-- Kendin ekle -->
+    <details class="bg-cream/30 rounded-3xl p-5 mt-5">
+      <summary class="font-serif text-forest cursor-pointer text-sm">⊕ Kendin ekle</summary>
+      <div class="mt-4">
+        <input id="shName" type="text" placeholder="Ürün adı (ör: yün blazer)" class="w-full bg-white rounded-xl p-2.5 text-sm text-forest outline-none mb-2">
+        <input id="shBrand" type="text" placeholder="Marka (ör: Max Mara)" class="w-full bg-white rounded-xl p-2.5 text-sm text-forest outline-none mb-2">
+        <input id="shLink" type="url" inputmode="url" placeholder="Satın alma linki (ürün sayfası)" class="w-full bg-white rounded-xl p-2.5 text-sm text-forest outline-none mb-2">
+        <div class="grid grid-cols-2 gap-2 mb-2">
+          <label class="bg-white text-forest font-sans text-[11px] uppercase tracking-wider px-4 py-3 rounded-full text-center cursor-pointer hover:bg-cream/50 transition">
+            ◐ Fotoğraf çek
+            <input id="shPhotoCam" type="file" accept="image/*" capture="environment" onchange="onWishPhotoPick(event)" class="hidden">
+          </label>
+          <label class="bg-white text-forest font-sans text-[11px] uppercase tracking-wider px-4 py-3 rounded-full text-center cursor-pointer hover:bg-cream/50 transition">
+            ▤ Galeriden
+            <input id="shPhotoGal" type="file" accept="image/*" onchange="onWishPhotoPick(event)" class="hidden">
+          </label>
+        </div>
+        <div id="shPhotoPreview" class="flex items-center gap-2 min-w-0 mb-3"></div>
+        <button onclick="addWishItem()" class="w-full bg-forest text-ivory font-sans text-xs uppercase tracking-widest py-3 rounded-full">Listeye ekle</button>
       </div>
-      <div id="shPhotoPreview" class="flex items-center gap-2 min-w-0 mb-3"></div>
-      <button onclick="addWishItem()" class="w-full bg-clay text-ivory font-sans text-xs uppercase tracking-widest py-3 rounded-full">+ Listeye ekle</button>
-    </div>
-
-    <div id="wishlistList" class="grid grid-cols-2 gap-3"></div>
+    </details>
   </div>
 
   <!-- Aksiyonlar -->
@@ -2190,6 +2202,7 @@ function renderModa() {
   }
 
   // Alışveriş listem
+  renderSuggestedBuys();
   renderWishlist();
 
   // Gardırop
@@ -2321,23 +2334,61 @@ function renderWishlist() {
 }
 
 function wishCard(item) {
-  const img = item.photo
-    ? `<img src="${item.photo}" onclick="openPhoto('${item.id}')" class="w-full h-40 object-cover cursor-zoom-in">`
-    : `<div class="w-full h-40 bg-cream/40 flex items-center justify-center text-forest/30 font-serif text-3xl">🛍</div>`;
+  const initial = (item.brand || item.name || '·').trim().charAt(0).toUpperCase();
+  const visual = item.photo
+    ? `<img src="${item.photo}" onclick="openPhoto('${item.id}')" class="w-20 h-24 object-cover rounded-xl flex-shrink-0 cursor-zoom-in">`
+    : `<div class="w-20 h-24 rounded-xl flex-shrink-0 bg-cream/60 flex items-center justify-center font-serif text-2xl text-forest/40">${initial}</div>`;
   const buy = item.link
-    ? `<a href="${escAttr(item.link)}" target="_blank" rel="noopener" class="block text-center bg-clay text-ivory font-sans uppercase tracking-widest text-[10px] py-2.5 rounded-full">↗ Satın al</a>`
-    : `<p class="text-center text-[10px] text-forest/40 italic py-2">link yok</p>`;
-  return `<div class="bg-white rounded-2xl overflow-hidden glow flex flex-col">
-    ${img}
-    <div class="p-3 flex-1 flex flex-col">
+    ? `<a href="${escAttr(item.link)}" target="_blank" rel="noopener" class="font-sans text-[10px] uppercase tracking-widest text-clay hover:text-forest transition">Satın al →</a>`
+    : `<span class="text-[10px] text-forest/35 italic">link yok</span>`;
+  return `<div class="bg-white rounded-2xl p-3 glow flex gap-3">
+    ${visual}
+    <div class="flex-1 min-w-0 flex flex-col">
       ${item.brand ? `<p class="text-[10px] text-clay uppercase tracking-wider truncate">${item.brand}</p>` : ''}
-      <p class="font-serif text-sm text-forest leading-tight mt-0.5 mb-3">${item.name}</p>
-      <div class="mt-auto flex items-center gap-2">
-        <div class="flex-1 min-w-0">${buy}</div>
-        <button onclick="deleteWishItem('${item.id}')" class="flex-shrink-0 text-forest/30 hover:text-clay w-8 h-8 rounded-full hover:bg-cream/50 transition">🗑</button>
+      <p class="font-serif text-base text-forest leading-tight mt-0.5">${item.name}</p>
+      ${item.note ? `<p class="text-[11px] text-forest/55 mt-1 leading-snug">${item.note}</p>` : ''}
+      <div class="mt-auto pt-2 flex items-center justify-between">
+        ${buy}
+        <button onclick="deleteWishItem('${item.id}')" class="flex-shrink-0 text-forest/30 hover:text-clay text-sm w-7 h-7 rounded-full hover:bg-cream/50 transition">🗑</button>
       </div>
     </div>
   </div>`;
+}
+
+/* --- Senin için seçtiğim kapsül liste --- */
+const SUGGESTED_BUYS = [
+  { piece:'Yapılandırılmış lacivert blazer', brand:'Theory / Network', note:'Tek başına dik gösterir — iş ve toplantının belkemiği.', budget:'~6–12K TL', q:'Network lacivert blazer kadın' },
+  { piece:'Yüksek bel düz paça yün pantolon', brand:'Massimo Dutti', note:'Bacağı uzatır, beli toparlar.', budget:'~3.5K TL', q:'Massimo Dutti yüksek bel yün pantolon' },
+  { piece:'Krem ipek gömlek', brand:'İpekyol / Massimo Dutti', note:'Yüzü aydınlatır, blazer altına ideal.', budget:'~2.5K TL', q:'İpekyol ipek gömlek krem' },
+  { piece:'İnce merino V-yaka triko', brand:'Uniqlo', note:'Katman ekler, hacim eklemez. Fiyat/kalite şampiyonu.', budget:'~1.2K TL', q:'Uniqlo merino V yaka kazak kadın' },
+  { piece:'Bej trençkot', brand:'Max Mara / Mango', note:'Uzun dikey hat — siluet uzatır.', budget:'Mango ~3K · Max Mara üst', q:'Mango bej trençkot kadın' },
+  { piece:'Sivri burun siyah topuklu', brand:'Beymen', note:'Bacağı uzatır, her kombini toparlar.', budget:'~3–6K TL', q:'sivri burun siyah stiletto topuklu' },
+  { piece:'Yapılı taba deri tote çanta', brand:'Massimo Dutti / Prada', note:'İş + günlük; nötr bağlayıcı.', budget:'MD ~5K · Prada lüks', q:'taba deri tote çanta' },
+];
+function googleLink(q){ return 'https://www.google.com/search?q=' + encodeURIComponent(q); }
+function renderSuggestedBuys(){
+  const el = document.getElementById('suggestedBuys');
+  if (!el) return;
+  el.innerHTML = SUGGESTED_BUYS.map((s, idx) => `
+    <div class="bg-white rounded-2xl p-3.5 glow flex gap-3 items-center">
+      <div class="flex-1 min-w-0">
+        <p class="text-[10px] text-clay uppercase tracking-wider">${s.brand}</p>
+        <p class="font-serif text-sm text-forest leading-tight mt-0.5">${s.piece}</p>
+        <p class="text-[11px] text-forest/55 mt-1 leading-snug">${s.note}</p>
+        <p class="text-[10px] text-forest/40 mt-1 tracking-wide">${s.budget}</p>
+      </div>
+      <button onclick="addSuggestedBuy(${idx})" class="flex-shrink-0 bg-forest text-ivory font-sans text-[10px] uppercase tracking-widest px-4 py-2.5 rounded-full hover:bg-forest-light transition">+ Ekle</button>
+    </div>`).join('');
+}
+function addSuggestedBuy(idx){
+  const s = SUGGESTED_BUYS[idx]; if (!s) return;
+  if (!Array.isArray(state.wishlist)) state.wishlist = [];
+  if (state.wishlist.some(w => w.name === s.piece && w.brand === s.brand)) { toast('Zaten listende'); return; }
+  state.wishlist.push({
+    id: 'sh' + Date.now() + Math.floor(Math.random()*1000),
+    name: s.piece, brand: s.brand, note: s.note, link: googleLink(s.q), photo: null,
+  });
+  save(); renderWishlist(); toast('Listene eklendi ✓');
 }
 
 function addWishItem() {
