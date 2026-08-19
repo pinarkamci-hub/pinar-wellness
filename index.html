@@ -66,10 +66,7 @@ tailwind.config = {
 <!-- TAB NAV -->
 <nav class="fixed md:sticky bottom-0 md:top-16 left-0 right-0 z-30 bg-ivory/95 backdrop-blur border-t md:border-t-0 md:border-b border-cream">
   <div class="max-w-3xl mx-auto px-1 py-2 flex justify-around">
-    <button class="tab-btn active font-sans text-[9px] md:text-xs px-1.5 md:px-3 py-2 rounded-full flex flex-col items-center gap-0.5" data-tab="moda">
-      <span class="text-base md:text-xl">❖</span><span>Moda</span>
-    </button>
-    <button class="tab-btn font-sans text-[9px] md:text-xs px-1.5 md:px-3 py-2 rounded-full flex flex-col items-center gap-0.5" data-tab="today">
+    <button class="tab-btn active font-sans text-[9px] md:text-xs px-1.5 md:px-3 py-2 rounded-full flex flex-col items-center gap-0.5" data-tab="today">
       <span class="text-base md:text-xl">◉</span><span>Bugün</span>
     </button>
     <button class="tab-btn font-sans text-[9px] md:text-xs px-1.5 md:px-3 py-2 rounded-full flex flex-col items-center gap-0.5" data-tab="routine">
@@ -102,7 +99,7 @@ tailwind.config = {
 <main class="max-w-3xl mx-auto px-5 py-6">
 
 <!-- =============== BUGÜN =============== -->
-<section id="page-today" class="hidden-page">
+<section id="page-today" class="active-page">
 
   <div class="mb-8">
     <p id="dayLabel" class="text-clay font-sans text-xs uppercase tracking-[0.2em] mb-2"></p>
@@ -119,7 +116,10 @@ tailwind.config = {
   <!-- SABAH -->
   <div class="mb-6">
     <div class="flex items-baseline justify-between mb-3">
-      <h3 class="font-serif text-2xl text-forest">Sabah</h3>
+      <div>
+        <h3 class="font-serif text-2xl text-forest">Sabah</h3>
+        <p id="amLabel" class="text-[10px] uppercase tracking-widest text-clay mt-0.5"></p>
+      </div>
       <span id="amProgress" class="text-xs font-sans text-clay"></span>
     </div>
     <div id="amSteps" class="space-y-2"></div>
@@ -176,123 +176,154 @@ tailwind.config = {
     <div class="space-y-3" id="weekRotation"></div>
   </div>
 
-  <!-- MEVCUT ENVANTER -->
+  <!-- PROTOKOL NOTLARI -->
+  <div class="bg-forest text-ivory rounded-3xl p-6 mb-6 glow">
+    <p class="text-clay-light font-sans text-[10px] uppercase tracking-[0.25em] mb-3">Protokol notları</p>
+    <h3 class="font-serif text-2xl mb-4">Uzmanın güncel protokolü</h3>
+    <ul class="space-y-3 text-sm text-ivory/85 leading-snug">
+      <li><span class="text-clay-light font-serif">Bekleme.</span> Katmanlar arası <strong>2 dakika</strong>. Enzimden sonra <strong>15 dakika</strong>. Maskeler <strong>20 dakika</strong>. Uygulamada ↓ işareti bekleme demek.</li>
+      <li><span class="text-clay-light font-serif">Sensai toz peeling haftada iki akşam.</span> Yalnızca <strong>cumartesi ve pazar</strong>. Uzmanın yazdığı beş akşam yerine iki akşama çekildi.</li>
+      <li><span class="text-clay-light font-serif">Enzim akşamları.</span> Pazartesi · çarşamba · cuma. Bu akşamlarda toz yerine <strong>Sensai Ultimate The Creamy Soap</strong> ile normal yıkama, ardından MSB Sensitive Enzyme.</li>
+      <li><span class="text-clay-light font-serif">Oil Capsule sadece cumartesi.</span> Environ C-Quence ile karıştırarak. Diğer akşamlarda kapsül yok.</li>
+      <li><span class="text-clay-light font-serif">Boyun her gün.</span> Sabah Vol.U.Lift, akşam Obagi Elastiderm — boyun + dekolte.</li>
+      <li><span class="text-clay-light font-serif">Güneş koruma pazarlık dışı.</span> Colorescience, her sabahın son adımı.</li>
+      <li><span class="text-clay-light font-serif">Moda sekmesi kaldırıldı.</span> Gardırop/kombin bölümü şimdilik kapatıldı — sistem cilt + longevity + sağlık üzerine odaklandı.</li>
+    </ul>
+  </div>
+
+  <!-- SABAH PROTOKOLÜ -->
   <div class="bg-white rounded-3xl p-6 glow mb-6">
-    <h3 class="font-serif text-xl text-forest mb-4">Aktif Ürünler</h3>
-    <div class="space-y-4 text-sm">
-      <div>
-        <p class="text-clay uppercase tracking-wider text-xs mb-2">Sabah · her gün</p>
-        <ul class="space-y-1 font-serif text-forest">
-          <li>1. <strong>Sensai Creamy Soap</strong> <span class="text-[10px] text-clay">yumuşak temizlik</span></li>
-          <li>2. iS Clinical Pro-Heal Serum</li>
-          <li>3. <strong>SkinCeuticals H.A. Intensifier Multi-Glycan Peptide</strong> ✨ <span class="text-[10px] text-clay">YENİ</span></li>
-          <li>4. Sensai Cellular Performance Cream</li>
-          <li>5. Environ Youth+ Eye Gel</li>
-          <li>6. <strong>SkinCeuticals SPF 50</strong> ⭐</li>
-        </ul>
-        <p class="mt-2 text-[10px] text-forest/60 italic leading-snug">H.A. Intensifier: peptid + multi-glycan + %1.3 hyaluronik asit. Pro-Heal antioksidanı kapatır → cilde hidrasyon kilidi + sıkılaşma ekler. Krem öncesi 2-3 damla.</p>
-      </div>
-      <div>
-        <p class="text-clay uppercase tracking-wider text-xs mb-2">Akşam · ilk adım her gün</p>
-        <ul class="space-y-1 font-serif text-forest">
-          <li>1. <strong>Genosys Snow O2 Cleanser</strong> ✨ <span class="text-[10px] text-clay">oksijenli derin temizlik</span></li>
-          <li class="text-[11px] text-forest/60 italic">Cilt hassas/kuruysa o gece Sensai'ye dön</li>
-        </ul>
-        <p class="mt-2 text-[10px] text-forest/60 italic leading-snug">Çift temizlik değil — Sensai (sabah) ↔ Genosys (akşam) rotasyon. Genosys aktif rutin (retinoid/A.G.E./oil) öncesi gözenek + glow hazırlığı.</p>
-      </div>
-      <div>
-        <p class="text-clay uppercase tracking-wider text-xs mb-2">Akşam · gün gün protokol</p>
-        <div class="space-y-3 text-xs">
+    <h3 class="font-serif text-xl text-forest mb-1">Sabah Protokolü</h3>
+    <p class="text-[11px] text-forest/55 mb-4 leading-snug">İlk 4 adım her gün aynı. 5. adımdaki aktif ve 8. adımdaki kapama güne göre değişir.</p>
 
-          <div class="bg-cream/30 rounded-xl p-3">
-            <p class="font-serif text-forest text-sm">PAZARTESİ <span class="text-[10px] text-clay font-sans uppercase tracking-wider">Revive + Retinol</span></p>
-            <ol class="mt-1 space-y-0.5 text-forest/80 list-decimal list-inside">
-              <li>ReviveNX ½ şişe (yüz+boyun, tamponla)</li>
-              <li>Revive Maske → 20 dk · kaldır, durulama YOK, kalanı yedir</li>
-              <li>2 dk · Environ C-Quence 3 · 1 pompa</li>
-              <li>2 dk · Avance Elixir · 2 pompa</li>
-              <li class="text-clay">+ Sensai Ultra Intensive ✨ önerim</li>
-            </ol>
-          </div>
+    <div class="bg-cream/30 rounded-xl p-3 mb-3">
+      <p class="text-clay uppercase tracking-wider text-[10px] mb-2">Her sabah · ortak taban</p>
+      <ol class="space-y-0.5 text-xs text-forest/85 list-decimal list-inside">
+        <li>Obagi Foaming Gel · 1 fındık <span class="text-forest/50">— ıslak cilde masaj, durula, kurula</span></li>
+        <li>Forlle'd Hyalogy Platinum Lotion · 7–8 damla <span class="text-forest/50">— avuca al, göz dahil tampon</span></li>
+        <li>MBR Hydrating &amp; Lifting Toner · 3 püskürtme</li>
+        <li>Environ Vita-Peptide Eye Gel <span class="text-forest/50">— ince tabaka</span></li>
+      </ol>
+    </div>
 
-          <div class="bg-cream/30 rounded-xl p-3">
-            <p class="font-serif text-forest text-sm">SALI + CUMARTESİ <span class="text-[10px] text-clay font-sans uppercase tracking-wider">Retinol + Oil</span></p>
-            <ol class="mt-1 space-y-0.5 text-forest/80 list-decimal list-inside">
-              <li>Environ Queence Serum 3 · 2 pompa</li>
-              <li>2 dk · Environ Oil Capsule · 1 adet patlat-yedir</li>
-            </ol>
-          </div>
-
-          <div class="bg-cream/30 rounded-xl p-3">
-            <p class="font-serif text-forest text-sm">ÇARŞAMBA <span class="text-[10px] text-clay font-sans uppercase tracking-wider">Azulene Nazik</span></p>
-            <ol class="mt-1 space-y-0.5 text-forest/80 list-decimal list-inside">
-              <li>Isov Azulene Care Serum (yüz+boyun)</li>
-              <li>2 dk · Isov Azulene Care Cream · 1 fındık</li>
-            </ol>
-          </div>
-
-          <div class="bg-cream/30 rounded-xl p-3">
-            <p class="font-serif text-forest text-sm">PERŞEMBE <span class="text-[10px] text-clay font-sans uppercase tracking-wider">Revival Maske</span></p>
-            <ol class="mt-1 space-y-0.5 text-forest/80 list-decimal list-inside">
-              <li>Environ Revival Masque · 20 dk · BOL SU DURULA</li>
-              <li>Isov Azulene Mist (tekrar)</li>
-              <li>Sensai Barrier Essence · 2 pompa</li>
-              <li>2 dk · Avance Elixir · 2 pompa</li>
-              <li class="text-clay">+ La Mer Le Crème Nuit ½ fındık ✨ önerim</li>
-            </ol>
-          </div>
-
-          <div class="bg-cream/30 rounded-xl p-3">
-            <p class="font-serif text-forest text-sm">CUMA <span class="text-[10px] text-clay font-sans uppercase tracking-wider">Bio Meso + Revive</span></p>
-            <ol class="mt-1 space-y-0.5 text-forest/80 list-decimal list-inside">
-              <li>Genosys Bio Meso Spicule · 2 fındık (MASAJ YOK · batışma normal)</li>
-              <li>1-2 dk · ReviveNX ½ şişe (tamponla)</li>
-              <li>Revive Maske · 20 dk · kaldır, durulama YOK, kalanı yedir</li>
-              <li>2 dk · Sensai Barrier Essence · 2 pompa</li>
-              <li>2 dk · La Mer Le Crème Nuit · 1 fındık</li>
-            </ol>
-          </div>
-
-          <div class="bg-cream/30 rounded-xl p-3">
-            <p class="font-serif text-forest text-sm">PAZAR <span class="text-[10px] text-clay font-sans uppercase tracking-wider">Hafif Retinol</span></p>
-            <ol class="mt-1 space-y-0.5 text-forest/80 list-decimal list-inside">
-              <li>Environ Queence Serum 3 · 2 pompa</li>
-              <li>2 dk · Avance Elixir · 2 pompa</li>
-              <li class="text-clay">+ Sensai Ultra VEYA La Mer Concentrate ✨ önerim</li>
-            </ol>
-          </div>
-
-          <p class="text-[10px] text-forest/60 italic mt-2 leading-snug">Her gece BAŞ: çift yıkama (Genosys Snow O2 → Sensai Creamy Soap) + Isov Azulene Mist (kol mesafe sık → tamponla)</p>
-        </div>
+    <div class="space-y-3 text-xs">
+      <div class="bg-cream/30 rounded-xl p-3">
+        <p class="font-serif text-forest text-sm">PAZARTESİ · ÇARŞAMBA · CUMA <span class="text-[10px] text-clay font-sans uppercase tracking-wider">C vitamini</span></p>
+        <ol class="mt-1 space-y-0.5 text-forest/80 list-decimal list-inside" start="5">
+          <li>Obagi Professional-C %10 · 5 damla <span class="text-clay">↓ 2 dk</span></li>
+          <li>SkinCeuticals Collagen Pro-Solution · 5 damla <span class="text-clay">↓ 2 dk</span></li>
+          <li>Environ AVST Moisturiser 2 · 2 pompa <span class="text-clay">↓ 2 dk</span></li>
+          <li>Obagi SuzanObagiMD Intensive Daily Repair · 2 pompa</li>
+          <li>Colorescience güneş koruma</li>
+        </ol>
       </div>
 
-      <div>
-        <p class="text-clay uppercase tracking-wider text-xs mb-2">Ek alanlar · her gece sonu</p>
-        <ul class="space-y-1 font-serif text-forest">
-          <li>Göz: Sensai Melt Rich Eye <span class="text-[10px] text-clay">(ringbox)</span></li>
-          <li>Boyun: Sensai Throat & Bust <span class="text-[10px] text-clay">(yukarı çek)</span></li>
-          <li>Eller: MBR The Best Hand</li>
-          <li>Dudak: Sensai Lip Treatment</li>
-        </ul>
+      <div class="bg-cream/30 rounded-xl p-3">
+        <p class="font-serif text-forest text-sm">SALI · PERŞEMBE <span class="text-[10px] text-clay font-sans uppercase tracking-wider">P-TIOX</span></p>
+        <ol class="mt-1 space-y-0.5 text-forest/80 list-decimal list-inside" start="5">
+          <li>SkinCeuticals P-TIOX · 5 damla <span class="text-clay">↓ 2 dk</span></li>
+          <li>SkinCeuticals Collagen Pro-Solution · 5 damla <span class="text-clay">↓ 2 dk</span></li>
+          <li>Environ AVST Moisturiser 2 · 2 pompa <span class="text-clay">↓ 2 dk</span></li>
+          <li>Environ Avance DFP312 Elixir · 2 pompa</li>
+          <li>Colorescience güneş koruma</li>
+        </ol>
+      </div>
+
+      <div class="bg-cream/30 rounded-xl p-3">
+        <p class="font-serif text-forest text-sm">CUMARTESİ · PAZAR <span class="text-[10px] text-clay font-sans uppercase tracking-wider">HA Intensifier</span></p>
+        <ol class="mt-1 space-y-0.5 text-forest/80 list-decimal list-inside" start="5">
+          <li>SkinCeuticals HA Intensifier Multi-Glycan · 5 damla <span class="text-clay">↓ 2 dk</span></li>
+          <li>SkinCeuticals Collagen Pro-Solution · 5 damla <span class="text-clay">↓ 2 dk</span></li>
+          <li>Environ AVST Moisturiser 2 · 2 pompa <span class="text-clay">↓ 2 dk</span></li>
+          <li>Environ Avance DFP312 Elixir · 2 pompa</li>
+          <li>Colorescience güneş koruma</li>
+        </ol>
       </div>
     </div>
 
-    <details class="mt-4 bg-clay/5 rounded-xl p-3">
-      <summary class="text-xs font-serif text-clay cursor-pointer">⚠ Eksik gördüğüm — yağ bazlı temizleyici</summary>
-      <p class="mt-2 text-[11px] text-forest/75 leading-relaxed">SPF + makyajlı günler için <strong>gerçek çift yıkama</strong> ister misin? Genosys + Sensai ikisi de su bazlı. Birinci adıma yağ-bazlı önerim:<br>
-      <span class="font-serif">• Sensai Silky Purifying Cleansing Oil</span><br>
-      <span class="font-serif">• Shu Uemura Anti/Oxi+ Cleansing Oil</span><br>
-      <span class="font-serif">• Banila Co Clean It Zero Balm Original</span></p>
-    </details>
+    <p class="mt-3 text-[10px] text-forest/60 italic leading-snug">Her sabahın sonunda boyun + dekolte: <strong>Vol.U.Lift</strong>.</p>
   </div>
 
-  <!-- ROTASYONDA -->
+  <!-- AKŞAM PROTOKOLÜ -->
+  <div class="bg-white rounded-3xl p-6 glow mb-6">
+    <h3 class="font-serif text-xl text-forest mb-1">Akşam Protokolü</h3>
+    <p class="text-[11px] text-forest/55 mb-4 leading-snug">Dört farklı akşam: enzim gecesi, Celltermi gecesi, cumartesi peeling, pazar peeling.</p>
+
+    <div class="space-y-3 text-xs">
+      <div class="bg-cream/30 rounded-xl p-3">
+        <p class="font-serif text-forest text-sm">PAZARTESİ · ÇARŞAMBA · CUMA <span class="text-[10px] text-clay font-sans uppercase tracking-wider">Enzim + Retinol</span></p>
+        <ol class="mt-1 space-y-0.5 text-forest/80 list-decimal list-inside">
+          <li>Sensai Ultimate The Creamy Soap <span class="text-forest/50">— normal yıkama</span></li>
+          <li>MSB Sensitive Enzyme · 2 pompa <span class="text-clay">↓ 15 dk · nemli havluyla bastırmadan sil</span></li>
+          <li>Obagi Foaming Gel <span class="text-forest/50">— ikinci temizlik</span></li>
+          <li>Forlle'd Hyalogy Platinum Lotion · 7–8 damla</li>
+          <li>Environ Vita-Peptide Eye Gel</li>
+          <li>SkinCeuticals A.G.E. Interrupter Ultra Serum · 5 damla <span class="text-clay">↓ 2 dk</span></li>
+          <li>MSB Sensitive Active Serum · 2 pompa <span class="text-clay">↓ 2 dk</span></li>
+          <li>Environ C-Quence Serum 3 · 2 pompa <span class="text-clay">↓ 2 dk</span></li>
+          <li>Environ Retinol Serum Forte · 2 pompa <span class="text-clay">↓ 2 dk</span></li>
+          <li>Vol.U.Lift krem · 2 leblebi</li>
+          <li>ZO Skin Health Hydrating Crème · yarım fındık <span class="text-forest/50">— yatmaya yakın</span></li>
+        </ol>
+      </div>
+
+      <div class="bg-cream/30 rounded-xl p-3">
+        <p class="font-serif text-forest text-sm">SALI · PERŞEMBE <span class="text-[10px] text-clay font-sans uppercase tracking-wider">Celltermi Revive</span></p>
+        <ol class="mt-1 space-y-0.5 text-forest/80 list-decimal list-inside">
+          <li>Obagi Foaming Gel <span class="text-forest/50">— cilt temizliği</span></li>
+          <li>MBR Hydrating &amp; Lifting Toner · 2 püskürtme <span class="text-forest/50">— avuca al, tampon</span></li>
+          <li>Environ Vita-Peptide Eye Gel</li>
+          <li>Celltermi Revive NX ampul · yarım ampul</li>
+          <li>Celltermi Revive maske <span class="text-clay">↓ 20 dk sonra kaldır · 2 dk</span></li>
+          <li>SkinCeuticals A.G.E. Interrupter Ultra Serum · 5 damla <span class="text-clay">↓ 2 dk</span></li>
+          <li>AlphaScience Novacell [Cg] · 5 damla <span class="text-clay">↓ 2 dk</span></li>
+          <li>MSB Sensitive Hydro Gel Serum forte · 2 pompa <span class="text-clay">↓ 2 dk</span></li>
+          <li>Environ C-Quence Serum 3 · 2 pompa <span class="text-clay">↓ 2 dk</span></li>
+          <li>Obagi SuzanObagiMD Moisture Restore · 1 pompa</li>
+        </ol>
+      </div>
+
+      <div class="bg-cream/30 rounded-xl p-3">
+        <p class="font-serif text-forest text-sm">CUMARTESİ <span class="text-[10px] text-clay font-sans uppercase tracking-wider">Peeling + PDRN</span></p>
+        <ol class="mt-1 space-y-0.5 text-forest/80 list-decimal list-inside">
+          <li>Sensai Silk Peeling Powder <span class="text-forest/50">— toz ile yıka</span></li>
+          <li>Obagi Foaming Gel <span class="text-forest/50">— ikinci temizlik</span></li>
+          <li>Forlle'd Hyalogy Platinum Lotion · 7–8 damla</li>
+          <li>Bright PDRN Sheet Mask <span class="text-clay">↓ 20 dk</span></li>
+          <li>Environ Vita-Peptide Eye Gel</li>
+          <li>SkinCeuticals A.G.E. Interrupter Ultra Serum · 5 damla <span class="text-clay">↓ 2 dk</span></li>
+          <li>MSB Sensitive Active Serum · 2 pompa <span class="text-clay">↓ 2 dk</span></li>
+          <li>Environ C-Quence · 2 pompa + 1 kapsül Oil Capsule <span class="text-clay">karıştır · kapsül sadece cumartesi · ↓ 2 dk</span></li>
+          <li>ZO Skin Health Hydrating Crème · 1 fındık</li>
+        </ol>
+      </div>
+
+      <div class="bg-cream/30 rounded-xl p-3">
+        <p class="font-serif text-forest text-sm">PAZAR <span class="text-[10px] text-clay font-sans uppercase tracking-wider">Peeling + Biyoselüloz</span></p>
+        <ol class="mt-1 space-y-0.5 text-forest/80 list-decimal list-inside">
+          <li>Sensai Silk Peeling Powder <span class="text-forest/50">— toz ile yıka</span></li>
+          <li>Obagi Foaming Gel <span class="text-forest/50">— ikinci temizlik</span></li>
+          <li>Forlle'd Hyalogy Platinum Lotion · 7–8 damla</li>
+          <li>Dr. Schrammek Super Vitalizing Biocellulose Mask <span class="text-clay">↓ 20 dk</span></li>
+          <li>Environ Vita-Peptide Eye Gel</li>
+          <li>SkinCeuticals A.G.E. Interrupter Ultra Serum · 5 damla <span class="text-clay">↓ 2 dk</span></li>
+          <li>MSB Sensitive Active Serum · 2 pompa <span class="text-clay">↓ 2 dk</span></li>
+          <li>Environ C-Quence Serum 3 · 2 pompa <span class="text-clay">↓ 2 dk</span></li>
+          <li>ZO Skin Health Hydrating Crème · 1 fındık</li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="mt-3 text-[10px] text-forest/60 italic leading-snug">Her akşamın sonunda boyun + dekolte: <strong>Obagi Elastiderm</strong>.</p>
+  </div>
+
+  <!-- PROTOKOL DIŞI -->
   <details class="bg-cream/40 rounded-3xl p-5 mb-6">
-    <summary class="font-serif text-lg text-forest cursor-pointer">⏸ Rotasyonda dinlenen ürünler</summary>
+    <summary class="font-serif text-lg text-forest cursor-pointer">⏸ Protokol dışı — şu an rotasyonda değil</summary>
     <p class="mt-3 text-sm text-forest/70 leading-relaxed">
-      Caudalie Resveratrol-Lift · Caudalie Premier Cru · Caudalie VinoHydra · Sensai Lift Focus Essence · Sensai Refreshing Eye Essence · Environ Avance Elixir
+      La Mer (Concentrate · Le Crème Nuit) · Augustinus Bader · iS Clinical Pro-Heal · Caudalie serisi · Isov Azulene · Genosys (Snow O2 · Bio Meso) · Sensai Ultra Intensive · Sensai Barrier Essence · Environ Revival Masque · Environ Avance Elixir (akşam kullanımı)
       <br><br>
-      <span class="text-xs">2 ay sonra rotasyona geri al. Şu an aynı anda kullanmak bariyer zayıflatır.</span>
+      <span class="text-xs">Bunlar uzmanın güncel protokolünde yok. Geri eklemek istersen Koç'a sor — hangi adımın yerine gireceğini söylesin. Aynı anda üst üste kullanmak bariyeri zayıflatır.</span>
     </p>
   </details>
 
@@ -1141,159 +1172,6 @@ tailwind.config = {
   </div>
 </section>
 
-<!-- =============== MODA =============== -->
-<section id="page-moda" class="active-page">
-  <div class="mb-6">
-    <p class="text-clay font-sans text-xs uppercase tracking-[0.2em] mb-2">Gardırop · Kombin · Alışveriş</p>
-    <h2 class="font-serif text-4xl text-forest">Moda</h2>
-    <p class="mt-3 text-xs text-forest/60 italic leading-relaxed">Parçalarını ekle (foto koyabilirsin) → otomatik kombin çıksın. Her şey cihazında kayıtlı kalır.</p>
-  </div>
-
-  <!-- Nereye gidiyorsun -->
-  <div class="bg-forest text-ivory rounded-3xl p-6 mb-6 glow">
-    <p class="text-clay-light text-[10px] uppercase tracking-widest mb-1">Etkinlik / yer</p>
-    <p class="font-serif text-xl mb-3">Nereye gidiyorsun?</p>
-    <input id="occasion" type="text" placeholder="Örn: iş toplantısı · akşam yemeği · Bodrum hafta sonu · davet" class="w-full bg-forest-light/50 rounded-2xl p-3 outline-none text-sm text-ivory placeholder-ivory/40 mb-3">
-    <button onclick="buildOccasionPrompt()" class="w-full bg-clay text-ivory font-sans uppercase tracking-widest text-xs py-3 rounded-full">◈ Gardırobumdan + alışveriş öner</button>
-    <p class="text-ivory/50 text-[11px] mt-3 leading-snug">Önce eldeki parçalardan kombin kurar, sonra eksikleri marka evreninden tamamlar — boyuna/kilona uygun, dik gösteren siluetle. <span class="text-clay-light">Ölçülerini ⚙ Ayarlar'dan gir.</span></p>
-  </div>
-
-  <!-- Otomatik öneri -->
-  <div class="mb-6">
-    <div class="flex items-center justify-between mb-3">
-      <h3 class="font-serif text-xl text-forest">✦ Önerilen kombinler</h3>
-      <button onclick="renderModa()" class="text-[10px] text-clay uppercase tracking-widest hover:text-forest transition">↻ yenile</button>
-    </div>
-    <div id="autoCombos" class="space-y-3"></div>
-  </div>
-
-  <!-- Fotoğraflarım -->
-  <div id="photoGalleryWrap" class="mb-6 hidden">
-    <div class="flex items-center justify-between mb-3">
-      <h3 class="font-serif text-xl text-forest">📷 Fotoğraflarım</h3>
-      <span id="galleryCount" class="text-[10px] text-clay uppercase tracking-widest"></span>
-    </div>
-    <div id="photoGallery" class="grid grid-cols-3 gap-2"></div>
-  </div>
-
-  <!-- Parça ekle -->
-  <div class="bg-white rounded-3xl p-6 glow mb-5">
-    <h3 class="font-serif text-xl text-forest mb-3">Parça ekle</h3>
-    <div class="grid grid-cols-2 gap-2 mb-2">
-      <select id="wCat" class="bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none">
-        <option value="ust">Üst (bluz/gömlek/triko)</option>
-        <option value="alt">Alt (pantolon/etek)</option>
-        <option value="elbise">Elbise</option>
-        <option value="dis">Dış (blazer/kaban/trenç)</option>
-        <option value="ayakkabi">Ayakkabı</option>
-        <option value="canta">Çanta</option>
-        <option value="aksesuar">Aksesuar (şal/takı/kemer)</option>
-      </select>
-      <input id="wColor" type="text" placeholder="Renk" class="bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none">
-    </div>
-    <input id="wName" type="text" placeholder="Parça adı (ör: yün blazer)" class="w-full bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none mb-2">
-    <input id="wBrand" type="text" placeholder="Marka — opsiyonel (Massimo Dutti)" class="w-full bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none mb-2">
-    <input id="wLink" type="url" inputmode="url" placeholder="Alışveriş linki — opsiyonel (aldığın yer)" class="w-full bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none mb-3">
-    <div class="grid grid-cols-2 gap-2 mb-2">
-      <label class="bg-cream/50 text-forest font-sans text-[11px] uppercase tracking-wider px-4 py-3 rounded-full text-center cursor-pointer hover:bg-cream/70 transition">
-        📷 Çek
-        <input id="wPhotoCam" type="file" accept="image/*" capture="environment" onchange="onPhotoPick(event)" class="hidden">
-      </label>
-      <label class="bg-cream/50 text-forest font-sans text-[11px] uppercase tracking-wider px-4 py-3 rounded-full text-center cursor-pointer hover:bg-cream/70 transition">
-        🖼 Galeriden
-        <input id="wPhotoGal" type="file" accept="image/*" onchange="onPhotoPick(event)" class="hidden">
-      </label>
-    </div>
-    <div id="wPhotoPreview" class="flex items-center gap-2 min-w-0 mb-3"></div>
-    <button onclick="addWardrobeItem()" class="w-full bg-clay text-ivory font-sans text-xs uppercase tracking-widest py-3 rounded-full">+ Gardıroba ekle</button>
-  </div>
-
-  <!-- Gardırop -->
-  <div class="mb-6">
-    <div class="flex items-center justify-between mb-3">
-      <h3 class="font-serif text-xl text-forest">Gardırobum</h3>
-      <span id="wCount" class="text-[10px] text-clay uppercase tracking-widest"></span>
-    </div>
-    <div id="wardrobeList" class="space-y-4"></div>
-  </div>
-
-  <!-- Alışveriş Listem -->
-  <div class="mb-8">
-    <p class="text-clay font-sans text-[11px] uppercase tracking-[0.2em] mb-1">Almak istediklerim</p>
-    <div class="flex items-baseline justify-between mb-4">
-      <h3 class="font-serif text-2xl text-forest">Alışveriş Listem</h3>
-      <span id="shCount" class="text-[10px] text-clay uppercase tracking-widest"></span>
-    </div>
-
-    <!-- Linkli kombin önerisi -->
-    <details open class="bg-cream/30 rounded-3xl p-5 mb-5">
-      <summary class="font-serif text-forest cursor-pointer text-sm">◈ Hazır kombin — linkli (satın al)</summary>
-      <p class="text-[11px] text-forest/55 mt-2 mb-4 leading-snug">Komple kombinler. Her parçanın <b>Ara →</b> linki Trendyol'da o ürünü açar. Beğenirsen tüm kombini listene ekle.</p>
-      <div id="linkCombos" class="space-y-3"></div>
-    </details>
-
-    <!-- Senin için seçtiğim kapsül -->
-    <details class="bg-cream/30 rounded-3xl p-5 mb-5">
-      <summary class="font-serif text-forest cursor-pointer text-sm">✦ Tek tek kapsül parçalar</summary>
-      <p class="text-[11px] text-forest/55 mt-2 mb-4 leading-snug">Boyuna/kilona uygun, dik gösteren parçalar — marka evreninden. Beğendiğini <b>+ Ekle</b> ile listene al.</p>
-      <div id="suggestedBuys" class="space-y-2.5"></div>
-    </details>
-
-    <!-- Listem -->
-    <div id="wishlistList" class="space-y-3"></div>
-
-    <!-- Kendin ekle -->
-    <details class="bg-cream/30 rounded-3xl p-5 mt-5">
-      <summary class="font-serif text-forest cursor-pointer text-sm">⊕ Kendin ekle</summary>
-      <div class="mt-4">
-        <input id="shName" type="text" placeholder="Ürün adı (ör: yün blazer)" class="w-full bg-white rounded-xl p-2.5 text-sm text-forest outline-none mb-2">
-        <input id="shBrand" type="text" placeholder="Marka (ör: Max Mara)" class="w-full bg-white rounded-xl p-2.5 text-sm text-forest outline-none mb-2">
-        <input id="shLink" type="url" inputmode="url" placeholder="Satın alma linki (ürün sayfası)" class="w-full bg-white rounded-xl p-2.5 text-sm text-forest outline-none mb-2">
-        <div class="grid grid-cols-2 gap-2 mb-2">
-          <label class="bg-white text-forest font-sans text-[11px] uppercase tracking-wider px-4 py-3 rounded-full text-center cursor-pointer hover:bg-cream/50 transition">
-            ◐ Fotoğraf çek
-            <input id="shPhotoCam" type="file" accept="image/*" capture="environment" onchange="onWishPhotoPick(event)" class="hidden">
-          </label>
-          <label class="bg-white text-forest font-sans text-[11px] uppercase tracking-wider px-4 py-3 rounded-full text-center cursor-pointer hover:bg-cream/50 transition">
-            ▤ Galeriden
-            <input id="shPhotoGal" type="file" accept="image/*" onchange="onWishPhotoPick(event)" class="hidden">
-          </label>
-        </div>
-        <div id="shPhotoPreview" class="flex items-center gap-2 min-w-0 mb-3"></div>
-        <button onclick="addWishItem()" class="w-full bg-forest text-ivory font-sans text-xs uppercase tracking-widest py-3 rounded-full">Listeye ekle</button>
-      </div>
-    </details>
-  </div>
-
-  <!-- Aksiyonlar -->
-  <div class="bg-forest text-ivory rounded-3xl p-6 mb-5 glow">
-    <p class="text-clay-light text-[10px] uppercase tracking-widest mb-1">Daha derin öneri</p>
-    <p class="font-serif text-xl mb-4">Claude'a sor</p>
-    <button onclick="buildOutfitPrompt()" class="w-full bg-clay text-ivory font-sans uppercase tracking-widest text-xs py-3 rounded-full mb-2">◈ Akıllı kombin</button>
-    <button onclick="buildShoppingPrompt()" class="w-full bg-forest-light/60 text-ivory font-sans uppercase tracking-widest text-xs py-3 rounded-full">✦ Alışveriş önerisi</button>
-    <p class="text-ivory/50 text-[11px] mt-3 leading-snug">Yukarıdaki öneriler anında çıkar. Daha kişisel/derin yorum için bu butonlar gardırobunu Claude'a taşır.</p>
-  </div>
-
-  <!-- Stil profili -->
-  <details class="bg-cream/40 rounded-2xl p-5 mb-3">
-    <summary class="font-serif text-forest cursor-pointer text-sm">❖ Stil profilim</summary>
-    <div class="mt-3">
-      <textarea id="styleProfile" rows="4" class="w-full bg-white rounded-2xl p-3 outline-none text-sm resize-none" placeholder="Örn: 44 yaş CEO. Smart-casual + iş şıklığı. Sade, kaliteli, kapsül gardırop. Sevdiğim renkler: lacivert, krem, taba, siyah. Kaçındığım: aşırı parlak/desenli."></textarea>
-      <button onclick="saveStyleProfile()" class="mt-3 bg-forest text-ivory font-sans text-xs uppercase tracking-wider px-5 py-2 rounded-full">Kaydet</button>
-    </div>
-  </details>
-
-  <!-- Marka evreni -->
-  <details class="bg-cream/40 rounded-2xl p-5">
-    <summary class="font-serif text-forest cursor-pointer text-sm">⚘ Alışveriş marka evrenim</summary>
-    <div class="mt-3 space-y-2 text-xs text-forest/80 font-sans leading-snug">
-      <p><span class="text-clay uppercase tracking-widest text-[9px]">Günlük · High-street</span><br>Mango · H&M · Koton · Marks &amp; Spencer · Uniqlo · COS · Trendyol satıcıları</p>
-      <p><span class="text-clay uppercase tracking-widest text-[9px]">Premium · Tailoring &amp; Çağdaş</span><br>Beymen · Massimo Dutti · Network · Theory · Sandro · Maje · Sézane · İpekyol · Rue · Nocturne · Atelier Aliz · Vakko · Raisa&amp;Vanessa</p>
-      <p><span class="text-clay uppercase tracking-widest text-[9px]">Lüks</span><br>Max Mara · Loro Piana · Brunello Cucinelli · Hermès · Prada <span class="text-forest/50">(çanta &amp; ayakkabı)</span></p>
-    </div>
-  </details>
-</section>
-
 <!-- =============== AYAR =============== -->
 <section id="page-settings" class="hidden-page">
   <div class="mb-6">
@@ -1305,27 +1183,6 @@ tailwind.config = {
     <p class="text-xs text-forest/60 mb-3">Koç bu bilgileri kullanır.</p>
     <textarea id="personalContext" rows="4" class="w-full bg-cream/30 rounded-2xl p-3 outline-none text-sm resize-none"></textarea>
     <button onclick="savePersonalContext()" class="mt-3 bg-forest text-ivory font-sans text-xs uppercase tracking-wider px-5 py-2 rounded-full">Kaydet</button>
-  </div>
-
-  <div class="bg-white rounded-3xl p-6 glow mb-4">
-    <h3 class="font-serif text-lg text-forest mb-1">Ölçülerim</h3>
-    <p class="text-[11px] text-forest/55 mb-3 leading-snug">Moda önerileri bunu kullanır — seni dik/uzun gösterecek, hacim eklemeyecek şekilde.</p>
-    <div class="grid grid-cols-3 gap-2 mb-2">
-      <input id="bHeight" type="number" inputmode="numeric" placeholder="Boy (cm)" class="bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none">
-      <input id="bWeight" type="number" inputmode="numeric" placeholder="Kilo (kg)" class="bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none">
-      <input id="bSize" type="text" placeholder="Beden (38)" class="bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none">
-    </div>
-    <select id="bShape" class="w-full bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none mb-2">
-      <option value="">Vücut tipi seç (opsiyonel)</option>
-      <option value="Kum saati">Kum saati (bel belirgin)</option>
-      <option value="Armut">Armut (alt yarı dolgun)</option>
-      <option value="Elma">Elma (orta bölge dolgun)</option>
-      <option value="Dikdörtgen">Dikdörtgen (düz hat)</option>
-      <option value="Ters üçgen">Ters üçgen (üst yarı geniş)</option>
-      <option value="?">Emin değilim</option>
-    </select>
-    <input id="bNotes" type="text" placeholder="Kaçındığım / gizlemek istediğim — opsiyonel" class="w-full bg-cream/30 rounded-xl p-2.5 text-sm text-forest outline-none mb-3">
-    <button onclick="saveBodyProfile()" class="bg-forest text-ivory font-sans text-xs uppercase tracking-wider px-5 py-2 rounded-full">Kaydet</button>
   </div>
 
   <div class="bg-white rounded-3xl p-6 glow mb-4">
@@ -1345,25 +1202,17 @@ tailwind.config = {
 
 </main>
 
-<!-- Foto büyütme -->
-<div id="lightbox" onclick="closeLightbox()" class="fixed inset-0 z-50 bg-ink/90 hidden items-center justify-center p-6 cursor-zoom-out">
-  <img id="lightboxImg" src="" alt="" class="max-w-full max-h-full rounded-2xl shadow-2xl">
-</div>
-
 <script>
 /* ================= STATE ================= */
 const STORAGE_KEY = 'pk_wellness_v2';
 const BACKUP_KEY = 'pk_wellness_v2_bak';
-
 function parseStore(k){ try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch { return null; } }
-function hasItems(o){ return o && ((o.wardrobe && o.wardrobe.length) || (o.wishlist && o.wishlist.length)); }
 
-// Fotoğrafsız hafif yedek — kota dolsa bile parça LİSTESİ asla kaybolmaz
+function hasItems(o){ return o && o.days && Object.keys(o.days).length > 0; }
+
+// Hafif yedek — ana kayıt bozulursa gün geçmişi kaybolmasın
 function slimBackup(st){
-  const strip = arr => (arr || []).map(({ photo, ...rest }) => rest);
   return JSON.stringify({
-    wardrobe: strip(st.wardrobe), wishlist: strip(st.wishlist),
-    styleProfile: st.styleProfile, bodyProfile: st.bodyProfile,
     personalContext: st.personalContext, days: st.days,
     shopBought: st.shopBought, aesCat: st.aesCat,
   });
@@ -1372,7 +1221,7 @@ function slimBackup(st){
 let state = (() => {
   let s = parseStore(STORAGE_KEY);
   const bak = parseStore(BACKUP_KEY);
-  // Ana veri boş/bozuk ama yedekte parça varsa → yedekten kurtar
+  // Ana veri boş/bozuk ama yedekte gün kaydı varsa → yedekten kurtar
   if (!hasItems(s) && hasItems(bak)) s = Object.assign({}, s || {}, bak);
   s = s || {};
   return {
@@ -1380,18 +1229,14 @@ let state = (() => {
     shopBought: s.shopBought || {},
     aesCat: s.aesCat || 'face',
     personalContext: s.personalContext || '44 yaş, kadın, Restar Group CEO (otomotiv/savunma). Yüksek iş yoğunluğu, kronik stres, perimenopause penceresi. Doğa ve deniz tutkusu. Hızlı + net + aksiyon odaklı.',
-    wardrobe: s.wardrobe || [],
-    wishlist: s.wishlist || [],
-    styleProfile: s.styleProfile || '',
-    bodyProfile: s.bodyProfile || {},
   };
 })();
 
 function save() {
   let mainOk = false;
   try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); mainOk = true; }
-  catch (e) { try { toast('Depolama doldu — yedek alındı, birkaç fotoğrafı sil'); } catch {} }
-  // Her durumda hafif (fotoğrafsız) yedeği güncel tut
+  catch (e) { try { toast('Depolama doldu — yedek alındı'); } catch {} }
+  // Her durumda hafif yedeği güncel tut
   try { localStorage.setItem(BACKUP_KEY, slimBackup(state)); } catch {}
 }
 // Açılışta ana veriyi normalize et (yedekten kurtarıldıysa hemen yeniden yaz)
@@ -1416,7 +1261,6 @@ function switchTab(tab) {
   if (tab === 'shop') renderShop();
   if (tab === 'aesthetic') renderAesthetic();
   if (tab === 'longevity') renderLongevity();
-  if (tab === 'moda') renderModa();
   if (tab === 'health') window.scrollTo({ top: 0 });
   if (tab === 'settings') renderSettings();
 }
@@ -1426,115 +1270,150 @@ document.querySelectorAll('.tab-btn').forEach(b => b.addEventListener('click', (
 const DAY_NAMES = ['Pazar','Pazartesi','Salı','Çarşamba','Perşembe','Cuma','Cumartesi'];
 const MONTHS = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
 
-function getTonight() {
+/* ---------------------------------------------------------------
+   CİLT PROTOKOLÜ — uzmanın son yazdığı 7 günlük protokol
+   Gruplar:  A = Pzt · Çar · Cum   B = Sal · Per   C = Cmt · Paz
+   Bekleme:  katmanlar arası 2 dk · enzimden sonra 15 dk
+   Sensai Silk Peeling Powder haftada 2 akşam → Cmt + Paz
+   Diğer akşamların yıkaması → Sensai Ultimate The Creamy Soap
+   Boyun her gün: sabah Vol.U.Lift · akşam Obagi Elastiderm
+---------------------------------------------------------------- */
+
+const NECK_AM = { id:'am_neck', t:'Boyun — Vol.U.Lift', s:'boyun + dekolte' };
+const NECK_PM = { id:'pm_neck', t:'Boyun — Obagi Elastiderm', s:'boyun + dekolte' };
+
+// Sabah — her günün ilk 4 adımı ortak
+const AM_BASE = [
+  { id:'am_clean',  t:'Obagi Foaming Gel · 1 fındık', s:'ıslak cilde nazikçe masaj, durula, kurula' },
+  { id:'am_lotion', t:"Forlle'd Hyalogy Platinum Lotion · 7–8 damla", s:'avuca al, göz dahil tüm yüze tampon' },
+  { id:'am_toner',  t:'MBR Hydrating &amp; Lifting Toner · 3 püskürtme', s:'tüm yüze' },
+  { id:'am_eye',    t:'Environ Vita-Peptide Eye Gel', s:'göz çevresine ince tabaka' },
+];
+// Sabah — aktiften sonraki ortak iki katman
+const AM_MID = [
+  { id:'am_collagen', t:'SkinCeuticals Collagen Pro-Solution · 5 damla', s:'↓ 2 dk bekle' },
+  { id:'am_avst',     t:'Environ AVST Moisturiser 2 · 2 pompa', s:'↓ 2 dk bekle' },
+];
+const AM_SPF = { id:'am_spf', t:'Colorescience güneş koruma', s:'⭐ son adım — her sabah', hero: true };
+
+function getMorning() {
   const d = new Date().getDay();
 
-  // ÇİFT YIKAMA + MIST — her akşam başlangıç
-  const cleanseStart = [
-    { id:'pm_clean1', t:'Genosys Snow O2 Cleanser', s:'1. yıkama · oksijenli derin' },
-    { id:'pm_clean2', t:'Sensai Creamy Soap', s:'2. yıkama · yumuşak finish' },
-    { id:'pm_mist', t:'Isov Azulene Mist', s:'kol mesafe sık → tamponla' },
-  ];
-
-  // EK ALANLAR — her gece sonu (göz, boyun, el, dudak)
-  const sealAreas = [
-    { id:'pm_eye', t:'Sensai Melt Rich Eye', s:'göz çevresi · ringbox hareketi' },
-    { id:'pm_neck', t:'Sensai Throat & Bust', s:'boyun · yukarı çek' },
-    { id:'pm_hand', t:'MBR The Best Hand', s:'el üstü' },
-    { id:'pm_lip', t:'Sensai Lip Treatment', s:'dudak' },
-  ];
-
-  // PAZARTESİ — Revive + Retinol
-  if (d === 1) return {
-    type: 'Revive + Retinol Gecesi',
-    hero: 'ReviveNX → Maske → C-Quence 3',
+  // SALI · PERŞEMBE
+  if (d === 2 || d === 4) return {
+    type: 'Salı — Perşembe',
     steps: [
-      ...cleanseStart,
-      { id:'pm_revive', t:'Revive NX · ½ şişe', s:'yüz + boyun · tamponla' },
-      { id:'pm_mask', t:'Revive Maske', s:'20 dk · kaldır, durulama YOK, kalanı yedir' },
-      { id:'pm_active', t:'Environ C-Quence 3 · 1 pompa', s:'2 dk sonra · retinol' },
-      { id:'pm_elixir', t:'Environ Avance Elixir · 2 pompa', s:'2 dk sonra · final aktif' },
-      { id:'pm_seal', t:'Sensai Ultra Intensive Cream', s:'önerim ✨ · bariyer kapama' },
-      ...sealAreas,
+      ...AM_BASE,
+      { id:'am_active', t:'SkinCeuticals P-TIOX · 5 damla', s:'↓ 2 dk bekle' },
+      ...AM_MID,
+      { id:'am_final', t:'Environ Avance DFP312 Elixir · 2 pompa', s:'kapama katmanı' },
+      AM_SPF, NECK_AM,
     ]
   };
 
-  // SALI + CUMARTESİ — Retinol + Oil
-  if (d === 2 || d === 6) return {
-    type: 'Retinol + Oil Gecesi',
-    hero: 'Queence (3) + Environ Oil Capsule',
+  // CUMARTESİ · PAZAR
+  if (d === 6 || d === 0) return {
+    type: 'Cumartesi — Pazar',
     steps: [
-      ...cleanseStart,
-      { id:'pm_active', t:'Environ Queence Serum 3 · 2 pompa', s:'retinol' },
-      { id:'pm_oil', t:'Environ Moisture+ Oil Capsule · 1 adet', s:'2 dk sonra · patlat, yedir' },
-      ...sealAreas,
+      ...AM_BASE,
+      { id:'am_active', t:'SkinCeuticals HA Intensifier Multi-Glycan · 5 damla', s:'↓ 2 dk bekle' },
+      ...AM_MID,
+      { id:'am_final', t:'Environ Avance DFP312 Elixir · 2 pompa', s:'kapama katmanı' },
+      AM_SPF, NECK_AM,
     ]
   };
 
-  // ÇARŞAMBA — Azulene Nazik
-  if (d === 3) return {
-    type: 'Azulene Nazik Gece',
-    hero: 'Isov Azulene Care Serum + Cream',
-    steps: [
-      ...cleanseStart,
-      { id:'pm_active', t:'Isov Azulene Care Serum', s:'yüz + boyun · tamponla' },
-      { id:'pm_cream', t:'Isov Azulene Care Cream · 1 fındık', s:'2 dk sonra · kapama' },
-      ...sealAreas,
-    ]
-  };
-
-  // PERŞEMBE — Revival Maske
-  if (d === 4) return {
-    type: 'Revival Maske Gecesi',
-    hero: 'Environ Revival Masque',
-    steps: [
-      ...cleanseStart,
-      { id:'pm_mask', t:'Environ Revival Masque', s:'yüz + boyun · 20 dk · BOL SU DURULA' },
-      { id:'pm_mist2', t:'Isov Azulene Mist (tekrar)', s:'mask sonrası yatıştır' },
-      { id:'pm_essence', t:'Sensai Barrier Essence · 2 pompa', s:'tonik' },
-      { id:'pm_elixir', t:'Environ Avance Elixir · 2 pompa', s:'2 dk sonra · final' },
-      { id:'pm_seal', t:'La Mer Le Crème Nuit · ½ fındık', s:'önerim ✨ · mask sonrası rebuild' },
-      ...sealAreas,
-    ]
-  };
-
-  // CUMA — Bio Meso + Revive
-  if (d === 5) return {
-    type: 'Biostimulant + Revive Gecesi',
-    hero: 'Bio Meso Spikül + ReviveNX → La Mer',
-    steps: [
-      ...cleanseStart,
-      { id:'pm_spicule', t:'Genosys Bio Meso Spicule · 2 fındık', s:'tamponla · MASAJ YOK · batışma normal' },
-      { id:'pm_revive', t:'Revive NX · ½ şişe', s:'1-2 dk sonra · yüz + boyun tamponla' },
-      { id:'pm_mask', t:'Revive Maske', s:'20 dk · kaldır, durulama YOK, kalanı yedir' },
-      { id:'pm_essence', t:'Sensai Barrier Essence · 2 pompa', s:'2 dk sonra · tonik' },
-      { id:'pm_cream', t:'La Mer Le Crème Nuit · 1 fındık', s:'2 dk sonra · final krem' },
-      ...sealAreas,
-    ]
-  };
-
-  // PAZAR (d===0) — Hafif Retinol
+  // PAZARTESİ · ÇARŞAMBA · CUMA
   return {
-    type: 'Hafif Retinol Gecesi',
-    hero: 'Queence (3) + Avance Elixir',
+    type: 'Pazartesi — Çarşamba — Cuma',
     steps: [
-      ...cleanseStart,
-      { id:'pm_active', t:'Environ Queence Serum 3 · 2 pompa', s:'retinol' },
-      { id:'pm_elixir', t:'Environ Avance Elixir · 2 pompa', s:'2 dk sonra · final aktif' },
-      { id:'pm_seal', t:'Sensai Ultra VEYA La Mer Concentrate', s:'önerim ✨ · nem kilidi' },
-      ...sealAreas,
+      ...AM_BASE,
+      { id:'am_active', t:'Obagi Professional-C %10 · 5 damla', s:'↓ 2 dk bekle' },
+      ...AM_MID,
+      { id:'am_final', t:'Obagi SuzanObagiMD Intensive Daily Repair · 2 pompa', s:'kapama katmanı' },
+      AM_SPF, NECK_AM,
     ]
   };
 }
 
-const AM_STEPS = [
-  { id:'am_clean', t:'Sensai Creamy Soap', s:'fırça ile · yumuşak' },
-  { id:'am_serum', t:'iS Clinical Pro-Heal', s:'antioksidan · 3-4 damla' },
-  { id:'am_ha', t:'SkinCeuticals H.A. Intensifier Multi-Glycan', s:'peptid + HA · 2-3 damla · neme kilit' },
-  { id:'am_cream', t:'Sensai Cellular Performance', s:'hafif nem' },
-  { id:'am_eye', t:'Environ Eye Gel', s:'göz çevresi' },
-  { id:'am_spf', t:'SkinCeuticals SPF 50', s:'⭐ non-negotiable', hero: true },
-];
+function getTonight() {
+  const d = new Date().getDay();
+
+  // CUMARTESİ — toz peeling + PDRN maske + Oil Capsule
+  if (d === 6) return {
+    type: 'Peeling + PDRN Gecesi',
+    hero: 'Sensai toz → Bright PDRN maske → C-Quence + Oil Capsule',
+    steps: [
+      { id:'pm_peel',   t:'Sensai Silk Peeling Powder', s:'toz ile yıka' },
+      { id:'pm_clean2', t:'Obagi Foaming Gel', s:'ikinci temizlik' },
+      { id:'pm_lotion', t:"Forlle'd Hyalogy Platinum Lotion · 7–8 damla", s:'avuca al, göz dahil tüm yüze tampon' },
+      { id:'pm_mask',   t:'Bright PDRN Sheet Mask', s:'20 dakika bekle' },
+      { id:'pm_eye',    t:'Environ Vita-Peptide Eye Gel', s:'göz çevresine ince tabaka' },
+      { id:'pm_age',    t:'SkinCeuticals A.G.E. Interrupter Ultra Serum · 5 damla', s:'↓ 2 dk bekle' },
+      { id:'pm_msb',    t:'MSB Sensitive Active Serum · 2 pompa', s:'↓ 2 dk bekle' },
+      { id:'pm_active', t:'Environ C-Quence · 2 pompa + 1 kapsül Oil Capsule', s:'karıştırarak uygula · kapsül SADECE cumartesi · ↓ 2 dk' },
+      { id:'pm_cream',  t:'ZO Skin Health Hydrating Crème · 1 fındık', s:'kapama' },
+      NECK_PM,
+    ]
+  };
+
+  // PAZAR — toz peeling + biyoselüloz maske
+  if (d === 0) return {
+    type: 'Peeling + Biyoselüloz Gecesi',
+    hero: 'Sensai toz → Schrammek maske → C-Quence 3',
+    steps: [
+      { id:'pm_peel',   t:'Sensai Silk Peeling Powder', s:'toz ile yıka' },
+      { id:'pm_clean2', t:'Obagi Foaming Gel', s:'ikinci temizlik' },
+      { id:'pm_lotion', t:"Forlle'd Hyalogy Platinum Lotion · 7–8 damla", s:'avuca al, göz dahil tüm yüze tampon' },
+      { id:'pm_mask',   t:'Dr. Schrammek Super Vitalizing Biocellulose Mask', s:'20 dakika bekle' },
+      { id:'pm_eye',    t:'Environ Vita-Peptide Eye Gel', s:'göz çevresine ince tabaka' },
+      { id:'pm_age',    t:'SkinCeuticals A.G.E. Interrupter Ultra Serum · 5 damla', s:'↓ 2 dk bekle' },
+      { id:'pm_msb',    t:'MSB Sensitive Active Serum · 2 pompa', s:'↓ 2 dk bekle' },
+      { id:'pm_active', t:'Environ C-Quence Serum 3 · 2 pompa', s:'↓ 2 dk bekle' },
+      { id:'pm_cream',  t:'ZO Skin Health Hydrating Crème · 1 fındık', s:'kapama' },
+      NECK_PM,
+    ]
+  };
+
+  // SALI · PERŞEMBE — Celltermi Revive gecesi
+  if (d === 2 || d === 4) return {
+    type: 'Celltermi Revive Gecesi',
+    hero: 'Revive NX ½ ampul → Revive maske (20 dk) → Novacell',
+    steps: [
+      { id:'pm_clean1', t:'Obagi Foaming Gel', s:'cilt temizliği' },
+      { id:'pm_toner',  t:'MBR Hydrating &amp; Lifting Toner · 2 püskürtme', s:'avuca al, tüm yüze tampon' },
+      { id:'pm_eye',    t:'Environ Vita-Peptide Eye Gel', s:'göz çevresine ince tabaka' },
+      { id:'pm_amp',    t:'Celltermi Revive NX ampul · yarım ampul', s:'yüz + boyun · tamponla' },
+      { id:'pm_mask',   t:'Celltermi Revive maske', s:'ampulün üzerine yapıştır · 20 dk sonra kaldır · ↓ 2 dk' },
+      { id:'pm_age',    t:'SkinCeuticals A.G.E. Interrupter Ultra Serum · 5 damla', s:'↓ 2 dk bekle' },
+      { id:'pm_nova',   t:'AlphaScience Novacell [Cg] · 5 damla', s:'↓ 2 dk bekle' },
+      { id:'pm_msb',    t:'MSB Sensitive Hydro Gel Serum forte · 2 pompa', s:'↓ 2 dk bekle' },
+      { id:'pm_active', t:'Environ C-Quence Serum 3 · 2 pompa', s:'↓ 2 dk bekle' },
+      { id:'pm_cream',  t:'Obagi SuzanObagiMD Moisture Restore · 1 pompa', s:'kapama' },
+      NECK_PM,
+    ]
+  };
+
+  // PAZARTESİ · ÇARŞAMBA · CUMA — enzim + retinol gecesi
+  return {
+    type: 'Enzim + Retinol Gecesi',
+    hero: 'MSB Enzyme (15 dk) → C-Quence 3 → Retinol Forte',
+    steps: [
+      { id:'pm_soap',    t:'Sensai Ultimate The Creamy Soap', s:'normal yıkama' },
+      { id:'pm_enzyme',  t:'MSB Sensitive Enzyme · 2 pompa', s:'tüm yüze · 15 dk bekle · nemli havluyla bastırmadan sil' },
+      { id:'pm_clean2',  t:'Obagi Foaming Gel', s:'ikinci temizlik' },
+      { id:'pm_lotion',  t:"Forlle'd Hyalogy Platinum Lotion · 7–8 damla", s:'avuca al, göz dahil tüm yüze tampon' },
+      { id:'pm_eye',     t:'Environ Vita-Peptide Eye Gel', s:'göz çevresine ince tabaka' },
+      { id:'pm_age',     t:'SkinCeuticals A.G.E. Interrupter Ultra Serum · 5 damla', s:'↓ 2 dk bekle' },
+      { id:'pm_msb',     t:'MSB Sensitive Active Serum · 2 pompa', s:'↓ 2 dk bekle' },
+      { id:'pm_active',  t:'Environ C-Quence Serum 3 · 2 pompa', s:'↓ 2 dk bekle' },
+      { id:'pm_retinol', t:'Environ Retinol Serum Forte · 2 pompa', s:'↓ 2 dk bekle' },
+      { id:'pm_vol',     t:'Vol.U.Lift krem · 2 leblebi', s:'yüz' },
+      { id:'pm_cream',   t:'ZO Skin Health Hydrating Crème · yarım fındık', s:'yatmaya yakın' },
+      NECK_PM,
+    ]
+  };
+}
 
 const DAILY_STEPS = [
   { id:'d_water', t:'2 litre su', s:'hidrasyon' },
@@ -1551,16 +1430,19 @@ function renderToday() {
   const g = hour < 5 ? 'İyi geceler' : hour < 12 ? 'Günaydın' : hour < 17 ? 'İyi günler' : hour < 22 ? 'İyi akşamlar' : 'İyi geceler';
   document.getElementById('greeting').textContent = g + '.';
 
+  const morning = getMorning();
   const tonight = getTonight();
   document.getElementById('tonightType').textContent = tonight.type;
   document.getElementById('tonightHero').textContent = '"' + tonight.hero + '"';
+  const amLabel = document.getElementById('amLabel');
+  if (amLabel) amLabel.textContent = morning.type;
 
   const t = getToday();
 
   // AM
-  document.getElementById('amSteps').innerHTML = AM_STEPS.map(s => stepCard(s, !!t.am[s.id], 'am')).join('');
-  const amDone = AM_STEPS.filter(s => t.am[s.id]).length;
-  document.getElementById('amProgress').textContent = `${amDone}/${AM_STEPS.length}`;
+  document.getElementById('amSteps').innerHTML = morning.steps.map(s => stepCard(s, !!t.am[s.id], 'am')).join('');
+  const amDone = morning.steps.filter(s => t.am[s.id]).length;
+  document.getElementById('amProgress').textContent = `${amDone}/${morning.steps.length}`;
 
   // Daily
   document.getElementById('dailySteps').innerHTML = DAILY_STEPS.map(s => stepCard(s, !!t.daily[s.id], 'daily')).join('');
@@ -1648,13 +1530,13 @@ function stat(label, val, sub) {
 /* ================= RUTİN ================= */
 function renderRoutine() {
   const week = [
-    { d: 'Pazartesi', t: 'Revive + Retinol', h: 'ReviveNX → Maske → C-Quence 3 → Avance' },
-    { d: 'Salı', t: 'Retinol + Oil', h: 'Queence (3) + Environ Oil Capsule' },
-    { d: 'Çarşamba', t: 'Azulene Nazik', h: 'Isov Azulene Serum + Cream' },
-    { d: 'Perşembe', t: 'Revival Maske', h: 'Revival Masque → Barrier → Avance' },
-    { d: 'Cuma', t: 'Bio Meso + Revive', h: 'Bio Meso Spikül → ReviveNX → La Mer' },
-    { d: 'Cumartesi', t: 'Retinol + Oil', h: 'Queence (3) + Environ Oil Capsule' },
-    { d: 'Pazar', t: 'Hafif Retinol', h: 'Queence (3) + Avance Elixir' },
+    { d: 'Pazartesi',  t: 'Enzim + Retinol',  h: 'MSB Enzyme (15 dk) → C-Quence 3 → Retinol Forte' },
+    { d: 'Salı',       t: 'Celltermi Revive', h: 'Revive NX ½ ampul → Revive maske (20 dk) → Novacell' },
+    { d: 'Çarşamba',   t: 'Enzim + Retinol',  h: 'MSB Enzyme (15 dk) → C-Quence 3 → Retinol Forte' },
+    { d: 'Perşembe',   t: 'Celltermi Revive', h: 'Revive NX ½ ampul → Revive maske (20 dk) → Novacell' },
+    { d: 'Cuma',       t: 'Enzim + Retinol',  h: 'MSB Enzyme (15 dk) → C-Quence 3 → Retinol Forte' },
+    { d: 'Cumartesi',  t: 'Peeling + PDRN',   h: 'Sensai toz → Bright PDRN maske → C-Quence + Oil Capsule' },
+    { d: 'Pazar',      t: 'Peeling + Maske',  h: 'Sensai toz → Schrammek biyoselüloz → C-Quence 3' },
   ];
   const todayName = DAY_NAMES[new Date().getDay()];
   document.getElementById('weekRotation').innerHTML = week.map(w => {
@@ -2055,7 +1937,7 @@ function buildPrompt() {
       const am = Object.keys(day.am || {}).filter(k => day.am[k]).length;
       const pm = Object.keys(day.pm || {}).filter(k => day.pm[k]).length;
       const dly = Object.keys(day.daily || {}).filter(k => day.daily[k]).length;
-      data += `- ${d}: sabah ${am}/5, akşam ${pm}/4, gün içi ${dly}/5${day.mood ? `, ruh hali: ${day.mood}` : ''}\n`;
+      data += `- ${d}: sabah ${am} adım, akşam ${pm} adım, gün içi ${dly}/5${day.mood ? `, ruh hali: ${day.mood}` : ""}\n`;
     });
   }
   return `Sen Pınar Kamçı'nın kişisel wellness + longevity + güzellik + perimenopause danışmanısın.
@@ -2076,18 +1958,23 @@ function buildPrompt() {
 ## PINAR HAKKINDA
 ${state.personalContext}
 
-## MEVCUT CİLT ENVANTERİ (~€6K)
-Environ (C-Quence 3, Avance Elixir, Revival Masque, Oil Capsules, Eye Gel), Sensai (Creamy Soap, Ultra Intensive, Melt Rich Eye, Throat & Bust...), Shiseido (Ultimune), La Mer (Concentrate, Night Cream, Treatment Lotion), SkinCeuticals (A.G.E. Interrupter, Collagen Pro, SPF 50), iS Clinical Pro-Heal, Caudalie (rotasyon), MBR Hand, Genosys Bio-Meso PDRN, Revive NX, Celltermi, Isov Azulene.
+## GÜNCEL CİLT PROTOKOLÜ (uzman yazımı · 7 gün)
+Bekleme kuralı: katmanlar arası 2 dk, enzimden sonra 15 dk. Boyun her gün: sabah Vol.U.Lift, akşam Obagi Elastiderm.
 
-### AKTİF ROTASYON
-- Sabah: Creamy Soap → iS Clinical → Sensai Cream → Environ Eye → SkinCeuticals SPF 50
-- Pzt/Çar/Cum: Environ C-Quence 3 + Sensai Ultra
-- Sal/Per: SkinCeuticals A.G.E. + La Mer Night
-- Cmt: Environ Oil + La Mer Concentrate
-- Pzr: Revival Masque / Celltermi
+### SABAH — ortak taban (her gün)
+Obagi Foaming Gel → Forlle'd Hyalogy Platinum Lotion → MBR Hydrating & Lifting Toner → Environ Vita-Peptide Eye Gel → [günün aktifi] → SkinCeuticals Collagen Pro-Solution → Environ AVST Moisturiser 2 → [günün kapaması] → Colorescience güneş koruma
+- Pzt/Çar/Cum: aktif = Obagi Professional-C %10 · kapama = Obagi SuzanObagiMD Intensive Daily Repair
+- Sal/Per: aktif = SkinCeuticals P-TIOX · kapama = Environ Avance DFP312 Elixir
+- Cmt/Paz: aktif = SkinCeuticals HA Intensifier Multi-Glycan · kapama = Environ Avance DFP312 Elixir
 
-### EKSİKLER (önerilmiş)
-Tretinoin, azelaic %15, niasinamid %10, Anua Heartleaf, Numbuzin No.3, Beauty of Joseon SPF
+### AKŞAM
+- Pzt/Çar/Cum (enzim + retinol): Sensai Ultimate Creamy Soap → MSB Sensitive Enzyme (15 dk) → Obagi Foaming Gel → Forlle'd Lotion → Eye Gel → SkinCeuticals A.G.E. Interrupter Ultra → MSB Sensitive Active Serum → Environ C-Quence Serum 3 → Environ Retinol Serum Forte → Vol.U.Lift krem → ZO Hydrating Crème
+- Sal/Per (Celltermi): Obagi Foaming Gel → MBR Toner → Eye Gel → Celltermi Revive NX ½ ampul → Celltermi Revive maske (20 dk) → A.G.E. Interrupter Ultra → AlphaScience Novacell [Cg] → MSB Sensitive Hydro Gel Serum forte → Environ C-Quence Serum 3 → Obagi SuzanObagiMD Moisture Restore
+- Cmt (peeling + PDRN): Sensai Silk Peeling Powder → Obagi Foaming Gel → Forlle'd Lotion → Bright PDRN Sheet Mask (20 dk) → Eye Gel → A.G.E. Interrupter Ultra → MSB Sensitive Active Serum → Environ C-Quence + 1 Oil Capsule (sadece cumartesi) → ZO Hydrating Crème
+- Paz (peeling + biyoselüloz): Sensai Silk Peeling Powder → Obagi Foaming Gel → Forlle'd Lotion → Dr. Schrammek Super Vitalizing Biocellulose Mask (20 dk) → Eye Gel → A.G.E. Interrupter Ultra → MSB Sensitive Active Serum → Environ C-Quence Serum 3 → ZO Hydrating Crème
+
+### PROTOKOL DIŞI (şu an rotasyonda değil)
+La Mer, Augustinus Bader, iS Clinical Pro-Heal, Caudalie, Isov Azulene, Genosys, Sensai Ultra Intensive/Barrier Essence, Environ Revival Masque. Öneri verirken önce bu protokolü koru — ekleme yapacaksan hangi adımın yerine geçtiğini söyle.
 ${data}
 
 ## SORUM
@@ -2106,559 +1993,9 @@ async function copyAndOpenClaude() {
   setTimeout(() => window.open('https://claude.ai/new', '_blank'), 250);
 }
 
-/* ================= MODA ================= */
-const MODA_CATS = [
-  { key:'ust',      label:'Üst',      icon:'◈' },
-  { key:'alt',      label:'Alt',      icon:'◇' },
-  { key:'elbise',   label:'Elbise',   icon:'❖' },
-  { key:'dis',      label:'Dış',      icon:'❉' },
-  { key:'ayakkabi', label:'Ayakkabı', icon:'✦' },
-  { key:'canta',    label:'Çanta',    icon:'⬡' },
-  { key:'aksesuar', label:'Aksesuar', icon:'✧' },
-];
-
-/* --- Renk algılama --- */
-const COLOR_MAP = {
-  'siyah':'#1c1c1c','beyaz':'#f3f3f0','gri':'#9a9a9a','antrasit':'#3a3d42',
-  'lacivert':'#1d2b4a','mavi':'#3f6fb0','açık mavi':'#9cc3e0',
-  'kırmızı':'#bf3a31','bordo':'#6e2030','pembe':'#d98aae','pudra':'#e7c2cf',
-  'mor':'#7a4b8a','yeşil':'#3f7d4f','haki':'#6b6f3a','sarı':'#dcc24f',
-  'turuncu':'#d4763a','kahve':'#5a3d2b','taba':'#a9683f','bej':'#cbb892',
-  'krem':'#ece3cf','ten':'#d8b89a','altın':'#c9a13b','gümüş':'#c4c7cc'
-};
-const NEUTRALS = ['siyah','beyaz','gri','antrasit','lacivert','bej','krem','taba','kahve','ten','gümüş'];
-
-function nearestColorName(r,g,b){
-  let best='', bd=1e9;
-  for (const [name,hex] of Object.entries(COLOR_MAP)){
-    const rr=parseInt(hex.slice(1,3),16), gg=parseInt(hex.slice(3,5),16), bb=parseInt(hex.slice(5,7),16);
-    const d=(r-rr)**2+(g-gg)**2+(b-bb)**2;
-    if (d<bd){ bd=d; best=name; }
-  }
-  return best;
-}
-function swatchHex(item){
-  if (item.colorHex) return item.colorHex;
-  const c = (item.color||'').toLowerCase().trim();
-  return COLOR_MAP[c] || '#cbb8d4';
-}
-
-/* --- Fotoğraf işleme: sıkıştır + baskın rengi anla --- */
-function processPhoto(file, done){
-  const r = new FileReader();
-  r.onload = ev => {
-    const img = new Image();
-    img.onload = () => {
-      const max = 300, sc = Math.min(1, max/Math.max(img.width, img.height));
-      const c = document.createElement('canvas');
-      c.width = Math.max(1, Math.round(img.width*sc));
-      c.height = Math.max(1, Math.round(img.height*sc));
-      const ctx = c.getContext('2d');
-      ctx.drawImage(img, 0, 0, c.width, c.height);
-      const dataUrl = c.toDataURL('image/jpeg', 0.62);
-      const d = ctx.getImageData(0,0,c.width,c.height).data;
-      const x0=Math.floor(c.width*0.2), x1=Math.ceil(c.width*0.8);
-      const y0=Math.floor(c.height*0.2), y1=Math.ceil(c.height*0.8);
-      let R=0,G=0,B=0,n=0;
-      for (let y=y0;y<y1;y++) for (let x=x0;x<x1;x++){
-        const i=(y*c.width+x)*4; if (d[i+3]<200) continue;
-        const r2=d[i],g2=d[i+1],b2=d[i+2];
-        if (r2>238&&g2>238&&b2>238) continue;     // beyaz fonu atla
-        R+=r2;G+=g2;B+=b2;n++;
-      }
-      if (!n){ for (let i=0;i<d.length;i+=4){ if (d[i+3]<200) continue; R+=d[i];G+=d[i+1];B+=d[i+2];n++; } }
-      let hex=null, name='';
-      if (n){ R=Math.round(R/n);G=Math.round(G/n);B=Math.round(B/n);
-        hex = '#'+[R,G,B].map(x=>x.toString(16).padStart(2,'0')).join('');
-        name = nearestColorName(R,G,B);
-      }
-      done({ dataUrl, hex, name });
-    };
-    img.src = ev.target.result;
-  };
-  r.readAsDataURL(file);
-}
-
-let pendingPhoto = null, pendingHex = null;
-function onPhotoPick(e){
-  const f = e.target.files[0]; if (!f) return;
-  processPhoto(f, ({dataUrl, hex, name}) => {
-    pendingPhoto = dataUrl; pendingHex = hex;
-    const cf = document.getElementById('wColor');
-    if (cf && !cf.value.trim()) cf.value = name;
-    document.getElementById('wPhotoPreview').innerHTML =
-      `<img src="${dataUrl}" class="w-12 h-12 object-cover rounded-lg flex-shrink-0">
-       <span class="text-[11px] text-forest/60 truncate">Algılanan renk: <b>${name||'—'}</b></span>`;
-  });
-}
-
-let pendingWishPhoto = null;
-function onWishPhotoPick(e){
-  const f = e.target.files[0]; if (!f) return;
-  processPhoto(f, ({dataUrl}) => {
-    pendingWishPhoto = dataUrl;
-    document.getElementById('shPhotoPreview').innerHTML =
-      `<img src="${dataUrl}" class="w-12 h-12 object-cover rounded-lg flex-shrink-0">
-       <span class="text-[11px] text-forest/60 truncate">Görsel eklendi ✓</span>`;
-  });
-}
-
-function renderModa() {
-  const sp = document.getElementById('styleProfile');
-  if (sp) sp.value = state.styleProfile || '';
-  const items = state.wardrobe || [];
-  document.getElementById('wCount').textContent = items.length ? `${items.length} parça` : '';
-
-  // Otomatik kombinler
-  const auto = document.getElementById('autoCombos');
-  const combos = buildAutoCombos();
-  if (!combos.length) {
-    auto.innerHTML = `<p class="text-xs text-forest/50 italic bg-cream/30 rounded-2xl p-5 text-center">En az 1 üst + 1 alt (ya da 1 elbise) ekle — kombinler burada kendiliğinden çıkar.</p>`;
-  } else {
-    auto.innerHTML = combos.map(comboCard).join('');
-  }
-
-  // Fotoğraflarım
-  const photos = items.filter(i => i.photo);
-  const gw = document.getElementById('photoGalleryWrap');
-  if (photos.length) {
-    gw.classList.remove('hidden');
-    document.getElementById('galleryCount').textContent = `${photos.length} foto`;
-    document.getElementById('photoGallery').innerHTML = photos.map(i =>
-      `<button onclick="openPhoto('${i.id}')" class="aspect-square rounded-xl overflow-hidden glow"><img src="${i.photo}" class="w-full h-full object-cover"></button>`
-    ).join('');
-  } else {
-    gw.classList.add('hidden');
-    document.getElementById('photoGallery').innerHTML = '';
-  }
-
-  // Alışveriş listem
-  renderLinkCombos();
-  renderSuggestedBuys();
-  renderWishlist();
-
-  // Gardırop
-  const list = document.getElementById('wardrobeList');
-  if (!items.length) {
-    list.innerHTML = `<p class="text-xs text-forest/50 italic bg-cream/30 rounded-2xl p-5 text-center">Henüz parça yok. Yukarıdan ekle — fotoğraf da koyabilirsin.</p>`;
-    return;
-  }
-  list.innerHTML = MODA_CATS.map(cat => {
-    const group = items.filter(i => i.cat === cat.key);
-    if (!group.length) return '';
-    return `<div>
-      <p class="text-[10px] text-clay uppercase tracking-widest mb-2">${cat.icon} ${cat.label} · ${group.length}</p>
-      <div class="space-y-2">${group.map(wardrobeRow).join('')}</div>
-    </div>`;
-  }).join('');
-}
-
-function escAttr(s){ return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;'); }
-
-function itemThumb(item, size) {
-  const s = size || 'w-12 h-12';
-  return item.photo
-    ? `<img src="${item.photo}" onclick="event.stopPropagation();openPhoto('${item.id}')" class="${s} object-cover rounded-lg flex-shrink-0 cursor-zoom-in">`
-    : `<span class="${s} rounded-lg flex-shrink-0 inline-block border border-black/5" style="background:${swatchHex(item)}"></span>`;
-}
-
-function wardrobeRow(item) {
-  const meta = [item.color, item.brand].filter(Boolean).join(' · ');
-  const link = item.link ? `<a href="${escAttr(item.link)}" target="_blank" rel="noopener" class="text-[11px] text-clay underline mt-1 inline-block truncate max-w-full">↗ Alışveriş linki</a>` : '';
-  return `<div class="bg-white rounded-2xl p-3 glow flex items-center gap-3">
-    ${itemThumb(item, 'w-14 h-14')}
-    <div class="flex-1 min-w-0">
-      <p class="font-serif text-sm text-forest leading-tight truncate">${item.name}</p>
-      ${meta ? `<p class="text-[11px] text-forest/60 mt-0.5 truncate flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full inline-block flex-shrink-0" style="background:${swatchHex(item)}"></span>${meta}</p>` : ''}
-      ${link}
-    </div>
-    <button onclick="deleteWardrobeItem('${item.id}')" class="flex-shrink-0 text-forest/30 hover:text-clay text-sm w-8 h-8 rounded-full hover:bg-cream/50 transition">🗑</button>
-  </div>`;
-}
-
-/* --- Otomatik kombin üretici (yerel kural, AI gerekmez) --- */
-function isNeutral(item){ return NEUTRALS.includes((item.color||'').toLowerCase().trim()); }
-function colorOk(a, b){
-  const ca=(a.color||'').toLowerCase().trim(), cb=(b.color||'').toLowerCase().trim();
-  if (!ca || !cb) return true;
-  return isNeutral(a) || isNeutral(b) || ca===cb;
-}
-function pick(items, cat){ return items.filter(i => i.cat === cat); }
-
-function buildAutoCombos(){
-  const items = state.wardrobe || [];
-  const ust = pick(items,'ust'), alt = pick(items,'alt'), elbise = pick(items,'elbise');
-  const dis = pick(items,'dis'), ayk = pick(items,'ayakkabi'), cnt = pick(items,'canta'), aks = pick(items,'aksesuar');
-  const labels = ['Ofis','Toplantı','Akşam','Hafta sonu','Şık-rahat'];
-  const out = [];
-  // Üst + Alt kombinleri
-  for (const u of ust){
-    for (const a of alt){
-      if (!colorOk(u,a)) continue;
-      out.push([u, a, dis[0], ayk[0], cnt[0], aks[0]].filter(Boolean));
-      if (out.length >= 5) break;
-    }
-    if (out.length >= 5) break;
-  }
-  // Elbise kombinleri
-  for (const e of elbise){
-    if (out.length >= 5) break;
-    out.push([e, dis[0], ayk[0], cnt[0], aks[0]].filter(Boolean));
-  }
-  return out.slice(0,5).map((parts,i) => ({ label: labels[i % labels.length], parts }));
-}
-
-function comboCard(combo){
-  const thumbs = combo.parts.map(p => itemThumb(p, 'w-12 h-12')).join('');
-  const names = combo.parts.map(p => p.name).join(' + ');
-  return `<div class="bg-white rounded-2xl p-3 glow">
-    <p class="text-[10px] text-clay uppercase tracking-widest mb-2">◈ ${combo.label}</p>
-    <div class="flex items-center gap-2 overflow-x-auto pb-1">${thumbs}</div>
-    <p class="text-[11px] text-forest/70 mt-2 leading-snug">${names}</p>
-  </div>`;
-}
-
-function addWardrobeItem() {
-  const name = document.getElementById('wName').value.trim();
-  if (!name) { toast('Parça adı gir'); return; }
-  if (!Array.isArray(state.wardrobe)) state.wardrobe = [];
-  state.wardrobe.push({
-    id: 'w' + Date.now() + Math.floor(Math.random()*1000),
-    cat: document.getElementById('wCat').value,
-    name,
-    color: document.getElementById('wColor').value.trim(),
-    brand: document.getElementById('wBrand').value.trim(),
-    link: document.getElementById('wLink').value.trim(),
-    photo: pendingPhoto || null,
-    colorHex: pendingHex || null,
-  });
-  save();
-  document.getElementById('wName').value = '';
-  document.getElementById('wColor').value = '';
-  document.getElementById('wBrand').value = '';
-  document.getElementById('wLink').value = '';
-  document.getElementById('wPhotoCam').value = '';
-  document.getElementById('wPhotoGal').value = '';
-  document.getElementById('wPhotoPreview').innerHTML = '';
-  pendingPhoto = null; pendingHex = null;
-  renderModa();
-  toast('Eklendi ✓');
-}
-
-function deleteWardrobeItem(id) {
-  state.wardrobe = (state.wardrobe || []).filter(i => i.id !== id);
-  save(); renderModa();
-}
-
-function openPhoto(id) {
-  const it = (state.wardrobe || []).concat(state.wishlist || []).find(x => x.id === id);
-  if (it && it.photo) openLightbox(it.photo);
-}
-
-/* --- Alışveriş Listem (wishlist) --- */
-function renderWishlist() {
-  const el = document.getElementById('wishlistList');
-  const items = state.wishlist || [];
-  document.getElementById('shCount').textContent = items.length ? `${items.length} ürün` : '';
-  el.innerHTML = items.length
-    ? items.map(wishCard).join('')
-    : `<p class="col-span-2 text-xs text-forest/50 italic bg-cream/30 rounded-2xl p-5 text-center">Liste boş. Beğendiğin ürünü marka, görsel ve linkiyle ekle.</p>`;
-}
-
-function wishCard(item) {
-  const initial = (item.brand || item.name || '·').trim().charAt(0).toUpperCase();
-  const visual = item.photo
-    ? `<img src="${item.photo}" onclick="openPhoto('${item.id}')" class="w-20 h-24 object-cover rounded-xl flex-shrink-0 cursor-zoom-in">`
-    : `<div class="w-20 h-24 rounded-xl flex-shrink-0 bg-cream/60 flex items-center justify-center font-serif text-2xl text-forest/40">${initial}</div>`;
-  const buy = item.link
-    ? `<a href="${escAttr(item.link)}" target="_blank" rel="noopener" class="font-sans text-[10px] uppercase tracking-widest text-clay hover:text-forest transition">Satın al →</a>`
-    : `<span class="text-[10px] text-forest/35 italic">link yok</span>`;
-  return `<div class="bg-white rounded-2xl p-3 glow flex gap-3">
-    ${visual}
-    <div class="flex-1 min-w-0 flex flex-col">
-      ${item.brand ? `<p class="text-[10px] text-clay uppercase tracking-wider truncate">${item.brand}</p>` : ''}
-      <p class="font-serif text-base text-forest leading-tight mt-0.5">${item.name}</p>
-      ${item.note ? `<p class="text-[11px] text-forest/55 mt-1 leading-snug">${item.note}</p>` : ''}
-      <div class="mt-auto pt-2 flex items-center justify-between">
-        ${buy}
-        <button onclick="deleteWishItem('${item.id}')" class="flex-shrink-0 text-forest/30 hover:text-clay text-sm w-7 h-7 rounded-full hover:bg-cream/50 transition">🗑</button>
-      </div>
-    </div>
-  </div>`;
-}
-
-/* --- Senin için seçtiğim kapsül liste --- */
-const SUGGESTED_BUYS = [
-  { piece:'Yapılandırılmış lacivert blazer', brand:'Theory / Network', note:'Tek başına dik gösterir — iş ve toplantının belkemiği.', budget:'~6–12K TL', q:'Network lacivert blazer kadın' },
-  { piece:'Yüksek bel düz paça yün pantolon', brand:'Massimo Dutti', note:'Bacağı uzatır, beli toparlar.', budget:'~3.5K TL', q:'Massimo Dutti yüksek bel yün pantolon' },
-  { piece:'Krem ipek gömlek', brand:'İpekyol / Massimo Dutti', note:'Yüzü aydınlatır, blazer altına ideal.', budget:'~2.5K TL', q:'İpekyol ipek gömlek krem' },
-  { piece:'İnce merino V-yaka triko', brand:'Uniqlo', note:'Katman ekler, hacim eklemez. Fiyat/kalite şampiyonu.', budget:'~1.2K TL', q:'Uniqlo merino V yaka kazak kadın' },
-  { piece:'Bej trençkot', brand:'Max Mara / Mango', note:'Uzun dikey hat — siluet uzatır.', budget:'Mango ~3K · Max Mara üst', q:'Mango bej trençkot kadın' },
-  { piece:'Sivri burun siyah topuklu', brand:'Beymen', note:'Bacağı uzatır, her kombini toparlar.', budget:'~3–6K TL', q:'sivri burun siyah stiletto topuklu' },
-  { piece:'Yapılı taba deri tote çanta', brand:'Massimo Dutti / Prada', note:'İş + günlük; nötr bağlayıcı.', budget:'MD ~5K · Prada lüks', q:'taba deri tote çanta' },
-];
-function shopLink(q){ return 'https://www.trendyol.com/sr?q=' + encodeURIComponent(q); }
-function renderSuggestedBuys(){
-  const el = document.getElementById('suggestedBuys');
-  if (!el) return;
-  el.innerHTML = SUGGESTED_BUYS.map((s, idx) => `
-    <div class="bg-white rounded-2xl p-3.5 glow flex gap-3 items-center">
-      <div class="flex-1 min-w-0">
-        <p class="text-[10px] text-clay uppercase tracking-wider">${s.brand}</p>
-        <p class="font-serif text-sm text-forest leading-tight mt-0.5">${s.piece}</p>
-        <p class="text-[11px] text-forest/55 mt-1 leading-snug">${s.note}</p>
-        <p class="text-[10px] text-forest/40 mt-1 tracking-wide">${s.budget}</p>
-      </div>
-      <button onclick="addSuggestedBuy(${idx})" class="flex-shrink-0 bg-forest text-ivory font-sans text-[10px] uppercase tracking-widest px-4 py-2.5 rounded-full hover:bg-forest-light transition">+ Ekle</button>
-    </div>`).join('');
-}
-function addSuggestedBuy(idx){
-  const s = SUGGESTED_BUYS[idx]; if (!s) return;
-  if (!Array.isArray(state.wishlist)) state.wishlist = [];
-  if (state.wishlist.some(w => w.name === s.piece && w.brand === s.brand)) { toast('Zaten listende'); return; }
-  state.wishlist.push({
-    id: 'sh' + Date.now() + Math.floor(Math.random()*1000),
-    name: s.piece, brand: s.brand, note: s.note, link: shopLink(s.q), photo: null,
-  });
-  save(); renderWishlist(); toast('Listene eklendi ✓');
-}
-
-/* --- Linkli hazır kombinler --- */
-const LINK_COMBOS = [
-  { label:'Toplantı · güçlü', pieces:[
-    { p:'Lacivert blazer', q:'kadın lacivert blazer ceket' },
-    { p:'Krem ipek gömlek', q:'kadın krem ipek saten gömlek' },
-    { p:'Yüksek bel yün pantolon', q:'kadın yüksek bel yün pantolon düz paça' },
-    { p:'Sivri burun topuklu', q:'kadın sivri burun stiletto siyah' },
-    { p:'Taba deri tote', q:'kadın taba deri tote çanta' },
-  ]},
-  { label:'Akıllı-rahat · gündüz', pieces:[
-    { p:'Merino V-yaka triko', q:'kadın merino V yaka kazak' },
-    { p:'Düz paça pantolon', q:'kadın yüksek bel düz paça pantolon' },
-    { p:'Bej trençkot', q:'kadın bej trençkot' },
-    { p:'Deri loafer', q:'kadın deri loafer ayakkabı' },
-  ]},
-  { label:'Davet · akşam', pieces:[
-    { p:'Saten midi elbise', q:'kadın saten midi elbise davet' },
-    { p:'İnce topuklu sandalet', q:'kadın ince topuklu abiye sandalet' },
-    { p:'Zarif clutch', q:'kadın clutch abiye çanta' },
-  ]},
-];
-
-function renderLinkCombos(){
-  const el = document.getElementById('linkCombos');
-  if (!el) return;
-  el.innerHTML = LINK_COMBOS.map((c, idx) => `
-    <div class="bg-white rounded-2xl p-4 glow">
-      <div class="flex items-center justify-between mb-2">
-        <p class="text-[10px] text-clay uppercase tracking-widest">◈ ${c.label}</p>
-        <button onclick="addComboToWishlist(${idx})" class="text-[9px] font-sans uppercase tracking-widest text-forest/60 hover:text-clay transition">+ hepsini ekle</button>
-      </div>
-      <div class="divide-y divide-cream/70">
-        ${c.pieces.map(pc => `
-          <div class="flex items-center justify-between gap-3 py-2">
-            <span class="font-serif text-sm text-forest leading-tight">${pc.p}</span>
-            <a href="${shopLink(pc.q)}" target="_blank" rel="noopener" class="flex-shrink-0 font-sans text-[10px] uppercase tracking-widest text-clay hover:text-forest transition">Ara →</a>
-          </div>`).join('')}
-      </div>
-    </div>`).join('');
-}
-
-function addComboToWishlist(idx){
-  const c = LINK_COMBOS[idx]; if (!c) return;
-  if (!Array.isArray(state.wishlist)) state.wishlist = [];
-  let added = 0;
-  c.pieces.forEach(pc => {
-    if (state.wishlist.some(w => w.name === pc.p && w.brand === c.label)) return;
-    state.wishlist.push({
-      id: 'sh' + Date.now() + Math.floor(Math.random()*100000),
-      name: pc.p, brand: c.label, note: '', link: shopLink(pc.q), photo: null,
-    });
-    added++;
-  });
-  save(); renderWishlist();
-  toast(added ? `${added} parça listene eklendi ✓` : 'Zaten listende');
-}
-
-function addWishItem() {
-  const name = document.getElementById('shName').value.trim();
-  if (!name) { toast('Ürün adı gir'); return; }
-  if (!Array.isArray(state.wishlist)) state.wishlist = [];
-  state.wishlist.push({
-    id: 'sh' + Date.now() + Math.floor(Math.random()*1000),
-    name,
-    brand: document.getElementById('shBrand').value.trim(),
-    link: document.getElementById('shLink').value.trim(),
-    photo: pendingWishPhoto || null,
-  });
-  save();
-  document.getElementById('shName').value = '';
-  document.getElementById('shBrand').value = '';
-  document.getElementById('shLink').value = '';
-  document.getElementById('shPhotoCam').value = '';
-  document.getElementById('shPhotoGal').value = '';
-  document.getElementById('shPhotoPreview').innerHTML = '';
-  pendingWishPhoto = null;
-  renderWishlist();
-  toast('Eklendi ✓');
-}
-
-function deleteWishItem(id) {
-  state.wishlist = (state.wishlist || []).filter(i => i.id !== id);
-  save(); renderWishlist();
-}
-function openLightbox(src) {
-  const lb = document.getElementById('lightbox');
-  document.getElementById('lightboxImg').src = src;
-  lb.classList.remove('hidden'); lb.classList.add('flex');
-}
-function closeLightbox() {
-  const lb = document.getElementById('lightbox');
-  lb.classList.add('hidden'); lb.classList.remove('flex');
-  document.getElementById('lightboxImg').src = '';
-}
-
-function saveStyleProfile() {
-  state.styleProfile = document.getElementById('styleProfile').value;
-  save(); toast('Kaydedildi ✓');
-}
-
-function saveBodyProfile() {
-  state.bodyProfile = {
-    h: document.getElementById('bHeight').value.trim(),
-    w: document.getElementById('bWeight').value.trim(),
-    size: document.getElementById('bSize').value.trim(),
-    shape: document.getElementById('bShape').value,
-    notes: document.getElementById('bNotes').value.trim(),
-  };
-  save(); toast('Ölçüler kaydedildi ✓');
-}
-
-function bodyBlock() {
-  const b = state.bodyProfile || {};
-  const parts = [];
-  if (b.h) parts.push(`boy ${b.h} cm`);
-  if (b.w) parts.push(`kilo ${b.w} kg`);
-  if (b.size) parts.push(`beden ${b.size}`);
-  if (b.shape && b.shape !== '?') parts.push(`vücut tipi ${b.shape}`);
-  return `## ÖLÇÜLERİM\n${parts.length ? parts.join(', ') : '(ölçü girilmemiş)'}${b.notes ? `\nKaçındığım: ${b.notes}` : ''}`;
-}
-
-const FLATTER_RULES = `## GÖRÜNÜM KURALI (ZORUNLU)
-- Beni ASLA şişman / geniş / kısa gösterecek parça önerme.
-- Boyuma ve kiloma oranlı, dik ve uzun gösteren siluet kur.
-- Tercih et: dikey hatlar, bel vurgusu, dökümlü kumaş, V/dikey yaka, tek-renk blok, doğru pantolon boyu.
-- Kaçın: hacim ekleyen oversize, yatay çizgi/iri desen, parlak-yapışkan kumaş, balon/yüksek gramaj kesim, yanlış bel hattı.`;
-
-const BRANDS_BLOCK = `## MARKA EVRENİM (alışveriş önerileri bunlarla sınırlı)
-- Günlük / high-street: Mango, H&M, Koton, Marks & Spencer, Uniqlo, COS, Trendyol satıcıları
-- Premium · tailoring & çağdaş: Beymen, Massimo Dutti, Network, Theory, Sandro, Maje, Sézane, İpekyol, Rue, Nocturne, Atelier Aliz, Vakko, Raisa&Vanessa
-- Lüks: Max Mara, Loro Piana, Brunello Cucinelli, Hermès, Prada (çanta & ayakkabı)`;
-
-function buildOccasionPrompt() {
-  if (!(state.wardrobe || []).length) { toast('Önce parça ekle'); return; }
-  const occ = (document.getElementById('occasion').value || '').trim();
-  if (!occ) { toast('Nereye gideceğini yaz'); return; }
-  const p = `${MODA_PERSONA}
-
-${bodyBlock()}
-
-${modaProfileBlock()}
-
-${BRANDS_BLOCK}
-
-## ETKİNLİK
-${occ}
-
-${FLATTER_RULES}
-
-## GÖREV
-"${occ}" için beni hazırla. SONUÇ → OPSİYON → AKSİYON formatı, kısa ve net.
-1) Önce GARDIROBUMDAN en iyi kombini kur — sadece elimdeki parçalar, renk + oran uyumunu somut açıkla, neden dik/uzun gösterdiğini söyle.
-2) Sonra bu kombini tamamlayacak / yükseltecek EKSİK 1-3 parçayı marka evrenimden öner — ne, renk, hangi marka tier'ı, tahmini bütçe. Sadece gerçekten kombin açan parçayı öner.`;
-  copyOpenClaude(p);
-}
-
-function wardrobeText() {
-  const items = state.wardrobe || [];
-  if (!items.length) return '(gardırop boş)';
-  return MODA_CATS.map(cat => {
-    const group = items.filter(i => i.cat === cat.key);
-    if (!group.length) return '';
-    const lines = group.map(i => `  - ${i.name}${i.color ? ` (${i.color})` : ''}${i.brand ? ` — ${i.brand}` : ''}`).join('\n');
-    return `${cat.label}:\n${lines}`;
-  }).filter(Boolean).join('\n');
-}
-
-const MODA_PERSONA = `Sen Pınar'ın kişisel stilisti + image danışmanısın. 44 yaş kadın CEO. Kapsül gardırop mantığı, vücut tipine + renk paletine uygun, smart-casual'dan iş şıklığına. Abartma, kanıtsız trend dayatma. Türkçe yanıt ver, marka adları orijinal kalsın.`;
-
-function modaProfileBlock() {
-  return `## STİL PROFİLİ\n${state.styleProfile || '(stil profili girilmemiş — gardıroptan çıkarım yap)'}\n\n## GARDIROP\n${wardrobeText()}`;
-}
-
-async function copyOpenClaude(prompt) {
-  try { await navigator.clipboard.writeText(prompt); } catch {
-    const ta = document.createElement('textarea'); ta.value = prompt;
-    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
-  }
-  toast('Kopyalandı ✓');
-  setTimeout(() => window.open('https://claude.ai/new', '_blank'), 250);
-}
-
-function buildOutfitPrompt() {
-  if (!(state.wardrobe || []).length) { toast('Önce parça ekle'); return; }
-  const p = `${MODA_PERSONA}
-
-${bodyBlock()}
-
-${modaProfileBlock()}
-
-${FLATTER_RULES}
-
-## GÖREV
-Yukarıdaki gardıroptaki parçalarla kombinler kur.
-
-Kurallar:
-- SONUÇ → OPSİYON → AKSİYON formatı.
-- 4-5 farklı kombin ver. Her kombin için: ortam (ofis / toplantı / akşam / hafta sonu), parça listesi (sadece gardıropta OLAN parçalardan), kısa "neden çalışıyor + neden beni dik/uzun gösterir" notu.
-- Renk + oran uyumunu somut açıkla (ör: "lacivert blazer + krem pantolon, taba çanta ile bağla").
-- Sadece elimdeki parçaları kullan, hayali parça uydurma.
-- En sonda: gardıropta tekrar eden / eksik kalan 1-2 noktayı kısaca işaretle.`;
-  copyOpenClaude(p);
-}
-
-function buildShoppingPrompt() {
-  if (!(state.wardrobe || []).length) { toast('Önce parça ekle'); return; }
-  const p = `${MODA_PERSONA}
-
-${bodyBlock()}
-
-${modaProfileBlock()}
-
-${BRANDS_BLOCK}
-
-${FLATTER_RULES}
-
-## GÖREV
-Mevcut gardırobu DAHA İYİ kombinlenebilir hale getirmek için alışveriş önerisi ver.
-
-Kurallar:
-- SONUÇ → OPSİYON → AKSİYON formatı.
-- Önce gardıroptaki BOŞLUĞU teşhis et (ör: "tüm üstler koyu, nötr açık bir bluz yok").
-- Max 5-6 somut parça öner. Her biri için: ne (parça + renk), hangi marka tier'ı, mevcut hangi parçalarla en az 2 yeni kombin açar, tahmini bütçe bandı.
-- Önceliklendir: önce 2-3 "kilit parça" (en çok kombin açan), sonra "isteğe bağlı".
-- Çanta/ayakkabıda lüks (Hermès/Prada) ile uygun alternatifi yan yana ver — ROI dürüst olsun.
-- Önerdiğin her parça beni dik/uzun gösteren siluete hizmet etmeli; şişman gösterecek kesim önerme.
-- Sadece gerçekten kombin açan parçayı öner; "trend diye al" deme.`;
-  copyOpenClaude(p);
-}
-
 /* ================= AYAR ================= */
 function renderSettings() {
   document.getElementById('personalContext').value = state.personalContext || '';
-  const b = state.bodyProfile || {};
-  const setv = (id,v) => { const el=document.getElementById(id); if (el) el.value = v ?? ''; };
-  setv('bHeight', b.h); setv('bWeight', b.w); setv('bSize', b.size); setv('bShape', b.shape); setv('bNotes', b.notes);
 }
 function savePersonalContext() {
   state.personalContext = document.getElementById('personalContext').value;
@@ -2696,7 +2033,7 @@ function toast(m) {
 }
 
 /* ================= INIT ================= */
-renderModa();
+renderToday();
 </script>
 
 </body>
