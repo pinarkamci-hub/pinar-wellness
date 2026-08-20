@@ -344,6 +344,7 @@ tailwind.config = {
   <!-- KATEGORİ TAB'LARI -->
   <div class="flex gap-2 mb-5 overflow-x-auto pb-1">
     <button onclick="filterAes('face')" id="aes-tab-face" class="aes-tab-btn px-4 py-2 rounded-full text-xs font-sans uppercase tracking-wider bg-forest text-ivory whitespace-nowrap">Yüz</button>
+    <button onclick="filterAes('jaw')" id="aes-tab-jaw" class="aes-tab-btn px-4 py-2 rounded-full text-xs font-sans uppercase tracking-wider bg-cream text-forest whitespace-nowrap">Gıdı · Çene</button>
     <button onclick="filterAes('body')" id="aes-tab-body" class="aes-tab-btn px-4 py-2 rounded-full text-xs font-sans uppercase tracking-wider bg-cream text-forest whitespace-nowrap">Vücut · Selülit</button>
     <button onclick="filterAes('paris')" id="aes-tab-paris" class="aes-tab-btn px-4 py-2 rounded-full text-xs font-sans uppercase tracking-wider bg-cream text-forest whitespace-nowrap">Paris Işıltısı</button>
   </div>
@@ -1780,6 +1781,65 @@ function toggleBought(id) {
 }
 
 /* ================= ESTETİK ================= */
+
+/* ---------- GIDI & ÇENE HATTI ---------- */
+const JAW_INTRO = `
+  <div class="bg-forest text-ivory rounded-3xl p-6 mb-4 glow">
+    <p class="text-clay-light text-[10px] uppercase tracking-widest mb-3">Önce teşhis · sonra cihaz</p>
+    <h4 class="font-serif text-2xl mb-2">Gıdı tek sorun değil</h4>
+    <p class="text-ivory/75 text-sm leading-relaxed mb-4">Üç ayrı bileşeni var — yağ, deri gevşekliği, platysma kası. Hiçbir uygulama üçünü birden çözmez. Yanlış bileşeni hedefleyen cihaz para ve zaman kaybı.</p>
+    <div class="space-y-3">
+      <div class="bg-forest-light/40 rounded-xl p-3">
+        <p class="font-serif text-sm text-clay-light">1 · Çimdik testi</p>
+        <p class="text-[11px] text-ivory/75 leading-snug mt-1">Gıdıyı başparmak + işaret parmağıyla tut. <strong>1,5 cm'den kalın</strong> yumuşak doku geliyorsa → yağ baskın.</p>
+      </div>
+      <div class="bg-forest-light/40 rounded-xl p-3">
+        <p class="font-serif text-sm text-clay-light">2 · Çene yukarı testi</p>
+        <p class="text-[11px] text-ivory/75 leading-snug mt-1">Başını tavana kaldır. Gıdı <strong>tamamen kayboluyorsa</strong> → deri gevşekliği baskın, yağ az.</p>
+      </div>
+      <div class="bg-forest-light/40 rounded-xl p-3">
+        <p class="font-serif text-sm text-clay-light">3 · Diş sıkma testi</p>
+        <p class="text-[11px] text-ivory/75 leading-snug mt-1">Dişini sık, boyuna bak. <strong>Dikey iki bant</strong> çıkıyorsa → platysma kası payı var.</p>
+      </div>
+    </div>
+    <div class="mt-4 pt-4 border-t border-forest-light/50">
+      <p class="text-[11px] text-ivory/75 leading-snug"><span class="text-clay-light font-serif">Sıra kuralı.</span> Önce yağ, <strong>6-8 hafta sonra</strong> sıkılaştırma. Ters sırada sıkılaştırmanın yarısı boşa gider.</p>
+      <p class="text-[11px] text-ivory/75 leading-snug mt-2"><span class="text-clay-light font-serif">Doğru fotoğraf.</span> Kamera <strong>göz hizasında</strong>, baş dik — biri önden biri profilden. Alttan çekilen fotoğraf gıdıyı olduğundan belirgin gösterir; kıyaslama yaparken yanıltır.</p>
+      <p class="text-[11px] text-ivory/75 leading-snug mt-2"><span class="text-clay-light font-serif">Tahriş varsa ertele.</span> Kızarık veya hassas ciltte Morpheus8 da lipo da yapılmaz — önce 2-3 hafta cildi sakinleştir.</p>
+    </div>
+  </div>`;
+
+const AESTHETIC_JAW = [
+  { id:'morpheus-submental', name:'Morpheus8 Submental', tag:'Karışık tabloda ilk tercih', cycle:'4-6 hafta × 3 seans',
+    what:'Mikro-iğne + radyofrekans, derinlik 4 mm\'ye kadar ayarlanabiliyor. Aynı seansta hem dermisi sıkar hem cilt altı yağı bir miktar küçültür.',
+    why:'<strong>NEDEN:</strong> Gıdının iki bileşenini birden hedefleyen <strong>tek cihaz</strong>. Yağ orta + deri gevşekliği hafif tabloda — 40\'lı yaşlarda en sık görülen tablo — en yüksek getiri burada. Downtime 3-5 gün kızarıklık; yoğun takvime uyar.',
+    cost:'10.000-25.000 TL · seans', ev:'güçlü', color:'#3D1F4D', icon:'◈' },
+
+  { id:'deoxycholic', name:'Deoksikolik Asit (Kybella / Belkyra)', tag:'Yağ baskınsa', cycle:'4-6 hafta × 2-4 seans',
+    what:'Safra asidi türevi enjeksiyon. Yağ hücresinin zarını çözer; hücre kalıcı olarak yok olur, vücut 4-6 haftada temizler.',
+    why:'<strong>NEDEN:</strong> Submental yağ için <strong>FDA onaylı tek enjeksiyon</strong>. Cerrahi yok, iz yok, kalıcı. Bedeli: her seans sonrası <strong>1-2 hafta belirgin şişlik</strong> — takvimini buna göre kur, önemli toplantı haftasına denk getirme.',
+    cost:'15.000-25.000 TL · seans', ev:'güçlü', color:'#5A3472', icon:'❋' },
+
+  { id:'submental-lipo', name:'Submental Mikro-Liposuction', tag:'En dramatik · tek seans', cycle:'Tek seans',
+    what:'Lokal anestezi, çene altından 2-3 mm giriş, mikro-kanülle yağ aspirasyonu. 45-60 dakika. Sıklıkla RF (Renuvion/J-Plasma) ile kombine edilip aynı seansta deri de sıkılır.',
+    why:'<strong>NEDEN:</strong> Yağ baskınsa <strong>tek seferde en net sonuç</strong> — cihazların 3 seansta yaptığını bir kerede yapar. Deri kalitesi iyiyse sonrasında sarkma riski düşük. 1 hafta korse, 2 hafta morarma. Küçük ama cerrahi işlem — Plastik Cerrahi uzmanı şart.',
+    cost:'40.000-80.000 TL · tek seans', ev:'güçlü', color:'#7A4A8C', icon:'◆' },
+
+  { id:'hifu-jaw', name:'HIFU — Çene Hattı + Boyun', tag:'Deri gevşekliği baskınsa', cycle:'Yılda 1',
+    what:'Odaklanmış ultrason SMAS tabakasına ısı verir, kollajen büzülür ve yeniden üretilir. Cilde temas eden yüzeyi yakmadan derine iner.',
+    why:'<strong>NEDEN:</strong> Yüz germe ameliyatının non-invaziv karşılığı; "çene hattı + boyun gevşekliği" tam endikasyonu. <strong>Ama yağ baskınsa hayal kırıklığı yaratır</strong> — HIFU yağ almaz. Deri sarkması ön plandaysa doğru seçim. 3-6 ayda olgunlaşır, 1-2 yıl sürer, downtime yok.',
+    cost:'15.000-40.000 TL · bölgeye göre', ev:'güçlü', color:'#B8648A', icon:'∞' },
+
+  { id:'nefertiti', name:'Nefertiti Lift (Platysma Botoks)', tag:'Bant + çene hattı çizgisi', cycle:'Her 3-4 ay',
+    what:'Platysma kasının çene hattını aşağı çeken üst liflerine ve dikey boyun bantlarına mikro doz botulinum toksin.',
+    why:'<strong>NEDEN:</strong> Kas aşağı çekmeyi bırakınca çene hattı çizgisi <strong>optik olarak netleşir</strong>. Diş sıkma testinde bant çıkıyorsa değerli. Tek başına gıdıyı çözmez — yağ veya deri işlemine <strong>tamamlayıcı</strong>, alternatif değil.',
+    cost:'8.000-14.000 TL · seans', ev:'orta', color:'#C9B8D4', darkText:true, icon:'◇' },
+
+  { id:'neck-booster', name:'Profhilo / Rejuran — Boyun', tag:'Yatay boyun çizgisi', cycle:'4 hafta × 2 seans',
+    what:'Boyun cildine stabilize hyalüronik asit (Profhilo) veya polinükleotid (Rejuran) mikro-enjeksiyonu. Volüm eklemez, doku kalitesini onarır.',
+    why:'<strong>NEDEN:</strong> Yatay boyun çizgisi ("Venüs halkası") gıdıdan <strong>ayrı bir sorun</strong> ve sıkılaştırıcı cihazlar onu açmaz. Doğrudan çalışan tek yöntem bu. Gıdı işlemiyle aynı dönemde planlanabilir — farklı katman, çakışmaz.',
+    cost:'8.000-15.000 TL · seans', ev:'orta', color:'#D4A4BE', darkText:true, icon:'❖' },
+];
 const AESTHETIC_FACE = [
   { id:'baby-botox', name:'Baby Botox (Mini Botox)', tag:'Non-invaziv · 10dk', cycle:'Her 3-4 ay',
     what:'Geleneksel Botox\'un <strong>yarı dozu</strong>. Alın, kaş arası (glabella), kuş ayakları, masseter (çene) kasına mikro enjeksiyon.',
@@ -1928,14 +1988,15 @@ const AESTHETIC_PARIS = [
 
 function renderAesthetic() {
   const cat = state.aesCat || 'face';
-  ['face','body','paris'].forEach(c => {
+  ['face','jaw','body','paris'].forEach(c => {
     const btn = document.getElementById('aes-tab-' + c);
     if (!btn) return;
     if (c === cat) { btn.classList.remove('bg-cream','text-forest'); btn.classList.add('bg-forest','text-ivory'); }
     else { btn.classList.remove('bg-forest','text-ivory'); btn.classList.add('bg-cream','text-forest'); }
   });
-  const data = cat === 'face' ? AESTHETIC_FACE : cat === 'body' ? AESTHETIC_BODY : AESTHETIC_PARIS;
-  document.getElementById('aesContainer').innerHTML = data.map(aesCard).join('');
+  const data = cat === 'face' ? AESTHETIC_FACE : cat === 'jaw' ? AESTHETIC_JAW : cat === 'body' ? AESTHETIC_BODY : AESTHETIC_PARIS;
+  const intro = cat === 'jaw' ? JAW_INTRO : '';
+  document.getElementById('aesContainer').innerHTML = intro + data.map(aesCard).join('');
 }
 
 function filterAes(cat) {
