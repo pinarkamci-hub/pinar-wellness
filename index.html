@@ -183,9 +183,10 @@ tailwind.config = {
     <ul class="space-y-3 text-sm text-ivory/85 leading-snug">
       <li><span class="text-clay-light font-serif">Bekleme.</span> Katmanlar arası <strong>2 dakika</strong>. Maske <strong>10 dakika</strong>. Uygulamada ↓ işareti bekleme demek.</li>
       <li><span class="text-clay-light font-serif">Sabah her gün aynı.</span> Obagi %10 C → Intensive Daily Repair → üzerine AVST → Colorescience SPF 50.</li>
-      <li><span class="text-clay-light font-serif">Maske dönüşümlü.</span> Enzim: pazartesi · çarşamba · cuma · pazar. Kil: salı · perşembe · cumartesi. Maskeden sonra köpük ya da Sensai toz temizleyici ile arındır.</li>
+      <li><span class="text-clay-light font-serif">Maske dönüşümlü.</span> Enzim: pazartesi · çarşamba · cuma · pazar. Kil: salı · perşembe · cumartesi (kil şu an elinde yok — alana kadar o akşamlar maske atlanır). Maskeden sonra köpük ya da Sensai toz temizleyici ile arındır.</li>
       <li><span class="text-clay-light font-serif">Her akşam retinol.</span> Retinol Forte'nin hemen üzerine Vol.U.Lift. Kızarıklık/soyulma olursa o akşam retinolü atla, Hydro Gel ile kapat.</li>
       <li><span class="text-clay-light font-serif">Güneş koruma pazarlık dışı.</span> Colorescience SPF 50, her sabahın son adımı — her gece retinol varken zorunlu.</li>
+      <li><span class="text-clay-light font-serif">Boyun her gün.</span> Sabah Vol.U.Lift, akşam Obagi Elastiderm — boyun + dekolte, yukarı doğru. (Uzmanın listesinde yoktu, rutine sabit eklendi.)</li>
       <li><span class="text-clay-light font-serif">Moda sekmesi kaldırıldı.</span> Gardırop/kombin bölümü şimdilik kapatıldı — sistem cilt + longevity + sağlık üzerine odaklandı.</li>
     </ul>
   </div>
@@ -208,7 +209,7 @@ tailwind.config = {
   <details class="bg-cream/40 rounded-3xl p-5 mb-6">
     <summary class="font-serif text-lg text-forest cursor-pointer">⏸ Protokol dışı — şu an rotasyonda değil</summary>
     <p class="mt-3 text-sm text-forest/70 leading-relaxed">
-      La Mer (Concentrate · Le Crème Nuit) · Augustinus Bader · iS Clinical Pro-Heal · Caudalie serisi · Isov Azulene · Genosys (Snow O2 · Bio Meso) · Sensai Ultra Intensive · Sensai Barrier Essence · Environ Revival Masque · Environ Avance DFP312 · Forlle'd Platinum Lotion · SkinCeuticals (Collagen Pro · P-TIOX · HA Intensifier · A.G.E. Interrupter) · Celltermi Revive · AlphaScience Novacell · ZO Hydrating Crème · Obagi Elastiderm · Obagi Moisture Restore · MSB Active Serum · Bright PDRN maske · Schrammek biyoselüloz · Oil Capsule
+      La Mer (Concentrate · Le Crème Nuit) · Augustinus Bader · iS Clinical Pro-Heal · Caudalie serisi · Isov Azulene · Genosys (Snow O2 · Bio Meso) · Sensai Ultra Intensive · Sensai Barrier Essence · Environ Revival Masque · Environ Avance DFP312 · Forlle'd Platinum Lotion · SkinCeuticals (Collagen Pro · P-TIOX · HA Intensifier · A.G.E. Interrupter) · Celltermi Revive · AlphaScience Novacell · ZO Hydrating Crème · Obagi Moisture Restore · MSB Active Serum · Bright PDRN maske · Schrammek biyoselüloz · Oil Capsule
       <br><br>
       <span class="text-xs">Bunlar uzmanın güncel protokolünde yok. Geri eklemek istersen Koç'a sor — hangi adımın yerine gireceğini söylesin. Aynı anda üst üste kullanmak bariyeri zayıflatır.</span>
     </p>
@@ -1191,7 +1192,7 @@ const PRODUCTS = {
     w:"Kademeli A vitamini nemlendiricisi. Environ'un merdiven sistemi — cildi retinoide tahriş etmeden alıştırır.", e:'güçlü' },
   'obagi-intensive-daily-repair': { b:'Obagi SuzanObagiMD', n:'Intensive Daily Repair',
     w:'Antioksidan + peptid onarım kremi. Gün boyu bariyer desteği, C vitamininin üstünü kilitler.', e:'orta' },
-  'colorescience':       { b:'Colorescience', n:'Güneş koruma', img:false,
+  'colorescience':       { b:'Colorescience', n:'Sunforgettable Face Shield SPF 50',
     w:'Mineral SPF. Fotoyaşlanmaya karşı elindeki en güçlü tek araç — yüzdeki yaşlanma görüntüsünün büyük kısmı UV kaynaklı.', e:'güçlü' },
   'volulift':            { b:'XO/SM', n:'Vol.U.Lift',
     w:'GLP-1/GIP 4D skin rebound kompleksi. Dolgunluk, derin kırışıklık ve yoğunluk hedefli; boyun-dekoltede sıkılaştırıcı.', e:'anekdot' },
@@ -1235,7 +1236,7 @@ const PRODUCTS = {
     w:"C-Quence'a antioksidan yağ kapsülü eklenir. Peeling gecesinde kuruluğa karşı yağ tamponu.", e:'orta' },
   'clay-mask':           { b:'Maske', n:'Kil Maske', img:false, icon:'✧',
     w:'Gözenek ve sebum temizliği. Enzim akşamlarıyla dönüşümlü — üst üste kullanılmaz.', e:'orta' },
-  'exline-peptide-pro':  { b:'Exline', n:'Peptide Pro', img:false, icon:'✧',
+  'exline-peptide-pro':  { b:'PCA Skin', n:'ExLinea Pro Peptide Serum',
     w:'Peptid serumu. Kolajen sinyali + sıkılık; retinol öncesi destek katmanı.', e:'anekdot' },
   'schrammek-biocellulose':{ b:'Dr. Schrammek', n:'Super Vitalizing Biocellulose Mask',
     w:'Biyoselüloz maske. Cilde tam oturur; yoğun nem ve yatıştırma.', e:'orta' },
@@ -1262,6 +1263,7 @@ function getMorning(day) {
       { id:'am_final',  p:'obagi-intensive-daily-repair', d:'2 pompa',  w:'hemen üzerine AVST' },
       { id:'am_avst',   p:'environ-avst-2',               d:'2 pompa',  w:'↓ 2 dk bekle' },
       { id:'am_spf',    p:'colorescience',                d:'SPF 50',   w:'⭐ son adım — her sabah', hero: true },
+      { id:'am_neck',   p:'volulift',                     d:'boyun + dekolte', w:'yukarı doğru çek' },
     ]
   };
 }
@@ -1278,7 +1280,7 @@ function getTonight(day) {
     steps: [
       { id:'pm_clean1',  p:'obagi-foaming-gel',     d:'',        w:'cilt temizliği' },
       clay
-        ? { id:'pm_mask', p:'clay-mask',  d:'', w:'tüm yüze · 10 dk bekle' }
+        ? { id:'pm_mask', p:'clay-mask',  d:'', w:'şu an elinde yok — alana kadar bu akşam maskeyi atla' }
         : { id:'pm_mask', p:'msb-enzyme', d:'', w:'tüm yüze · 10 dk bekle' },
       { id:'pm_clean2',  p:'obagi-foaming-gel',     d:'',        w:'maskeyi arındır · köpük ya da Sensai toz temizleyici' },
       { id:'pm_toner',   p:'mbr-toner',             d:'',        w:'avuca al, tüm yüze tampon' },
@@ -1288,6 +1290,7 @@ function getTonight(day) {
       { id:'pm_active',  p:'environ-cquence-3',     d:'2 pompa', w:'↓ 2 dk bekle' },
       { id:'pm_retinol', p:'environ-retinol-forte', d:'2 pompa', w:'hemen üzerine Vol.U.Lift' },
       { id:'pm_vol',     p:'volulift',              d:'2 fındık', w:'kapama' },
+      { id:'pm_neck',    p:'obagi-elastiderm',      d:'boyun + dekolte', w:'yukarı doğru çek' },
     ]
   };
 }
@@ -1996,13 +1999,13 @@ ${state.personalContext}
 Bekleme kuralı: katmanlar arası 2 dk, maske 10 dk.
 
 ### SABAH — her gün aynı
-Obagi Foaming Gel → MBR Hydrating & Lifting Toner (3 pompa, tampon) → Environ Vita-Peptide Eye Gel → Obagi Professional-C %10 (5 damla, 2 dk) → Obagi SuzanObagiMD Intensive Daily Repair (2 pompa) → üzerine Environ AVST Moisturiser 2 (2 pompa, 2 dk) → Colorescience SPF 50
+Obagi Foaming Gel → MBR Hydrating & Lifting Toner (3 pompa, tampon) → Environ Vita-Peptide Eye Gel → Obagi Professional-C %10 (5 damla, 2 dk) → Obagi SuzanObagiMD Intensive Daily Repair (2 pompa) → üzerine Environ AVST Moisturiser 2 (2 pompa, 2 dk) → Colorescience Sunforgettable SPF 50 → boyun + dekolte: Vol.U.Lift
 
 ### AKŞAM — her gün (retinol her gece)
-Obagi Foaming Gel → MASKE 10 dk (enzim: Pzt/Çar/Cum/Paz = MSB Sensitive Enzyme · kil: Sal/Per/Cmt = kil maske) → köpük ya da Sensai toz temizleyici ile arındır → MBR Hydrating & Lifting Toner → Environ Vita-Peptide Eye Gel → MSB Sensitive Hydro Gel (1 pompa, 2 dk) → Exline Peptide Pro (2 pompa, 2 dk) → Environ C-Quence (2 pompa, 2 dk) → Environ Retinol Serum Forte (2 pompa) → üzerine Vol.U.Lift (2 fındık)
+Obagi Foaming Gel → MASKE 10 dk (enzim: Pzt/Çar/Cum/Paz = MSB Sensitive Enzyme · kil: Sal/Per/Cmt = kil maske — şu an elinde yok, o akşamlar maske atlanır) → köpük ya da Sensai toz temizleyici ile arındır → MBR Hydrating & Lifting Toner → Environ Vita-Peptide Eye Gel → MSB Sensitive Hydro Gel (1 pompa, 2 dk) → PCA Skin ExLinea Pro Peptide Serum (2 pompa, 2 dk) → Environ C-Quence (2 pompa, 2 dk) → Environ Retinol Serum Forte (2 pompa) → üzerine Vol.U.Lift (2 fındık) → boyun + dekolte: Obagi Elastiderm
 
 ### PROTOKOL DIŞI (şu an rotasyonda değil)
-La Mer, Augustinus Bader, iS Clinical Pro-Heal, Caudalie, Isov Azulene, Genosys, Sensai Ultra Intensive/Barrier Essence, Environ Revival Masque, Forlle'd Platinum Lotion, SkinCeuticals (Collagen Pro, P-TIOX, HA Intensifier, A.G.E. Interrupter), Environ Avance DFP312, Celltermi Revive, AlphaScience Novacell, ZO Hydrating Crème, Obagi Elastiderm/Moisture Restore, MSB Active Serum, Bright PDRN & Schrammek maske, Oil Capsule. Öneri verirken önce bu protokolü koru — ekleme yapacaksan hangi adımın yerine geçtiğini söyle.
+La Mer, Augustinus Bader, iS Clinical Pro-Heal, Caudalie, Isov Azulene, Genosys, Sensai Ultra Intensive/Barrier Essence, Environ Revival Masque, Forlle'd Platinum Lotion, SkinCeuticals (Collagen Pro, P-TIOX, HA Intensifier, A.G.E. Interrupter), Environ Avance DFP312, Celltermi Revive, AlphaScience Novacell, ZO Hydrating Crème, Obagi Moisture Restore, MSB Active Serum, Bright PDRN & Schrammek maske, Oil Capsule. Öneri verirken önce bu protokolü koru — ekleme yapacaksan hangi adımın yerine geçtiğini söyle.
 ${data}
 
 ## SORUM
